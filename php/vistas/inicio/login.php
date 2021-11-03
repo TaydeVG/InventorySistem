@@ -45,14 +45,14 @@ session_start();
   <div id="contenedorLoad">
     <div class="container">
       <div class="row">
-        <div class="col-12 text-center">
-          <img src="https://iconarchive.com/download/i52489/custom-icon-design/pretty-office-8/Users.ico"
-          alt="" width="400" height="400">
+        <div class="col-12 text-center ">
+          <img style="width: 85%;" class="animated zoomIn shadow-lg position-absolute top-50 start-50 translate-middle border border-5 rounded p-3" src="../../../resources/imagenes/UPVE_IdEX_@3x.png"
+          alt="">
         </div>
       </div>
     </div>
   </div>
-  <img class="float-end" src="https://iconarchive.com/download/i52489/custom-icon-design/pretty-office-8/Users.ico"
+  <img class="float-end" src="../../../resources/imagenes/users_icon.png"
     alt="" width="200" height="200">
   <br><br><br><br>
   <main class="form-signin card border-focus" style="max-width: 430px;">

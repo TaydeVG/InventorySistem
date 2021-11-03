@@ -42,7 +42,7 @@ session_start();
 <body style="background-color: #EEEEEE;">
     <div id="modalNotifyContainer"></div>
 
-    <img class="float-end" src="https://iconarchive.com/download/i52489/custom-icon-design/pretty-office-8/Users.ico"
+    <img class="float-end" src="../../../resources/imagenes/users_icon.png"
         alt="" width="200" height="200">
     <br><br><br><br>
     <main class="form-signin w-50" style="min-width: 400px;">
