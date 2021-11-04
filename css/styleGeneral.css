@@ -212,11 +212,11 @@
 }
 .bg-green-8
 {
-	background-color: #055200;
+	background-color: #663399;
 }
 .bg-primary-dark
 {
-	background-color: #3E5F8A; color: white;
+	background-color: #663399; color: white;
 }
 .text-primary-dark{
 	color: #3E5F8A;
@@ -431,8 +431,8 @@
 }
 
 .img-rotate-infinit {
-	-webkit-animation: 15s rotate linear infinite;
-	animation: 15s rotate linear infinite;
+	-webkit-animation: 8s rotate linear backwards;
+	animation: 8s rotate linear backwards;
 	-webkit-transform-origin: 50% 50%;
 	transform-origin: 50% 50%;
 }

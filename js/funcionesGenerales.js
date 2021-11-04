@@ -1,3 +1,9 @@
+//retorna un registro de un arreglo de objetos, buscando por su id
+function findRegistroById(id, arrayDatos) {
+   const resultado = arrayDatos.find(registro => registro.id == id);
+   return resultado;
+}
+
 function efectoLoadInSection(sectionAfectada) {
     $(sectionAfectada).parent().append('<div class="opacarContenido texto-centrado fadeIn"><i class="fas fa-sync-alt fa-spin h2" ></i></div>');
  

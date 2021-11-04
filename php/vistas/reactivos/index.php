@@ -23,10 +23,10 @@ session_start();
             <div class="col-12">
                 <div class="card text-center shadow animated fadeInLeft mb-3 mt-4">
                     <div class="card-header">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between ">
                             <h3> Ractivos </h3>
                             <button class="btn btn-outline-success" data-bs-toggle="modal"
-                                data-bs-target="#modalId">Nuevo <i class="fas fa-plus"></i></button>
+                                data-bs-target="#modalId" data-bs-opcion="new">Nuevo <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
