@@ -114,12 +114,12 @@ var tipoIcono = {
             '<h5 class="modal-title" id="h6TituloModal"><i class=" '+ tipoIcono[idAlerta] +'"></i> '+ asunto +'</h5>'+
             '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'+
           '</div>'+
-          '<div class="modal-body  '+ tipoAlert[idAlerta] +' text-justify" id="mensajeNotifyBody">'+
+          '<div class="modal-body text-center" id="mensajeNotifyBody">'+
           '<h5>' + mensaje +'</h5>'+
           '</div>'+
             '<div class="modal-footer"  id="footerModalNotify">'+
-                '<button type="button" id="btnModalYesOrCancel" class="btn btn-success mx-auto"  style="width: 25%;">   <i class="far fa-check-circle font-size-30px"></i>   </button>'+
-                '<button type="button" class="btn btn-danger mx-auto" data-bs-dismiss="modal">   <i class="far fa-times-circle font-size-30px"></i>   </button>'+
+                '<button type="button" id="btnModalYesOrCancel" class="btn btn-success mx-auto" title="Confirmar" style="width: 25%;">   <i class="far fa-check-circle font-size-30px"></i>   </button>'+
+                '<button type="button" class="btn btn-danger mx-auto" data-bs-dismiss="modal" title="Cancelar">   <i class="far fa-times-circle font-size-30px"></i>   </button>'+
             	'<div id="iconModalLoading" class="mx-auto text-success"></div>'+
             '</div>'+
         '</div>'+

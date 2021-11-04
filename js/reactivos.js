@@ -82,13 +82,13 @@ function modalLogicLoad() {
 }
 function initFormModal(modal) {
    modal.querySelector('#recipient-nombre').value = "";
-   modal.querySelector('#recipient-reactividad').value = "";
-   modal.querySelector('#recipient-inflamabilida').value = "";
-   modal.querySelector('#recipient-riesgoSalud').value = "";
-   modal.querySelector('#recipient-presentacion').value = "";
-   modal.querySelector('#recipient-nReactivo').value = "";
-   modal.querySelector('#recipient-unidadMedida').value = "";
-   modal.querySelector('#recipient-codigoAlmacenamiento').value = "";
+   modal.querySelector('#recipient-reactividad').value = "0";
+   modal.querySelector('#recipient-inflamabilida').value = "0";
+   modal.querySelector('#recipient-riesgoSalud').value = "0";
+   modal.querySelector('#recipient-presentacion').value = "0";
+   modal.querySelector('#recipient-nReactivo').value = "0";
+   modal.querySelector('#recipient-unidadMedida').value = "0";
+   modal.querySelector('#recipient-codigoAlmacenamiento').value = "0";
    modal.querySelector('#recipient-caducidad').value = "";
    modal.querySelector('#recipient-nMueble').value = "";
    modal.querySelector('#recipient-nEstante').value = "";
@@ -161,7 +161,7 @@ function llenarTabla(datos) {
 
    $('.btnEliminar').click(function (event) {
       var idUsuario = $(this).data('id');
-      enableNotifyYesOrCancel("¿?", "¿Seguro Que Desea Eliminar Este Registro?", 3);
+      enableNotifyYesOrCancel("Eliminar Reactivo", "¿Está usted seguro de eliminar el reactivo de manera permanente?", 3);
       $("#btnModalYesOrCancel").click(function () {
          $.when(disableNotifyYesOrCancel())// funcion para cerrar el modal a continuacion ira las acciones a seguir
             .then(function (data, textStatus, jqXHR) {
