@@ -1,5 +1,13 @@
 $(document).ready(function () {
-    initEvents()
+    initEvents();
+
+    console.log(localStorage.getItem("user"));
+    console.log(localStorage.getItem("pass"));
+    if (localStorage.getItem("user") && localStorage.getItem("pass")) {
+        $('#txtMail').val(localStorage.getItem("user"));
+        $('#txtPass').val(localStorage.getItem("pass"));
+        this.querySelector("#checkRecordar").checked = true;
+    }
 });
 
 function initEvents() {
@@ -7,12 +15,14 @@ function initEvents() {
         event.preventDefault();
         var email = $("#txtMail").val();
         var password = $("#txtPass").val();
+        var recordar = this.querySelector("#checkRecordar").checked;
 
-        validarDatosLogin(email, password);
+        validarDatosLogin(email, password, recordar);
     });
+
 }
 
-function validarDatosLogin(usuario, password) {
+function validarDatosLogin(usuario, password, recordar) {
     var objParam = {
         'opcion': 1,
         'email': usuario,
@@ -26,13 +36,19 @@ function validarDatosLogin(usuario, password) {
         dataType: 'JSON',
         data: objParam,
         success: function (response) {
-            
+
             if (response.resultOper == 1) {
+                if (recordar == true) {
+                    localStorage.setItem("user",usuario);
+                    localStorage.setItem("pass", password);
+                } else {
+                    localStorage.removeItem("user");
+                    localStorage.removeItem("pass");
+                }
                 console.log(response);
                 enableNotifyAlerta("Exito!", response.mensaje + " " + response.respuesta.nombre, 3);
-                $("#btnModal").click(function()
-                {
-                    window.location="principal.php";
+                $("#btnModal").click(function () {
+                    window.location = "principal.php";
                 });
             }
             else {
@@ -40,7 +56,7 @@ function validarDatosLogin(usuario, password) {
             }
         },
         beforeSend: function () {
-         console.log("cargando peticion");
+            console.log("cargando peticion");
         },
         error: function (xhr, status, error) {
             console.log(xhr.responseText);

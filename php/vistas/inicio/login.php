@@ -88,7 +88,7 @@ if (isset($_SESSION["usuario"])) { //si hay sesion iniciar lo manda a la ventana
                     <div class="col-6">
                         <div class="checkbox mb-3">
                             <label>
-                                <input type="checkbox" value="remember-me" id="checkRecordar" name="checkRecordar">
+                                <input type="checkbox" id="checkRecordar" name="checkRecordar">
                                 Recordar
                             </label>
                         </div>
