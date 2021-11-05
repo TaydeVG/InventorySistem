@@ -406,7 +406,7 @@
 	color: rgb(27, 27, 27) !important;
 }
 .active-nav{
-	color: rgb(27, 27, 27) !important;
+	background-color: rgba(27, 27, 27, 0.534) !important;
 	color: white !important;
 }
 

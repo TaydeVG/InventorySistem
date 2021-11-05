@@ -14,7 +14,6 @@ $(document).ready(function () {
 });
 
 function initEvents() {
-
    // Reload Card
    $('.reload').on('click', function () {
 

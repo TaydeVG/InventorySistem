@@ -1,5 +1,10 @@
-<?php 
+<?php
 session_start();
+if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
+} else { //si no hay sesion iniciar lo manda al login
+    header("Location: ../inicio/login.php");
+    exit;
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -25,8 +30,8 @@ session_start();
                     <div class="card-header">
                         <div class="d-flex justify-content-between ">
                             <h3> Ractivos </h3>
-                            <button class="btn btn-outline-success" data-bs-toggle="modal"
-                                data-bs-target="#modalId" data-bs-opcion="new">Nuevo <i class="fas fa-plus"></i></button>
+                            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalId"
+                                data-bs-opcion="new">Nuevo <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
                 </div>

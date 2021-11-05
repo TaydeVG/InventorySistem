@@ -27,19 +27,9 @@ function validarDatosLogin(usuario, password) {
         data: objParam,
         success: function (response) {
             
-             var usuario = {
-                'id': response.respuesta['id'],
-                'nombre': response.respuesta['nombre'],
-                'apellido': response.respuesta['apellido'],
-                'email': response.respuesta['email'],
-                'password': response.respuesta['password'],
-                'imagen': response.respuesta['foto'],
-                'id_tipo_usuario': response.respuesta['id_tipo_usuario']
-            }; 
-
             if (response.resultOper == 1) {
                 console.log(response);
-                enableNotifyAlerta("Exito!", response.mensaje + " " + response.respuesta['nombre'], 3);
+                enableNotifyAlerta("Exito!", response.mensaje + " " + response.respuesta.nombre, 3);
                 $("#btnModal").click(function()
                 {
                     window.location="principal.php";

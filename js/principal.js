@@ -8,10 +8,11 @@ function initEventsPrin() {
         $("#btnModalYesOrCancel").click(function () {
             $.when(disableNotifyYesOrCancel())// funcion para cerrar el modal a continuacion ira las acciones a seguir
                 .then(function (data, textStatus, jqXHR) {
-                    window.location="login.php";                   
+                    cerrarSesion();    
+                    window.location = "principal.php";               
                 });
         });
 
     });
 
-}
+} 

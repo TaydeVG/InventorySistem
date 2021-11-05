@@ -3,6 +3,8 @@ session_start();
 
 include_once("../php/objetos/Usuario.php");
 include_once("../php/clases/ClassReactivos.php");
+include_once("../php/clases/ClassEquipos.php");
+include_once("../php/clases/ClassLogin.php");
 
 $datosRespuesta = array();
 $UsuarioRequest = new Usuario();
@@ -28,29 +30,19 @@ $conexMySql = null;
 switch ($opcion) {
 	case 1:
 
-		$datos               = array();
-		$datos['mensaje']    = "Bienvenido";
-		$datos['resultOper'] = 1;
-
-		$Usuario        = new Usuario();
-		$Usuario->setId(1);
-		$Usuario->setNombre("Juan");
-		$Usuario->setApellido("Perez");
-		$Usuario->setEmail($UsuarioRequest->getEmail());
-		$Usuario->setPassword($UsuarioRequest->getPassword());
-		$Usuario->setId_tipo_usuario(1);
-
-		$datos['respuesta']  = $Usuario;
-		//$datosRespuesta = CGenerales::iniciarSesion($conexMySql,$Usuario->getEmail(),$Usuario->getPassword(),$huellaUsuario);
-		$datosRespuesta =  $datos;
-		
+		$datosRespuesta = ClassLogin::iniciarSesion("conexion", $UsuarioRequest->getEmail(),$UsuarioRequest->getPassword());
 		echo json_encode($datosRespuesta);
 		break;
-	case 2://obtiene todos los reactivos
+	case 2: //obtiene todos los reactivos
 		$datosRespuesta = ClassReactivos::getReactivos($conexMySql);
 		echo json_encode($datosRespuesta);
 		break;
+	case 3: //obtiene todos los reactivos
+		$datosRespuesta = ClassEquipos::getEquipos($conexMySql);
+		echo json_encode($datosRespuesta);
+		break;
 	case 0:
-		echo "Opcion Invalida: " . $opcion;
+		$datosRespuesta = ClassLogin::cerrarSesion();
+		echo json_encode($datosRespuesta);
 		break;
 }

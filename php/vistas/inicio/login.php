@@ -1,5 +1,8 @@
-<?php 
+<?php
 session_start();
+if (isset($_SESSION["usuario"])) { //si hay sesion iniciar lo manda a la ventana principal
+    header("Location: principal.php");
+}
 ?>
 <!doctype html>
 <html lang="es">

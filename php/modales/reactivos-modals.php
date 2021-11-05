@@ -11,7 +11,7 @@
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
                                 <label for="recipient-nombre" class="col-form-label fw-bold">Nombre:</label>
-                                <input type="text" class="form-control" id="recipient-nombre">
+                                <input type="text" class="form-control" id="recipient-nombre" placeholder="Escribe Aquí">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
@@ -131,13 +131,13 @@
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
                                 <label for="recipient-nMueble" class="col-form-label fw-bold">No. de mueble:</label>
-                                <input type="number" class="form-control" id="recipient-nMueble">
+                                <input type="number" class="form-control" id="recipient-nMueble" placeholder="Escribe Aquí">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
                                 <label for="recipient-nEstante" class="col-form-label fw-bold">No. de estante:</label>
-                                <input type="number" class="form-control" id="recipient-nEstante">
+                                <input type="number" class="form-control" id="recipient-nEstante" placeholder="Escribe Aquí">
                             </div>
                         </div>
                     </div>

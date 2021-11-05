@@ -1,5 +1,10 @@
-<?php 
+<?php
 session_start();
+if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
+} else { //si no hay sesion iniciar lo manda al login
+    header("Location: login.php");
+    exit;
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -20,11 +25,9 @@ session_start();
         <div class="row">
             <div class="col-3 ">
                 <img class="rounded-circle img-rotate-infinit d-none d-sm-none d-md-block"
-                    src="../../../resources/imagenes/logo.png"
-                    alt="imagen" width="300" height="300">
+                    src="../../../resources/imagenes/logo.png" alt="imagen" width="300" height="300">
                 <img class="rounded-circle img-rotate-infinit d-block d-sm-block d-md-none"
-                    src="../../../resources/imagenes/logo.png"
-                    alt="imagen" width="100" height="100">
+                    src="../../../resources/imagenes/logo.png" alt="imagen" width="100" height="100">
             </div>
             <div class="col-7 text-center">
                 <br><br><br class=" d-none d-sm-none d-md-block"><br class=" d-none d-sm-none d-md-block"><br
@@ -35,8 +38,7 @@ session_start();
 
             <div class="col-12 text-center mt-3">
                 <br><br>
-                <img src="../../../resources/imagenes/utencilios.png" class="rounded"
-                    width="400" alt="">
+                <img src="../../../resources/imagenes/utencilios.png" class="rounded" width="400" alt="">
             </div>
         </div>
     </div>
