@@ -46,6 +46,10 @@ switch ($opcion) {
 		$datosRespuesta = ClassRecipientes::getRecipientes($conexMySql);
 		echo json_encode($datosRespuesta);
 		break;
+	case 5: //obtiene los mantenimientos de equipos
+		$datosRespuesta = ClassEquipos::getMantenimientos($conexMySql);
+		echo json_encode($datosRespuesta);
+		break;
 	case 0:
 		$datosRespuesta = ClassLogin::cerrarSesion();
 		echo json_encode($datosRespuesta);

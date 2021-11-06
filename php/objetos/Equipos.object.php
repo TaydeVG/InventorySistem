@@ -86,3 +86,40 @@ class Equipo
         $this->fecha_alta = $fecha_alta;
     }
 }
+
+/**
+ * 
+ */
+class Mantenimiento
+{
+    public $id = 0;
+    public $fecha_mantenimiento = "";
+    public $observaciones = "";
+
+    public function getId()
+    {
+        return $this->id;
+    }
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getFecha_mantenimiento()
+    {
+        return $this->fecha_mantenimiento;
+    }
+    public function setFecha_mantenimiento($fecha_mantenimiento)
+    {
+        $this->fecha_mantenimiento = $fecha_mantenimiento;
+    }
+
+    public function getObservaciones()
+    {
+        return $this->observaciones;
+    }
+    public function setObservaciones($observaciones)
+    {
+        $this->observaciones = $observaciones;
+    }
+}

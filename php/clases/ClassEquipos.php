@@ -52,4 +52,44 @@ class ClassEquipos
         }
         return $datos;
     }
+    public static function getMantenimientos($conexMySql)
+    {
+        $datos               = array();
+        $datos['mensaje']    = "";
+        $datos['respuesta']  = array();
+        $datos['resultOper'] = 0;
+
+        try {
+            $Mantenimiento = new Mantenimiento;
+
+            $Mantenimiento->setId(1);
+            $Mantenimiento->setFecha_mantenimiento("2020-10-10");
+            $Mantenimiento->setObservaciones("Se realizo mantenimiento preventivo");
+
+            array_push($datos['respuesta'], $Mantenimiento);
+            $Mantenimiento = new Mantenimiento;
+            $Mantenimiento->setId(2);
+            $Mantenimiento->setFecha_mantenimiento("2020-09-10");
+            $Mantenimiento->setObservaciones("Se realizo mantenimiento correctivo");
+
+            array_push($datos['respuesta'], $Mantenimiento);
+            array_push($datos['respuesta'], $Mantenimiento);
+            array_push($datos['respuesta'], $Mantenimiento);
+            array_push($datos['respuesta'], $Mantenimiento);
+            array_push($datos['respuesta'], $Mantenimiento);
+            array_push($datos['respuesta'], $Mantenimiento);
+            array_push($datos['respuesta'], $Mantenimiento);
+            array_push($datos['respuesta'], $Mantenimiento);
+            array_push($datos['respuesta'], $Mantenimiento);
+            array_push($datos['respuesta'], $Mantenimiento);
+            array_push($datos['respuesta'], $Mantenimiento);
+
+            $datos['mensaje'] = "informacion obtenida con exito.";
+            $datos['resultOper'] = 1;
+        } catch (Exception $e) {
+            $datos['mensaje'] = $e;
+            $datos['resultOper'] = -1;
+        }
+        return $datos;
+    }
 }

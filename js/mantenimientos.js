@@ -2,7 +2,7 @@ $(document).ready(function () {
     loadingNotify("", "Cargando");//efecto loading al inicar pagina
 
     $('#navEquipos').addClass("active-nav");
-    $('#navEquipos').attr('href', '#');
+    //$('#navEquipos').attr('href', '#');
     modalLogicLoad();
 
 
@@ -23,6 +23,7 @@ function initEvents() {
             }, 500);
         });
     });
+
 }
 
 function modalLogicLoad() {
@@ -38,19 +39,16 @@ function modalLogicLoad() {
 
         switch (opcion) {//dependiendo la accion se aplica logica
             case 'new':
-                modalTitle.textContent = 'Ingresar datos del equipo';
+                modalTitle.textContent = 'Ingresar datos del mantenimiento';
                 btnModalSubmit.textContent = "Guardar";
                 btnModalCancel.textContent = "Cancelar";
 
                 $('#btnModalSubmit').addClass("d-block");
                 $('#btnModalSubmit').removeClass("d-none");
 
-                $('#section-detalle_mant').removeClass("d-block");
-                $('#section-detalle_mant').addClass("d-none");
-
                 break;
             case 'view':
-                modalTitle.textContent = 'Informacion del equipo';
+                modalTitle.textContent = 'Informacion del mantenimiento';
                 var id = button.getAttribute('data-bs-id');// se obtiene el id de la fila
                 var registro = findRegistroById(id, getDatosTabla());//se obtienen los datos de ese id
                 setFormModal(modal, registro);//se carga la informacion en modal
@@ -61,12 +59,9 @@ function modalLogicLoad() {
                 $('#btnModalSubmit').removeClass("d-block");
                 $('#btnModalSubmit').addClass("d-none");
 
-                $('#section-detalle_mant').addClass("d-block");
-                $('#section-detalle_mant').removeClass("d-none");
-
                 break;
             case 'edit':
-                modalTitle.textContent = 'Ingresar datos del equipo a editar';
+                modalTitle.textContent = 'Ingresar datos del mantenimiento a editar';
                 var id = button.getAttribute('data-bs-id');// se obtiene el id de la fila
                 var registro = findRegistroById(id, getDatosTabla());//se obtienen los datos de ese id
                 setFormModal(modal, registro);//se carga la informacion en modal
@@ -76,8 +71,6 @@ function modalLogicLoad() {
                 $('#btnModalSubmit').addClass("d-block");
                 $('#btnModalSubmit').removeClass("d-none");
 
-                $('#section-detalle_mant').addClass("d-block");
-                $('#section-detalle_mant').removeClass("d-none");
                 break;
             default:
                 modalTitle.textContent = 'Se desconoce detonador de modal';
@@ -87,40 +80,29 @@ function modalLogicLoad() {
     });
 }
 
+
 function initFormModal(modal) {
-    modal.querySelector('#recipient-nombre').value = "";
-    modal.querySelector('#recipient-condicion_uso').value = "";
-    modal.querySelector('#recipient-mantenimiento').value = "0";
-    modal.querySelector('#recipient-num_economico').value = "0";
-    modal.querySelector('#recipient-num_serie').value = "";
-    modal.querySelector('#recipient-id_laboratorio').value = "0";
+    modal.querySelector('#recipient-fecha_mantenimiento').value = "";
+    modal.querySelector('#recipient-observaciones').value = "";
     deshabilitarFormModal(modal, false);//habilita formulario modal
 }
 
 function setFormModal(modal, datos) {
-    modal.querySelector('#recipient-nombre').value = datos.nombre;
-    modal.querySelector('#recipient-condicion_uso').value = datos.condicion_uso;
-    modal.querySelector('#recipient-mantenimiento').value = datos.mantenimiento;
-    modal.querySelector('#recipient-num_economico').value = datos.num_economico;
-    modal.querySelector('#recipient-num_serie').value = datos.num_serie;
-    modal.querySelector('#recipient-id_laboratorio').value = datos.id_laboratorio;
-
-    $("#btnDetalleMant").attr("href", "mantenimientos.php?ideq=" + datos.id);//se agrega esta linea para mandar el id por parametros a la vista de mantenimientos
+    modal.querySelector('#recipient-fecha_mantenimiento').value = datos.fecha_mantenimiento;
+    modal.querySelector('#recipient-observaciones').value = datos.observaciones;
 }
+
 function deshabilitarFormModal(modal, isDisabled) {
-    modal.querySelector('#recipient-nombre').disabled = isDisabled;
-    modal.querySelector('#recipient-condicion_uso').disabled = isDisabled;
-    modal.querySelector('#recipient-mantenimiento').disabled = isDisabled;
-    modal.querySelector('#recipient-num_economico').disabled = isDisabled;
-    modal.querySelector('#recipient-num_serie').disabled = isDisabled;
-    modal.querySelector('#recipient-id_laboratorio').disabled = isDisabled;
+
+    modal.querySelector('#recipient-fecha_mantenimiento').disabled = isDisabled;
+    modal.querySelector('#recipient-observaciones').disabled = isDisabled;
 
     if (isDisabled) { //si es true, se deshabilitan inputs
-        $('#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-mantenimiento,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').addClass("form-control-plaintext");
-        $('#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-mantenimiento,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').removeClass("form-control");
+        $('#recipient-fecha_mantenimiento,#recipient-observaciones').addClass("form-control-plaintext");
+        $('#recipient-fecha_mantenimiento,#recipient-observaciones').removeClass("form-control");
     } else {//si es false, se habilitan inputs
-        $('#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-mantenimiento,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').removeClass("form-control-plaintext");
-        $('#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-mantenimiento,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').addClass("form-control");
+        $('#recipient-fecha_mantenimiento,#recipient-observaciones').removeClass("form-control-plaintext");
+        $('#recipient-fecha_mantenimiento,#recipient-observaciones').addClass("form-control");
     }
 }
 
@@ -133,12 +115,8 @@ function llenarTabla(datos) {
         $('#tabla_id').append($(
             ` <tr class="row` + (i + 1) + `  animated fadeInLeft">` +
             `<td class="text-center">` + (i + 1) + `</td>` +
-            `<td class="text-center">` + datos[i].nombre + `</td>` +
-            `<td class="text-center">` + datos[i].condicion_uso + `</td>` +
-            `<td class="text-center">` + datos[i].mantenimiento + `</td>` +
-            `<td class="text-center">` + datos[i].num_economico + `</td>` +
-            `<td class="text-center">` + datos[i].num_serie + `</td>` +
-            `<td class="text-center">` + datos[i].fecha_alta + `</td>` +
+            `<td class="text-center">` + datos[i].fecha_mantenimiento + `</td>` +
+            `<td class="text-center">` + datos[i].observaciones + `</td>` +
             `<td class="text-center"> 
                 <div class="d-flex justify-content-evenly">
                    <button class="btn btn-outline-success" title="Ver" data-bs-toggle="modal" data-bs-target="#modalId" data-bs-id="`+ datos[i].id + `" data-bs-opcion="view"><i class="fas fa-eye"></i></button>
@@ -156,7 +134,7 @@ function llenarTabla(datos) {
 
     $('.btnEliminar').click(function (event) {
         var idUsuario = $(this).data('id');
-        enableNotifyYesOrCancel("Eliminar equipo", "¿Está usted seguro de eliminar el equipo de manera permanente?", 3);
+        enableNotifyYesOrCancel("Eliminar manteniminto", "¿Está usted seguro de eliminar el mantenimiento de manera permanente?", 3);
         $("#btnModalYesOrCancel").click(function () {
             $.when(disableNotifyYesOrCancel())// funcion para cerrar el modal a continuacion ira las acciones a seguir
                 .then(function (data, textStatus, jqXHR) {
@@ -173,7 +151,7 @@ function llenarTabla(datos) {
 function getDatosTabla() {
     var datos = [];
     var objParam = {
-        'opcion': 3
+        'opcion': 5
     };
 
     $.ajax({
