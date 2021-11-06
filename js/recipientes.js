@@ -1,5 +1,5 @@
 $(document).ready(function () {
-   loadingNotify("", "Cargando");//efecto loading al inicar pagina
+   loadingNotify("Espere un momento...", "Cargando");//efecto loading al inicar pagina
 
    $('#navRecipientes').addClass("active-nav");
    $('#navRecipientes').attr('href', '#');
