@@ -46,6 +46,8 @@ function modalLogicLoad() {
 
             $('#btnModalSubmit').addClass("d-block");
             $('#btnModalSubmit').removeClass("d-none");
+            
+            $('#btnClearModal').show();
 
             break;
          case 'view':
@@ -59,6 +61,7 @@ function modalLogicLoad() {
 
             $('#btnModalSubmit').removeClass("d-block");
             $('#btnModalSubmit').addClass("d-none");
+            $('#btnClearModal').hide();
 
             break;
          case 'edit':
@@ -71,10 +74,14 @@ function modalLogicLoad() {
 
             $('#btnModalSubmit').addClass("d-block");
             $('#btnModalSubmit').removeClass("d-none");
+            $('#btnClearModal').hide();
+
             break;
          default:
             modalTitle.textContent = 'Se desconoce detonador de modal';
             btnModalSubmit.textContent = "";
+            $('#btnClearModal').hide();
+
             break;
       }
    });
@@ -159,12 +166,12 @@ function llenarTabla(datos) {
    });
 
    $('.btnEliminar').click(function (event) {
-      var idUsuario = $(this).data('id');
+      var id = $(this).data('id');
       enableNotifyYesOrCancel("Eliminar Reactivo", "¿Está usted seguro de eliminar el reactivo de manera permanente?", 3);
       $("#btnModalYesOrCancel").click(function () {
          $.when(disableNotifyYesOrCancel())// funcion para cerrar el modal a continuacion ira las acciones a seguir
             .then(function (data, textStatus, jqXHR) {
-               alert("Eliminado = " + idUsuario);
+               enableNotifyAlerta("Exito!", "¡Reactivo eliminado con exito!", 3);
             });
       });
 

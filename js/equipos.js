@@ -48,6 +48,7 @@ function modalLogicLoad() {
                 $('#section-detalle_mant').removeClass("d-block");
                 $('#section-detalle_mant').addClass("d-none");
 
+                $('#btnClearModal').show();
                 break;
             case 'view':
                 modalTitle.textContent = 'Informacion del equipo';
@@ -64,6 +65,7 @@ function modalLogicLoad() {
                 $('#section-detalle_mant').addClass("d-block");
                 $('#section-detalle_mant').removeClass("d-none");
 
+                $('#btnClearModal').hide();
                 break;
             case 'edit':
                 modalTitle.textContent = 'Ingresar datos del equipo a editar';
@@ -78,10 +80,16 @@ function modalLogicLoad() {
 
                 $('#section-detalle_mant').addClass("d-block");
                 $('#section-detalle_mant').removeClass("d-none");
+
+                $('#btnClearModal').hide();
+
                 break;
             default:
                 modalTitle.textContent = 'Se desconoce detonador de modal';
                 btnModalSubmit.textContent = "";
+
+                $('#btnClearModal').hide();
+
                 break;
         }
     });
@@ -155,12 +163,12 @@ function llenarTabla(datos) {
     });
 
     $('.btnEliminar').click(function (event) {
-        var idUsuario = $(this).data('id');
+        var id = $(this).data('id');
         enableNotifyYesOrCancel("Eliminar equipo", "¿Está usted seguro de eliminar el equipo de manera permanente?", 3);
         $("#btnModalYesOrCancel").click(function () {
             $.when(disableNotifyYesOrCancel())// funcion para cerrar el modal a continuacion ira las acciones a seguir
                 .then(function (data, textStatus, jqXHR) {
-                    alert("Eliminado = " + idUsuario);
+                    enableNotifyAlerta("Exito!", "¡Equipo eliminado con exito!", 3);
                 });
         });
 

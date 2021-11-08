@@ -17,31 +17,26 @@
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
                                 <label for="recipient-reactividad" class="col-form-label fw-bold">Reactividad:</label>
-                                <input type="number" class="form-control" id="recipient-reactividad" min="0" max="4"
-                                    value="0">
+                                <input type="number" class="form-control" id="recipient-reactividad" min="0" max="4" value="0">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
-                                <label for="recipient-inflamabilida"
-                                    class="col-form-label fw-bold">inflamabilida:</label>
-                                <input type="number" class="form-control" id="recipient-inflamabilida" min="0" max="4"
-                                    value="0">
+                                <label for="recipient-inflamabilida" class="col-form-label fw-bold">inflamabilida:</label>
+                                <input type="number" class="form-control" id="recipient-inflamabilida" min="0" max="4" value="0">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
                                 <label for="recipient-riesgoSalud" class="col-form-label fw-bold">Riesgo a la
                                     salud:</label>
-                                <input type="number" class="form-control" id="recipient-riesgoSalud" min="0" max="4"
-                                    value="0">
+                                <input type="number" class="form-control" id="recipient-riesgoSalud" min="0" max="4" value="0">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
                                 <label for="recipient-presentacion" class="col-form-label fw-bold">Presentación:</label>
-                                <select class="form-select" aria-label="Default select example"
-                                    id="recipient-presentacion">
+                                <select class="form-select" aria-label="Default select example" id="recipient-presentacion">
                                     <option selected value="0">Selección</option>
                                     <option value="1">Frasco Vidrio</option>
                                     <option value="2">Frasco Plástico</option>
@@ -57,8 +52,7 @@
                             <div class="mb-1">
                                 <label for="recipient-nReactivo" class="col-form-label fw-bold">Cantidad de
                                     reactivo:</label>
-                                <select class="form-select" aria-label="Default select example"
-                                    id="recipient-nReactivo">
+                                <select class="form-select" aria-label="Default select example" id="recipient-nReactivo">
                                     <option selected value="0">Selección</option>
                                     <option value="1">Lleno</option>
                                     <option value="2">Medio</option>
@@ -71,8 +65,7 @@
                             <div class="mb-1">
                                 <label for="recipient-unidadMedida" class="col-form-label fw-bold">Unidad de
                                     medida:</label>
-                                <select class="form-select" aria-label="Default select example"
-                                    id="recipient-unidadMedida">
+                                <select class="form-select" aria-label="Default select example" id="recipient-unidadMedida">
                                     <option selected value="0">Selección</option>
                                     <option value="1">Mililitro</option>
                                     <option value="2">Gramo</option>
@@ -86,8 +79,7 @@
                                 <label for="recipient-codigoAlmacenamiento" class="col-form-label fw-bold">Código de
                                     almacenamiento:</label>
                                 <div class="input-group">
-                                    <select class="form-select" aria-label="Default select example"
-                                        id="recipient-codigoAlmacenamiento">
+                                    <select class="form-select" aria-label="Default select example" id="recipient-codigoAlmacenamiento">
                                         <option selected value="0">Selección</option>
                                         <option value="1">Inflamable</option>
                                         <option value="2">Oxidante</option>
@@ -95,8 +87,7 @@
                                         <option value="4">Tóxico</option>
                                         <option value="5">No preligroso</option>
                                     </select>
-                                    <button class="btn btn-outline-light text-dark border" type="button"
-                                        data-bs-toggle="popover" data-bs-placement="top" title="Ayuda" data-bs-content=" 
+                                    <button class="btn btn-outline-light text-dark border" type="button" data-bs-toggle="popover" data-bs-placement="top" title="Ayuda" data-bs-content=" 
                                         <div class='row'>
                                             <div class='col-9'> >Inflamable </div>
                                             <div class='col-3'><div class='p-2 mb-3 bg-danger text-white'></div></div>
@@ -144,9 +135,9 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-evenly">
-                <button type="button" class="btn btn-primary" id="btnModalSubmit">Guardar</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                    id="btnModalCancel">Cancelar</button>
+                <button type="button" class="btn btn-outline-primary" id="btnModalSubmit">Guardar</button>
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" id="btnModalCancel">Cancelar</button>
+                <button type="button" class="btn btn-outline-secondary" id="btnClearModal" onclick="initFormModal(document.getElementById('modalId'))">Limpiar</button>
             </div>
         </div>
     </div>

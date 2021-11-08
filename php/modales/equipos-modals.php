@@ -64,9 +64,12 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-evenly">
-                <button type="button" class="btn btn-primary" id="btnModalSubmit">Guardar</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                <button type="button" class="btn btn-outline-primary" id="btnModalSubmit">Guardar</button>
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
                     id="btnModalCancel">Cancelar</button>
+                <button type="button" class="btn btn-outline-secondary" id="btnClearModal"
+                    onclick="initFormModal(document.getElementById('modalId'))">Limpiar</button>
+
             </div>
         </div>
     </div>

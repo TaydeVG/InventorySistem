@@ -14,6 +14,7 @@ $(document).ready(function () {
 });
 
 function initEvents() {
+   $('#section_otro_material').hide();
    // Reload Card
    $('.reload').on('click', function () {
 
@@ -23,6 +24,25 @@ function initEvents() {
             disableEfectoLoadInSection($('.reload'));
          }, 500);
       });
+   });
+
+   $('#recipient-tipo_material').change(function (e) {
+      var value = $(this).val();
+      if (value == 3) {
+         $('#section_otro_material').show();
+         $('#recipient-tipo_material_otro').focus();
+         $('#recipient-tipo_material').hide();
+      } else {
+         $('#section_otro_material').hide();
+
+      }
+   });
+
+   $('#btnCambiarMat').click(function (e) {
+      $('#section_otro_material').hide();
+      $('#recipient-tipo_material').show();
+      $('#recipient-tipo_material').val("0");
+      $('#recipient-tipo_material').focus();
    });
 
 }
@@ -46,7 +66,7 @@ function modalLogicLoad() {
 
             $('#btnModalSubmit').addClass("d-block");
             $('#btnModalSubmit').removeClass("d-none");
-
+            $('#btnClearModal').show();
             break;
          case 'view':
             modalTitle.textContent = 'Informacion del recipiente';
@@ -59,7 +79,7 @@ function modalLogicLoad() {
 
             $('#btnModalSubmit').removeClass("d-block");
             $('#btnModalSubmit').addClass("d-none");
-
+            $('#btnClearModal').hide();
             break;
          case 'edit':
             modalTitle.textContent = 'Ingresar datos del recipiente a editar';
@@ -71,10 +91,12 @@ function modalLogicLoad() {
 
             $('#btnModalSubmit').addClass("d-block");
             $('#btnModalSubmit').removeClass("d-none");
+            $('#btnClearModal').hide();
             break;
          default:
             modalTitle.textContent = 'Se desconoce detonador de modal';
             btnModalSubmit.textContent = "";
+            $('#btnClearModal').hide();
             break;
       }
    });
@@ -135,12 +157,12 @@ function llenarTabla(datos) {
    });
 
    $('.btnEliminar').click(function (event) {
-      var idUsuario = $(this).data('id');
+      var id = $(this).data('id');
       enableNotifyYesOrCancel("Eliminar recipiente", "¿Está usted seguro de eliminar el recipiente de manera permanente?", 3);
       $("#btnModalYesOrCancel").click(function () {
          $.when(disableNotifyYesOrCancel())// funcion para cerrar el modal a continuacion ira las acciones a seguir
             .then(function (data, textStatus, jqXHR) {
-               alert("Eliminado = " + idUsuario);
+               enableNotifyAlerta("Exito!", "¡Recipiente eliminado con exito!", 3);
             });
       });
 
