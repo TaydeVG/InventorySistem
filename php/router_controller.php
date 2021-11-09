@@ -43,7 +43,7 @@ while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
 switch ($opcion) {
 	case 1:
 
-		$datosRespuesta = ClassLogin::iniciarSesion("conexion", $UsuarioRequest->getEmail(), $UsuarioRequest->getPassword());
+		$datosRespuesta = ClassLogin::iniciarSesion($conexMySql->conectar(), $UsuarioRequest->getEmail(), $UsuarioRequest->getPassword());
 		echo json_encode($datosRespuesta);
 		break;
 	case 2: //obtiene todos los reactivos
