@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+require "../php/clases/conexion.php";
 include_once("../php/objetos/Usuario.php");
 include_once("../php/clases/ClassReactivos.php");
 include_once("../php/clases/ClassEquipos.php");
@@ -26,8 +26,20 @@ set_time_limit(0);
 setlocale(LC_ALL, 'es_ES');
 define("CHARSET", "iso-8859-1");
 
-$conexMySql = null;
-
+$conexMySql = new Conexion();//se instancia la clase Conexion para acceder a sus funciones
+/* 
+estructura para consultas PDO = PHP Data Objects: extensión que provee una capa de abstracción de acceso a datos;
+1.- enviar conexion por parametros a funcion: $conexMySql->cnx
+2.- una vez ubicaod en la clase, antes de ejecutar la consulta se debe abrir conexion: $conexMySql->conectar();
+3.- luego seria preparar la consulta con la conexion recibida por parametro: $consulta = $cnx->prepare("SELECT * FROM tabla");
+4.- al preparar la consulta, debajo iria la ejecucion de la funcion: $consulta->execute();
+5.- al ejecutar la consulta, para obtener los registros: 
+$registros = [];
+while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+	$registros[] = $row;
+}
+6.- una vez obtenida la informacion de base de datos seria, cerrar la conexion:  $cnx->desconectar();
+*/
 switch ($opcion) {
 	case 1:
 
@@ -52,6 +64,7 @@ switch ($opcion) {
 		break;
 	case 0:
 		$datosRespuesta = ClassLogin::cerrarSesion();
+		$conexMySql = null;
 		echo json_encode($datosRespuesta);
 		break;
 }
