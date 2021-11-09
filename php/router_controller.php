@@ -22,6 +22,7 @@ $UsuarioRequest->setPassword($password != 0 ? $password : (isset($_GET['password
 
 ini_set('memory_limit', '-1');
 set_time_limit(0);
+
 //ESTAS DOS LINEAS ES PARA RESOLVER EL PROBLEMA DE LAS Ñ
 setlocale(LC_ALL, 'es_ES');
 define("CHARSET", "iso-8859-1");
