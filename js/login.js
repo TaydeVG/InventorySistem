@@ -60,7 +60,7 @@ function validarDatosLogin(usuario, password, recordar) {
         },
         error: function (xhr, status, error) {
             console.log(xhr.responseText);
-            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
+            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
         }
     });
 
