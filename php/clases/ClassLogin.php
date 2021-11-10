@@ -10,7 +10,6 @@ class ClassLogin
         $datos['respuesta']  = array();
         $datos['resultOper'] = 0;
 
-		if ($pEmail != "" && $pPassword != "") {
 			$cSql = "SELECT id,nombre,apellido,email,password,id_tipo_usuario FROM  usuarios where email LIKE '$pEmail%' LIMIT 1;";
 
 			try {
@@ -49,7 +48,6 @@ class ClassLogin
 				$datos['mensaje'] = $e;
 				$datos['resultOper'] = -1;
 			}
-		}
 		return $datos;
 	}
 	public static function cerrarSesion()
