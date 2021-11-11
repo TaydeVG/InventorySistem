@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2021 a las 01:18:41
+-- Tiempo de generación: 11-11-2021 a las 21:52:20
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -35,6 +35,51 @@ CREATE TABLE `administrador` (
   `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `administrador`
+--
+
+INSERT INTO `administrador` (`id`, `nombre`, `apellido`, `correo`, `password`) VALUES
+(1, 'juan', 'perez', 'juan@gmail.com', '1234'),
+(3, 'Maria', 'Lopez Atondo', 'maria@gmail.com', '1234');
+
+--
+-- Disparadores `administrador`
+--
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_ADMIN_BITACORA_DELETE` AFTER DELETE ON `administrador` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
+VALUES
+(CURRENT_USER,'administrador','DELETE',
+CONCAT(OLD.id,'|',OLD.nombre,'|',OLD.apellido,'|',
+       OLD.correo,'|',OLD.password));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_ADMIN_BITACORA_INSERT` AFTER INSERT ON `administrador` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
+VALUES(CURRENT_USER,'administrador','INSERT',CONCAT(NEW.id,'|',NEW.nombre,'|',NEW.apellido,'|',NEW.correo,'|',NEW.password));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_ADMIN_BITACORA_UPDATE` AFTER UPDATE ON `administrador` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual,informacion_anterior)
+VALUES
+(CURRENT_USER,'administrador','UPDATE',CONCAT(NEW.id,'|',NEW.nombre,'|',
+NEW.apellido,'|',NEW.correo,'|',NEW.password),
+CONCAT(OLD.id,'|',OLD.nombre,'|',OLD.apellido,'|',
+       OLD.correo,'|',OLD.password));
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -45,10 +90,23 @@ CREATE TABLE `bitacora` (
   `id` int(11) NOT NULL,
   `usuario` varchar(50) NOT NULL,
   `fecha_movimiento` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `tabla` varchar(100) NOT NULL,
   `accion` varchar(50) NOT NULL,
   `informacion_actual` text NOT NULL,
   `informacion_anterior` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `bitacora`
+--
+
+INSERT INTO `bitacora` (`id`, `usuario`, `fecha_movimiento`, `tabla`, `accion`, `informacion_actual`, `informacion_anterior`) VALUES
+(1, 'root@localhost', '2021-11-11 17:46:10', '', 'INSERT', '3|Maria|Lopez|maria@gmail.com|1234', ''),
+(2, 'root@localhost', '2021-11-11 18:14:22', '', 'UPDATE', '3|Maria|Lopez Atondo|maria@gmail.com|1234', '3|Maria|Lopez|maria@gmail.com|1234'),
+(3, 'root@localhost', '2021-11-11 18:26:09', '', 'DELETE', '', '2|pedro|sanchez|pedro@gmail.com|12334'),
+(4, 'root@localhost', '2021-11-11 18:43:50', 'administrador', 'INSERT', '4|ejem|apel|ejem@gmail.com|23f32', ''),
+(5, 'root@localhost', '2021-11-11 18:44:14', 'administrador', 'UPDATE', '4|ejem|apellido|ejem@gmail.com|23f32', '4|ejem|apel|ejem@gmail.com|23f32'),
+(6, 'root@localhost', '2021-11-11 18:44:25', 'administrador', 'DELETE', '', '4|ejem|apellido|ejem@gmail.com|23f32');
 
 -- --------------------------------------------------------
 
@@ -58,13 +116,56 @@ CREATE TABLE `bitacora` (
 
 CREATE TABLE `equipo` (
   `id` int(11) NOT NULL,
-  `nombre` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
   `condicion_uso` varchar(50) NOT NULL,
   `mantenimiento` varchar(200) NOT NULL,
   `num_economico` int(11) NOT NULL,
   `num_serie` varchar(20) NOT NULL,
   `id_laboratorio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Disparadores `equipo`
+--
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_EQUIPO_BITACORA_DELETE` AFTER DELETE ON `equipo` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
+VALUES(CURRENT_USER,'equipo','DELETE',CONCAT(OLD.id,'|',
+OLD.nombre,'|',OLD.condicion_uso,'|',                          OLD.mantenimiento,'|',OLD.num_economico,'|',
+OLD.num_serie,'|',OLD.id_laboratorio));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_EQUIPO_BITACORA_INSERT` AFTER INSERT ON `equipo` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
+VALUES(CURRENT_USER,'equipo','INSERT',CONCAT(NEW.id,'|',
+NEW.nombre,'|',NEW.condicion_uso,'|',                          NEW.mantenimiento,'|',NEW.num_economico,'|',
+NEW.num_serie,'|',NEW.id_laboratorio));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_EQUIPO_BITACORA_UPDATE` AFTER UPDATE ON `equipo` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora 
+(usuario,tabla,accion,informacion_actual,
+informacion_anterior)
+VALUES(CURRENT_USER,'equipo','UPDATE',CONCAT(NEW.id,'|',
+NEW.nombre,'|',NEW.condicion_uso,'|',                    NEW.mantenimiento,'|',NEW.num_economico,'|',
+NEW.num_serie,'|',NEW.id_laboratorio),
+CONCAT(OLD.id,'|',
+OLD.nombre,'|',OLD.condicion_uso,'|',
+OLD.mantenimiento,'|',OLD.num_economico,'|',
+OLD.num_serie,'|',OLD.id_laboratorio));
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -79,6 +180,50 @@ CREATE TABLE `laboratorio` (
   `descripcion` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `laboratorio`
+--
+
+INSERT INTO `laboratorio` (`id`, `nombre`, `admin`, `descripcion`) VALUES
+(1, 'gya', 1, 'qwf');
+
+--
+-- Disparadores `laboratorio`
+--
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_LABORAT_BITACORA_DELETE` AFTER DELETE ON `laboratorio` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
+VALUES(CURRENT_USER,'laboratorio','DELETE',CONCAT(OLD.id,'|',
+OLD.nombre,'|',OLD.admin,'|',OLD.descripcion));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_LABORAT_BITACORA_INSERT` AFTER INSERT ON `laboratorio` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
+VALUES(CURRENT_USER,'laboratorio','INSERT',CONCAT(NEW.id,'|',
+NEW.nombre,'|',NEW.admin,'|',NEW.descripcion));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_LABORAT_BITACORA_UPDATE` AFTER UPDATE ON `laboratorio` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual,
+                     informacion_anterior)
+VALUES(CURRENT_USER,'laboratorio','UPDATE',CONCAT(NEW.id,'|',
+NEW.nombre,'|',NEW.admin,'|',NEW.descripcion),
+CONCAT(OLD.id,'|',
+OLD.nombre,'|',OLD.admin,'|',OLD.descripcion));
+
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -91,6 +236,43 @@ CREATE TABLE `mantenimiento` (
   `observaciones` varchar(200) NOT NULL,
   `id_equipo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Disparadores `mantenimiento`
+--
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_MANT_BITACORA_DELETE` AFTER DELETE ON `mantenimiento` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
+VALUES(CURRENT_USER,'mantenimiento','DELETE',CONCAT(OLD.id,'|',
+OLD.fecha_mantenimiento,'|',OLD.observaciones,'|',OLD.id_equipo));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_MANT_BITACORA_INSERT` AFTER INSERT ON `mantenimiento` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
+VALUES(CURRENT_USER,'mantenimiento','INSERT',CONCAT(NEW.id,'|',
+NEW.fecha_mantenimiento,'|',NEW.observaciones,'|',NEW.id_equipo));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_MANT_BITACORA_UPDATE` AFTER UPDATE ON `mantenimiento` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual,
+                     informacion_anterior)
+VALUES(CURRENT_USER,'mantenimiento','UPDATE',CONCAT(NEW.id,'|',
+NEW.fecha_mantenimiento,'|',NEW.observaciones,'|',NEW.id_equipo),
+CONCAT(OLD.id,'|',
+OLD.fecha_mantenimiento,'|',OLD.observaciones,'|',OLD.id_equipo));
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -114,6 +296,54 @@ CREATE TABLE `reactivo` (
   `id_laboratorio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Disparadores `reactivo`
+--
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_REACTIVO_BITACORA_DELETE` AFTER DELETE ON `reactivo` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
+VALUES(CURRENT_USER,'reactivo','DELETE',CONCAT(OLD.id,'|',
+OLD.nombre,'|',OLD.reactividad,'|',OLD.inflamabilidad,
+OLD.riesgo_salud,'|',OLD.presentacion,'|',OLD.cantidad_reactivo,
+OLD.unidad_medida,'|',OLD.codigo_almacenamiento,'|',OLD.caducidad,
+OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_REACTIVO_BITACORA_INSERT` AFTER INSERT ON `reactivo` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
+VALUES(CURRENT_USER,'reactivo','INSERT',CONCAT(NEW.id,'|',
+NEW.nombre,'|',NEW.reactividad,'|',NEW.inflamabilidad,
+NEW.riesgo_salud,'|',NEW.presentacion,'|',NEW.cantidad_reactivo,
+NEW.unidad_medida,'|',NEW.codigo_almacenamiento,'|',NEW.caducidad,
+NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_REACTIVO_BITACORA_UPDATE` AFTER UPDATE ON `reactivo` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual,informacion_anterior)
+VALUES(CURRENT_USER,'reactivo','UPDATE',CONCAT(NEW.id,'|',
+NEW.nombre,'|',NEW.reactividad,'|',NEW.inflamabilidad,
+NEW.riesgo_salud,'|',NEW.presentacion,'|',NEW.cantidad_reactivo,
+NEW.unidad_medida,'|',NEW.codigo_almacenamiento,'|',NEW.caducidad,
+NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio),
+CONCAT(OLD.id,'|',
+OLD.nombre,'|',OLD.reactividad,'|',OLD.inflamabilidad,
+OLD.riesgo_salud,'|',OLD.presentacion,'|',OLD.cantidad_reactivo,
+OLD.unidad_medida,'|',OLD.codigo_almacenamiento,'|',OLD.caducidad,
+OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio));
+
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -128,6 +358,45 @@ CREATE TABLE `recipiente` (
   `id_laboratorio` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Disparadores `recipiente`
+--
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_RECIPIENTE_BITACORA_DELETE` AFTER DELETE ON `recipiente` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
+VALUES(CURRENT_USER,'recipiente','DELETE',CONCAT(OLD.id,'|',
+OLD.nombre,'|',OLD.id_tipo_material,'|',OLD.capacidad,
+'|',OLD.id_laboratorio));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_RECIPIENTE_BITACORA_INSERT` AFTER INSERT ON `recipiente` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
+VALUES(CURRENT_USER,'recipiente','INSERT',CONCAT(NEW.id,'|',
+NEW.nombre,'|',NEW.id_tipo_material,'|',NEW.capacidad,
+'|',NEW.id_laboratorio));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_RECIPIENTE_BITACORA_UPDATE` AFTER UPDATE ON `recipiente` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual,informacion_anterior)
+VALUES(CURRENT_USER,'recipiente','UPDATE',CONCAT(NEW.id,'|',
+NEW.nombre,'|',NEW.id_tipo_material,'|',NEW.capacidad,
+'|',NEW.id_laboratorio),CONCAT(OLD.id,'|',
+OLD.nombre,'|',OLD.id_tipo_material,'|',OLD.capacidad,
+'|',OLD.id_laboratorio));
+
+END
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -138,6 +407,41 @@ CREATE TABLE `tipo_material` (
   `id` int(11) NOT NULL,
   `tipo_material` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Disparadores `tipo_material`
+--
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_TIPOMATERIAL_BITACORA_DELETE` AFTER DELETE ON `tipo_material` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
+VALUES(CURRENT_USER,'tipo_material','DELETE',CONCAT(OLD.id,'|',
+OLD.tipo_material));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_TIPOMATERIAL_BITACORA_INSERT` AFTER INSERT ON `tipo_material` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
+VALUES(CURRENT_USER,'tipo_material','INSERT',CONCAT(NEW.id,'|',
+NEW.tipo_material));
+
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `TRIGGER_TIPOMATERIAL_BITACORA_UPDATE` AFTER UPDATE ON `tipo_material` FOR EACH ROW BEGIN
+
+INSERT INTO bitacora (usuario,tabla,accion,informacion_actual,informacion_anterior)
+VALUES(CURRENT_USER,'tipo_material','UPDATE',CONCAT(NEW.id,'|',
+NEW.tipo_material),CONCAT(OLD.id,'|',
+OLD.tipo_material));
+
+END
+$$
+DELIMITER ;
 
 --
 -- Índices para tablas volcadas
@@ -205,25 +509,25 @@ ALTER TABLE `tipo_material`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorio`
 --
 ALTER TABLE `laboratorio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `mantenimiento`
