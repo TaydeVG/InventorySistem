@@ -17,9 +17,8 @@ class ClassLogin
 				$Usuario->setId(1);
 				$Usuario->setNombre("ejemplo nombre");
 				$Usuario->setApellido("ejemplo apellido");
-				$Usuario->setEmail($pEmail);
+				$Usuario->setCorreo($pEmail);
 				$Usuario->setPassword($pPassword);
-				$Usuario->setId_tipo_usuario(1);
 
 				$_SESSION["usuario"] = $Usuario; 
 				

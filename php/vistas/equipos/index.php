@@ -15,7 +15,7 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
     <link rel="stylesheet" href="../../../css/equipos.css">
 
     <title>INICIO</title>
-</head>
+    </head>
 
 <body style="background-color: #EEEEEE;">
     <?php include("../../../navbar-top.php"); ?>
@@ -30,8 +30,8 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                     <div class="card-header">
                         <div class="d-flex justify-content-between ">
                             <h3> Equipos </h3>
-                            <button class="btn btn-outline-success" data-bs-toggle="modal"
-                                data-bs-target="#modalId" data-bs-opcion="new">Nuevo <i class="fas fa-plus"></i></button>
+                            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalId"
+                                data-bs-opcion="new">Nuevo <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,8 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                     <div class="card-footer text-muted ">
                         <div class="row">
                             <div class="col-6">
-                                <button class="btn btn-outline-primary float-start">Descargar <i class="fas fa-download"></i></button>
+                                <button class="btn btn-outline-primary float-start">Descargar <i
+                                        class="fas fa-download"></i></button>
                             </div>
                             <div class="col-6 padding-right-5por padding-left-5por">
                                 <nav aria-label="Page navigation example" id="paginationTable">

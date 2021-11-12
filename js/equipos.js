@@ -11,6 +11,7 @@ $(document).ready(function () {
 
     disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
     initEvents();
+
 });
 function initEvents() {
     // Reload Card
@@ -21,6 +22,41 @@ function initEvents() {
             setTimeout(() => {
                 disableEfectoLoadInSection($('.reload'));
             }, 500);
+        });
+    });
+
+    //evento de cuando se le da submit al formulario del modal
+    $("#formModal").submit(function (e) {
+        e.preventDefault();
+        //se genera form data para poder mandar el archivo file
+        var objParam = new FormData($(this)[0]);
+        objParam.append("opcion", 6);
+
+        $.ajax({
+            cache: false,
+            url: '../../../php/router_controller.php',
+            type: 'POST',
+            dataType: 'JSON',
+            data: objParam,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+
+                if (response.resultOper == 1) {
+
+                    console.log(response);
+
+                } else {
+                    console.log(response);
+                }
+            },
+            beforeSend: function () {
+                console.log("cargando peticion");
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+                enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
+            }
         });
     });
 }
@@ -96,12 +132,8 @@ function modalLogicLoad() {
 }
 
 function initFormModal(modal) {
-    modal.querySelector('#recipient-nombre').value = "";
-    modal.querySelector('#recipient-condicion_uso').value = "";
-    modal.querySelector('#recipient-mantenimiento').value = "0";
-    modal.querySelector('#recipient-num_economico').value = "0";
-    modal.querySelector('#recipient-num_serie').value = "";
-    modal.querySelector('#recipient-id_laboratorio').value = "0";
+    $("#formModal")[0].reset();
+    $("#closePrev").click();//cierra previsualizador
     deshabilitarFormModal(modal, false);//habilita formulario modal
 }
 

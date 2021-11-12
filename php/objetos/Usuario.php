@@ -7,9 +7,8 @@ class Usuario
 	public  $id = 0;
 	public  $nombre  = "";
 	public  $apellido = "";
-	public  $email = "";
+	public  $correo = "";
 	public  $password = "";
-	public  $id_tipo_usuario = 0;
 	
 	public function getId() 
 	{
@@ -35,13 +34,13 @@ class Usuario
 	{
 		$this->apellido = $apellido;
 	}
-	public function getEmail() 
+	public function getCorreo() 
 	{
-		return $this->email;
+		return $this->correo;
 	}
-	public function setEmail($email) 
+	public function setCorreo($correo) 
 	{
-		$this->email = $email;
+		$this->correo = $correo;
 	}
 	public function getPassword() 
 	{
@@ -51,17 +50,10 @@ class Usuario
 	{
 		$this->password = $password;
 	}
-	public function getId_tipo_usuario() 
-	{
-		return $this->id_tipo_usuario;
-	}
-	public function setId_tipo_usuario($id_tipo_usuario) 
-	{
-		$this->id_tipo_usuario = $id_tipo_usuario;
-	}
+
 	public function toString() 
 	{
-		return "Usuario [id=" . $this->id . ", nombre=" . $this->nombre . ", apellido=" . $this->apellido. ", email=" . $this->email . ", password=" . $this->password . ", foto=" . $this->foto . ", id_tipo_usuario=" . $this->id_tipo_usuario . "]";
+		return "Usuario [id=" . $this->id . ", nombre=" . $this->nombre . ", apellido=" . $this->apellido. ", email=" . $this->email . ", password=" . $this->password . "]";
 	}
 }
  ?>

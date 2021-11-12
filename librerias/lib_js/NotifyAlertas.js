@@ -12,7 +12,7 @@ function enableNotifyAlerta(asunto,mensaje,idAlerta)
 	{
 		$('body').removeClass('modal-open'); 
 		$('.modal-backdrop').remove(); 
-	};
+	}; 
 	//Arreglos Notificacion Inicio
 	var tipoAlert = {
 			1:'alert-primary',
@@ -71,6 +71,7 @@ function enableNotifyAlerta(asunto,mensaje,idAlerta)
  		$("#modalNotify").modal("toggle");
  	});
 	$("#modalNotify").modal("show");
+	
 	setTimeout(function(){ $("#btnModal").focus(); }, 1000);
 }
 function enableNotifyYesOrCancel(asunto,mensaje,idAlerta)

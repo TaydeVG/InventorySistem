@@ -6,6 +6,7 @@ include_once("../php/clases/ClassReactivos.php");
 include_once("../php/clases/ClassEquipos.php");
 include_once("../php/clases/ClassLogin.php");
 include_once("../php/clases/ClassRecipientes.php");
+include_once("../php/clases/ClassControllerFiles.php");
 
 $datosRespuesta = array();
 $UsuarioRequest = new Usuario();
@@ -14,8 +15,11 @@ $UsuarioRequest = new Usuario();
 $opcion         = isset($_POST['opcion']) ? $_POST['opcion'] : 0;
 $opcion         = $opcion != 0 ? $opcion : (isset($_GET['opcion']) ? $_GET['opcion'] : 0);
 
+$idUsuario         = isset($_POST['idUsuario']) ? $_POST['idUsuario'] : 0;
+$UsuarioRequest->setId($idUsuario != 0 ? $idUsuario : (isset($_GET['idUsuario']) ? $_GET['idUsuario'] : 0));
+
 $email         = isset($_POST['email']) ? $_POST['email'] : 0;
-$UsuarioRequest->setEmail($email != 0 ? $email : (isset($_GET['email']) ? $_GET['email'] : 0));
+$UsuarioRequest->setCorreo($email != 0 ? $email : (isset($_GET['email']) ? $_GET['email'] : 0));
 
 $password      = isset($_POST['password']) ? $_POST['password'] : 0;
 $UsuarioRequest->setPassword($password != 0 ? $password : (isset($_GET['password']) ? $_GET['password'] : 0));
@@ -27,7 +31,7 @@ set_time_limit(0);
 setlocale(LC_ALL, 'es_ES');
 define("CHARSET", "iso-8859-1");
 
-$conexMySql = new Conexion();//se instancia la clase Conexion para acceder a sus funciones
+$conexMySql = new Conexion(); //se instancia la clase Conexion para acceder a sus funciones
 /* 
 estructura para consultas PDO = PHP Data Objects: extensión que provee una capa de abstracción de acceso a datos;
 1.- enviar conexion por parametros a funcion: $conexMySql->cnx
@@ -41,10 +45,11 @@ while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
 }
 6.- una vez obtenida la informacion de base de datos seria, cerrar la conexion:  $cnx->desconectar();
 */
+
 switch ($opcion) {
 	case 1:
 
-		$datosRespuesta = ClassLogin::iniciarSesion("conexion", $UsuarioRequest->getEmail(), $UsuarioRequest->getPassword());
+		$datosRespuesta = ClassLogin::iniciarSesion("conexion", $UsuarioRequest->getCorreo(), $UsuarioRequest->getPassword());
 		echo json_encode($datosRespuesta);
 		break;
 	case 2: //obtiene todos los reactivos
@@ -61,6 +66,10 @@ switch ($opcion) {
 		break;
 	case 5: //obtiene los mantenimientos de equipos
 		$datosRespuesta = ClassEquipos::getMantenimientos($conexMySql);
+		echo json_encode($datosRespuesta);
+		break;
+	case 6: //subir imagen
+		$datosRespuesta = ClassControllerFiles::subirArchivoAlServidor($_FILES['upl'], $UsuarioRequest->getId());
 		echo json_encode($datosRespuesta);
 		break;
 	case 0:
