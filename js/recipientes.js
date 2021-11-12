@@ -25,6 +25,40 @@ function initEvents() {
          }, 500);
       });
    });
+   //evento de cuando se le da submit al formulario del modal
+   $("#formModal").submit(function (e) {
+      e.preventDefault();
+      //se genera form data para poder mandar el archivo file
+      var objParam = new FormData($(this)[0]);
+      objParam.append("opcion", 6);
+
+      $.ajax({
+          cache: false,
+          url: '../../../php/router_controller.php',
+          type: 'POST',
+          dataType: 'JSON',
+          data: objParam,
+          contentType: false,
+          processData: false,
+          success: function (response) {
+
+              if (response.resultOper == 1) {
+
+                  console.log(response);
+
+              } else {
+                  console.log(response);
+              }
+          },
+          beforeSend: function () {
+              console.log("cargando peticion");
+          },
+          error: function (xhr, status, error) {
+              console.log(xhr.responseText);
+              enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
+          }
+      });
+  });
 
    $('#recipient-tipo_material').change(function (e) {
       var value = $(this).val();
@@ -102,9 +136,8 @@ function modalLogicLoad() {
    });
 }
 function initFormModal(modal) {
-   modal.querySelector('#recipient-nombre').value = "";
-   modal.querySelector('#recipient-capacidad').value = "0";
-   modal.querySelector('#recipient-tipo_material').value = "0";
+   $("#formModal")[0].reset();
+   $("#closePrev").click();//cierra previsualizador
    deshabilitarFormModal(modal, false);//habilita formulario modal
 
 }
