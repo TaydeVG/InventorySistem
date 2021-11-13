@@ -1,52 +1,51 @@
 <?php
 require_once("../php/objetos/Usuario.php");
+include_once("encryption.php");
 
 class ClassLogin
 {
 	public static function iniciarSesion($conexMySql, $pEmail, $pPassword)
 	{
 		$datos               = array();
-        $datos['mensaje']    = "";
-        $datos['respuesta']  = array();
-        $datos['resultOper'] = 0;
+		$datos['mensaje']    = "";
+		$datos['respuesta']  = array();
+		$datos['resultOper'] = 0;
 
-			$cSql = "SELECT id,nombre,apellido,email,password,id_tipo_usuario FROM  usuarios where email LIKE '$pEmail%' LIMIT 1;";
-
+		if ($pEmail && $pPassword) {
+			//	$pPassword           = Password::hash($pPassword);
 			try {
-				$Usuario        = new Usuario();
-				$Usuario->setId(1);
-				$Usuario->setNombre("ejemplo nombre");
-				$Usuario->setApellido("ejemplo apellido");
-				$Usuario->setCorreo($pEmail);
-				$Usuario->setPassword($pPassword);
+				$sql = "SELECT id,nombre,apellido,correo,password FROM administrador WHERE correo = '$pEmail' and password = '$pPassword' LIMIT 1;";
+				$consulta = $conexMySql->prepare($sql);
+				$consulta->execute();
 
-				$_SESSION["usuario"] = $Usuario; 
-				
-				$datos['respuesta'] = $Usuario;
-				$datos['mensaje'] = "Datos de sesion correctos.";
-				$datos['resultOper'] = 1;
-				/* foreach ($conexMySql->query($cSql) as $Resultado) {
-					$Usuario->setId($Resultado['id']);
-					$Usuario->setNombre($Resultado['nombre']);
-					$Usuario->setApellido($Resultado['apellido']);
-					$Usuario->setEmail($Resultado['email']);
-					$Usuario->setPassword($Resultado['password']);
-					$Usuario->setId_tipo_usuario($Resultado['id_tipo_usuario']);
+				$Usuario = new Usuario();
+				while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+					$Usuario->setId($row->id);
+					$Usuario->setNombre($row->nombre);
+					$Usuario->setApellido($row->apellido);
+					$Usuario->setCorreo($row->correo);
+					$Usuario->setPassword($row->password);
 				}
 
 				if ($Usuario != null && $Usuario->getId() != null && $Usuario->getId() != 0) {
-					$datos['mensaje'] = "Bienvenido!.";
+
+					$_SESSION["usuario"] = $Usuario;
+
 					$datos['respuesta'] = $Usuario;
+					$datos['mensaje'] = "Bienvenido " . $Usuario->getNombre() . ".";
 					$datos['resultOper'] = 1;
 				} else {
 					$datos['respuesta'] = $Usuario;
 					$datos['mensaje'] = "Datos Incorrectos!.";
 					$datos['resultOper'] = 2;
-				} */
+				}
 			} catch (Exception $e) {
 				$datos['mensaje'] = $e;
 				$datos['resultOper'] = -1;
 			}
+		} else {
+			$datos['mensaje'] = "BAD REQUEST";
+		}
 		return $datos;
 	}
 	public static function cerrarSesion()
@@ -56,6 +55,6 @@ class ClassLogin
 		$datos['resultOper'] = 1;
 		// Finalmente, destruir la sesión.
 		session_destroy();
-		return $datos ;
+		return $datos;
 	}
 }

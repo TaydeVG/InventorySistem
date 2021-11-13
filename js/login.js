@@ -45,15 +45,15 @@ function validarDatosLogin(usuario, password, recordar) {
                     localStorage.removeItem("user");
                     localStorage.removeItem("pass");
                 }
-                console.log(response);
-                enableNotifyAlerta("Exito!", response.mensaje + " " + response.respuesta.nombre, 3);
+                enableNotifyAlerta("Exito!", response.mensaje, 3);
                 $("#btnModal").click(function () {
                     window.location = "principal.php";
                 });
             }
             else {
-                enableNotifyAlerta("Datos Invalidos!", response.mensaje, 4);
+                enableNotifyAlerta("Datos Invalidos!", response.mensaje, 5);
             }
+            console.log(response);
         },
         beforeSend: function () {
             console.log("cargando peticion");

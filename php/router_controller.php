@@ -48,8 +48,9 @@ while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
 
 switch ($opcion) {
 	case 1:
-
-		$datosRespuesta = ClassLogin::iniciarSesion("conexion", $UsuarioRequest->getCorreo(), $UsuarioRequest->getPassword());
+		$conexMySql->conectar();
+		$datosRespuesta = ClassLogin::iniciarSesion($conexMySql->cnx, $UsuarioRequest->getCorreo(), $UsuarioRequest->getPassword());
+		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
 	case 2: //obtiene todos los reactivos
