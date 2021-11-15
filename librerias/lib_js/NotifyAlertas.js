@@ -56,7 +56,7 @@ function enableNotifyAlerta(asunto,mensaje,idAlerta)
           '<h5>' + mensaje +'</h5>'+
           '</div>'+
             '<div class="modal-footer"  id="footerModalNotify">'+
-                '<button type="button" id="btnModal" class="btn btn-success mx-auto"  style="width: 25%;">   <i class="far fa-check-circle font-size-30px"></i>   </button>'+
+                '<button type="button" id="btnModal" class="btn btn-success mx-auto"  style="width: 20%;">   <i class="far fa-check-circle font-size-24px"></i>   </button>'+
             	'<div id="iconModalLoading" class="mx-auto text-success"></div>'+
             '</div>'+
         '</div>'+
@@ -119,8 +119,8 @@ var tipoIcono = {
           '<h5>' + mensaje +'</h5>'+
           '</div>'+
             '<div class="modal-footer"  id="footerModalNotify">'+
-                '<button type="button" id="btnModalYesOrCancel" class="btn btn-success mx-auto" title="Confirmar" style="width: 25%;">   <i class="far fa-check-circle font-size-30px"></i>   </button>'+
-                '<button type="button" class="btn btn-danger mx-auto" data-bs-dismiss="modal" title="Cancelar">   <i class="far fa-times-circle font-size-30px"></i>   </button>'+
+                '<button type="button" id="btnModalYesOrCancel" class="btn btn-success mx-auto" title="Confirmar" style="width: 20%;">   <i class="far fa-check-circle font-size-24px"></i>   </button>'+
+                '<button type="button" class="btn btn-danger mx-auto" data-bs-dismiss="modal" title="Cancelar">   <i class="far fa-times-circle font-size-24px"></i>   </button>'+
             	'<div id="iconModalLoading" class="mx-auto text-success"></div>'+
             '</div>'+
         '</div>'+

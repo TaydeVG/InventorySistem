@@ -12,9 +12,10 @@ class ClassLogin
 		$datos['resultOper'] = 0;
 
 		if ($pEmail && $pPassword) {
-			//	$pPassword           = Password::hash($pPassword);
 			try {
-				$sql = "SELECT id,nombre,apellido,correo,password FROM administrador WHERE correo = '$pEmail' and password = '$pPassword' LIMIT 1;";
+
+				$sql = "SELECT id,nombre,apellido,correo,password FROM administrador WHERE correo = '$pEmail' and password = '" .
+					Password::hash($pPassword) . "' LIMIT 1;";
 				$consulta = $conexMySql->prepare($sql);
 				$consulta->execute();
 
@@ -36,7 +37,7 @@ class ClassLogin
 					$datos['resultOper'] = 1;
 				} else {
 					$datos['respuesta'] = $Usuario;
-					$datos['mensaje'] = "Datos Incorrectos!.";
+					$datos['mensaje'] = "Ups... Usuario o contraseña incorrectos!";
 					$datos['resultOper'] = 2;
 				}
 			} catch (Exception $e) {

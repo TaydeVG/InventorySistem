@@ -7,6 +7,7 @@ include_once("../php/clases/ClassEquipos.php");
 include_once("../php/clases/ClassLogin.php");
 include_once("../php/clases/ClassRecipientes.php");
 include_once("../php/clases/ClassControllerFiles.php");
+include_once("../php/clases/ClassAdministradores.php");
 
 $datosRespuesta = array();
 $UsuarioRequest = new Usuario();
@@ -23,6 +24,12 @@ $UsuarioRequest->setCorreo($email != 0 ? $email : (isset($_GET['email']) ? $_GET
 
 $password      = isset($_POST['password']) ? $_POST['password'] : 0;
 $UsuarioRequest->setPassword($password != 0 ? $password : (isset($_GET['password']) ? $_GET['password'] : 0));
+
+$apellido      = isset($_POST['apellido']) ? $_POST['apellido'] : 0;
+$UsuarioRequest->setApellido($apellido != 0 ? $apellido : (isset($_GET['apellido']) ? $_GET['apellido'] : 0));
+
+$nombre      = isset($_POST['nombre']) ? $_POST['nombre'] : 0;
+$UsuarioRequest->setNombre($nombre != 0 ? $nombre : (isset($_GET['nombre']) ? $_GET['nombre'] : 0));
 
 ini_set('memory_limit', '-1');
 set_time_limit(0);
@@ -71,6 +78,12 @@ switch ($opcion) {
 		break;
 	case 6: //subir imagen
 		$datosRespuesta = ClassControllerFiles::subirArchivoAlServidor($_FILES['upl'], $UsuarioRequest->getId());
+		echo json_encode($datosRespuesta);
+		break;
+	case 7:
+		$conexMySql->conectar();
+		$datosRespuesta = ClassAdministradores::insert($conexMySql->cnx, $UsuarioRequest);
+		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
 	case 0:
