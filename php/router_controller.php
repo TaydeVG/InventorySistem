@@ -86,6 +86,12 @@ switch ($opcion) {
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
+	case 8:
+		$conexMySql->conectar();
+		$datosRespuesta = ClassLogin::restablecerPassword($conexMySql->cnx, $UsuarioRequest->getCorreo());
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
 	case 0:
 		$datosRespuesta = ClassLogin::cerrarSesion();
 		$conexMySql = null;

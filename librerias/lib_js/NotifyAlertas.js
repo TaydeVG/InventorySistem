@@ -32,7 +32,7 @@ function enableNotifyAlerta(asunto,mensaje,idAlerta)
 			4:'animated shake',
 			5:'animated tada',
 			6:'animated bounceIn',
-			7:'animated flash',
+			7:'animated bounceIn',
 			8:'animated swing'
 			};
 	var tipoIcono = {
@@ -52,7 +52,7 @@ function enableNotifyAlerta(asunto,mensaje,idAlerta)
             '<h5 class="modal-title" id="h6TituloModal"><i class=" '+ tipoIcono[idAlerta] +'"></i> '+ asunto +'</h5>'+
             '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>'+
           '</div>'+
-          '<div class="modal-body  '+ tipoAlert[idAlerta] +' text-justify" id="mensajeNotifyBody">'+
+          '<div class="modal-body '+ tipoAlert[idAlerta] +' text-center" id="mensajeNotifyBody">'+
           '<h5>' + mensaje +'</h5>'+
           '</div>'+
             '<div class="modal-footer"  id="footerModalNotify">'+
@@ -136,7 +136,7 @@ function disableNotifyYesOrCancel()
 	$("#modalNotify").modal("toggle");
 }
 function loadingNotify(asunto,mensaje){
-	enableNotifyAlerta(asunto,mensaje,6);
+	enableNotifyAlerta(asunto,mensaje,7);
 	$("#btnModal").hide();
 	$("#iconModalLoading").show();
 	$("#iconModalLoading").html('<i class="fas fa-sync-alt fa-spin fa-3x" ></i>');

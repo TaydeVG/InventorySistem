@@ -44,6 +44,7 @@ if (isset($_SESSION["usuario"])) { //si hay sesion iniciar lo manda a la ventana
 
 <body style="background-color: #EEEEEE;">
     <div id="modalNotifyContainer"></div>
+    <?php include("../../modales/reiniciar-password-modals.php"); ?>
 
     <div id="contenedorLoad">
         <div class="container">
@@ -94,7 +95,7 @@ if (isset($_SESSION["usuario"])) { //si hay sesion iniciar lo manda a la ventana
                         </div>
                     </div>
                     <div class="col-6">
-                        <a href="#" target="_blank" rel="noopener noreferrer">¿Olvidaste tu contraseña?</a>
+                        <a data-bs-toggle="modal" href="#modalId" role="button">¿Olvidaste tu contraseña?</a>
                     </div>
                 </div>
                 <button class="w-100 btn btn-primary" id="btnLogin" type="submit">Iniciar sesión</button>
@@ -115,7 +116,7 @@ if (isset($_SESSION["usuario"])) { //si hay sesion iniciar lo manda a la ventana
             contenedor.style.visibility = 'hidden';
             contenedor.style.opacity = '0';
 
-        }, 2000);
+        }, 1500);
     }
     </script>
     <script type="text/javascript" src="../../../js/login.js"></script>
