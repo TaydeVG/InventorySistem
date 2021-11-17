@@ -19,8 +19,8 @@
                             <div class="form-floating pb-1">
                                 <input type="email"
                                     class="rounded-0 rounded-top form-control border-0 border-bottom border-primary"
-                                    id="recipient-mail-retry" name="recipient-mail-retry" placeholder="name@example.com" required
-                                    style="height: 40px !important;">
+                                    id="recipient-mail-retry" name="recipient-mail-retry" placeholder="name@example.com"
+                                    required style="height: 40px !important;">
                                 <label for="floatingInput" class="form-text pt-1">Correo Electronico</label>
                             </div>
                         </div>
@@ -28,9 +28,49 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-evenly">
-                <button type="button" class="btn btn-primary" id="btnModalSubmit" data-bs-dismiss="modal">Enviar</button>
+                <button type="button" class="btn btn-primary" id="btnModalSubmit"
+                    data-bs-dismiss="modal">Enviar</button>
                 <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
                     id="btnModalCancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalIdPassword" tabindex="-1" aria-labelledby="modalIdLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="modalIdLabel">Cambiar Contraseña</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-sm-12">
+                        <div class="mb-1">
+                            <label class="col-form-label text-center text-muted">Se generó
+                                una contraseña aleatoria recientemente, se le recomienda cambiar de
+                                contraseña.
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 px-5">
+                        <div class="form-floating pb-1">
+                            <input type="password"
+                                class="rounded-0 rounded-top form-control border-0 border-bottom border-primary"
+                                id="recipient-pass-cambio" name="recipient-pass-cambio" placeholder="Escribe Aquí"
+                                minlength="8" maxlength="8" required style="height: 40px !important;">
+                            <label for="floatingInput" class="form-text pt-1">Contraseña</label>
+                        </div>
+                        <label class="text-muted ps-2">Minimo 8 caracteres</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-evenly">
+                <button type="button" class="btn btn-primary" id="btnModalPassSubmit"
+                    data-bs-dismiss="modal">Enviar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnModalCancel">Recodar mas
+                    tarde</button>
             </div>
         </div>
     </div>

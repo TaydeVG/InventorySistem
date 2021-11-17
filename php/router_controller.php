@@ -1,5 +1,4 @@
 <?php
-session_start();
 require "../php/clases/conexion.php";
 include_once("../php/objetos/Usuario.php");
 include_once("../php/clases/ClassReactivos.php");
@@ -8,6 +7,9 @@ include_once("../php/clases/ClassLogin.php");
 include_once("../php/clases/ClassRecipientes.php");
 include_once("../php/clases/ClassControllerFiles.php");
 include_once("../php/clases/ClassAdministradores.php");
+
+session_start(); // se agrega luego de las importaciones para no tener problemas con los arrays en variables de sesion
+
 
 $datosRespuesta = array();
 $UsuarioRequest = new Usuario();
@@ -30,6 +32,9 @@ $UsuarioRequest->setApellido($apellido != 0 ? $apellido : (isset($_GET['apellido
 
 $nombre      = isset($_POST['nombre']) ? $_POST['nombre'] : 0;
 $UsuarioRequest->setNombre($nombre != 0 ? $nombre : (isset($_GET['nombre']) ? $_GET['nombre'] : 0));
+
+$is_password_random      = isset($_POST['is_password_random']) ? $_POST['is_password_random'] : 0;
+$UsuarioRequest->setIs_password_random($is_password_random != 0 ? $is_password_random : (isset($_GET['is_password_random']) ? $_GET['is_password_random'] : 0));
 
 ini_set('memory_limit', '-1');
 set_time_limit(0);
@@ -91,6 +96,15 @@ switch ($opcion) {
 		$datosRespuesta = ClassLogin::restablecerPassword($conexMySql->cnx, $UsuarioRequest->getCorreo());
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
+		break;
+	case 9:
+		$conexMySql->conectar();
+		$datosRespuesta = ClassAdministradores::update_password($conexMySql->cnx, $_SESSION["usuario"]->correo, $UsuarioRequest->getPassword());
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 10:
+		echo json_encode($_SESSION["usuario"]);
 		break;
 	case 0:
 		$datosRespuesta = ClassLogin::cerrarSesion();

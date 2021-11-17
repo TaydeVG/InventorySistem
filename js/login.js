@@ -56,7 +56,6 @@ function restablecer_password(mail) {
         data: objParam,
         success: function (response) {
             //disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
-        
             console.log(response);
 
             if (response.resultOper == 1) {
@@ -67,11 +66,13 @@ function restablecer_password(mail) {
                 });
             }
             else {
-                if ( response.mensaje.errorInfo) {
-                    enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
-                } else {
-                    enableNotifyAlerta("ATENCION!", response.mensaje, 5);
-                }
+                setTimeout(() => {
+                    if (response.mensaje.errorInfo) {
+                        enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                    } else {
+                        enableNotifyAlerta("ATENCION!", response.mensaje, 5);
+                    }
+                }, 1000);
             }
         },
         beforeSend: function () {

@@ -9,6 +9,7 @@ class Usuario
 	public  $apellido = "";
 	public  $correo = "";
 	public  $password = "";
+	public  $is_password_random = 0;
 	
 	public function getId() 
 	{
@@ -49,11 +50,18 @@ class Usuario
 	public function setPassword($password) 
 	{
 		$this->password = $password;
+	} 
+	public function getIs_password_random() 
+	{
+		return $this->is_password_random;
+	}
+	public function setIs_password_random($is_password_random) 
+	{
+		$this->is_password_random = $is_password_random;
 	}
 
 	public function toString() 
 	{
-		return "Usuario [id=" . $this->id . ", nombre=" . $this->nombre . ", apellido=" . $this->apellido. ", email=" . $this->email . ", password=" . $this->password . "]";
+		return "Usuario [id=" . $this->id . ", nombre=" . $this->nombre . ", apellido=" . $this->apellido. ", email=" . $this->email . ", password=" . $this->password .", is_password_random=" . $this->is_password_random . "]";
 	}
 }
- ?>
