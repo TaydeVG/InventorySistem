@@ -8,4 +8,4 @@
  <!-- Font Awesome 5.10.1 CSS -->
  <link rel="stylesheet" href="../../../librerias/lib_css/Font Awesome Free 5.10.1.css">
  <link rel="stylesheet" href="../../../css/styleGeneral.css">
- <link rel="shortcut icon" href="../../../resources/imagenes/logo.png" type="image/x-icon">
+ <link rel="shortcut icon" href="https://pbs.twimg.com/profile_images/1369476360247242754/p20mopJI_400x400.png" type="image/x-icon">

@@ -7,8 +7,8 @@ function findRegistroById(id, arrayDatos) {
 function efectoLoadInSection(sectionAfectada) {
    $(sectionAfectada).parent().append('<div class="opacarContenido texto-centrado fadeIn"><i class="fas fa-sync-alt fa-spin h2" ></i></div>');
 
-   $('.reload').attr('id', 'reload');
-   setTimeout(function () { $('.reload').attr('id', ''); }, 2000);
+   $(sectionAfectada).attr('id', 'reload');
+   setTimeout(function () { $(sectionAfectada).attr('id', ''); }, 2000);
 }
 function disableEfectoLoadInSection(sectionAfectada) {
    $(sectionAfectada).parent().find('.opacarContenido').remove();

@@ -45,7 +45,7 @@ function enableNotifyAlerta(asunto,mensaje,idAlerta)
 			7:'fas fa-award',
 			8:'fas fa-award'
 			};
-	$("#modalNotifyContainer").html('<div class="modal fade '+  tipoAnimacion[idAlerta] +'" id="modalNotify" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
+	$("#modalNotifyContainer").html('<div class="modal fade '+  tipoAnimacion[idAlerta] +'" data-bs-backdrop="static" data-bs-keyboard="false" id="modalNotify" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">'+
       '<div class="modal-dialog modal-dialog-centered modal-sm" role="document">'+
         '<div class="modal-content">'+
           '<div class="modal-header bg-primary-dark">'+
@@ -136,6 +136,7 @@ function disableNotifyYesOrCancel()
 	$("#modalNotify").modal("toggle");
 }
 function loadingNotify(asunto,mensaje){
+	
 	enableNotifyAlerta(asunto,mensaje,7);
 	$("#btnModal").hide();
 	$("#iconModalLoading").show();

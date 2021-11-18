@@ -4,6 +4,7 @@ $(document).ready(function () {
     initEventsPrin();
     modalLogicLoad();// carga la logica para cuando se muestre el modal
     getUserSesion();//obtiene el usuario de sesion para ferificarlo
+    sessionStorage.setItem("opcion-reactivos", "");
 });
 
 function initEventsPrin() {
