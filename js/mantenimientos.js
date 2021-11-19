@@ -113,7 +113,7 @@ function llenarTabla(datos) {
 
     for (var i = 0; i < cantdatos; i++) {
         $('#tabla_id').append($(
-            ` <tr class="row` + (i + 1) + `  animated fadeInLeft">` +
+            ` <tr class="row` + (i + 1) + `  animated bounceInDown">` +
             `<td class="text-center">` + (i + 1) + `</td>` +
             `<td class="text-center">` + datos[i].fecha_mantenimiento + `</td>` +
             `<td class="text-center">` + datos[i].observaciones + `</td>` +

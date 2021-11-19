@@ -8,11 +8,10 @@ class Equipo
     public $id = 0;
     public $nombre = "";
     public $condicion_uso = "";
-    public $mantenimiento = 0;
     public $num_economico = 0;
     public $num_serie = "";
     public $id_laboratorio = 0;
-    public $fecha_alta = "";
+    public $eliminado = false;
 
     public function getId()
     {
@@ -39,15 +38,6 @@ class Equipo
     public function setCondicion_uso($condicion_uso)
     {
         $this->condicion_uso = $condicion_uso;
-    }
-
-    public function getMantenimiento()
-    {
-        return $this->mantenimiento;
-    }
-    public function setMantenimiento($mantenimiento)
-    {
-        $this->mantenimiento = $mantenimiento;
     }
 
     public function getNum_economico()
@@ -77,13 +67,13 @@ class Equipo
         $this->id_laboratorio = $id_laboratorio;
     }
 
-    public function getFecha_alta()
+    public function getEliminado()
     {
-        return $this->fecha_alta;
+        return $this->eliminado;
     }
-    public function setFecha_alta($fecha_alta)
+    public function setEliminado($eliminado)
     {
-        $this->fecha_alta = $fecha_alta;
+        $this->eliminado = $eliminado;
     }
 }
 

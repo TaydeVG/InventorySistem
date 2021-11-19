@@ -9,47 +9,39 @@ class ClassEquipos
         $datos['mensaje']    = "";
         $datos['respuesta']  = array();
         $datos['resultOper'] = 0;
+        $Equipo = new Equipo;
 
         try {
-            $Equipo = new Equipo;
 
-            $Equipo->setId(1);
-            $Equipo->setNombre("Tubo pbc");
-            $Equipo->setCondicion_uso("ahi anda");
-            $Equipo->setMantenimiento(1);
-            $Equipo->setNum_economico(3432);
-            $Equipo->setNum_serie("2009324");
-            $Equipo->setId_laboratorio(2);
-            $Equipo->setFecha_alta("27-10-2021");
+            $sql = "SELECT id, nombre, condicion_uso, num_economico, num_serie, id_laboratorio, eliminado
+             FROM equipo;";
+            $consulta = $conexMySql->prepare($sql);
+            $consulta->execute();
 
-            array_push($datos['respuesta'], $Equipo);
-            $Equipo = new Equipo;
-            $Equipo->setId(2);
-            $Equipo->setNombre("Balvula ilidio");
-            $Equipo->setCondicion_uso("ahi anda");
-            $Equipo->setMantenimiento(1);
-            $Equipo->setNum_economico(3432);
-            $Equipo->setNum_serie("2009324");
-            $Equipo->setId_laboratorio(2);
-            $Equipo->setFecha_alta("20-10-2021");
-            array_push($datos['respuesta'], $Equipo);
-            array_push($datos['respuesta'], $Equipo);
-            array_push($datos['respuesta'], $Equipo);
-            array_push($datos['respuesta'], $Equipo);
-            array_push($datos['respuesta'], $Equipo);
-            array_push($datos['respuesta'], $Equipo);
-            array_push($datos['respuesta'], $Equipo);
-            array_push($datos['respuesta'], $Equipo);
-            array_push($datos['respuesta'], $Equipo);
-            array_push($datos['respuesta'], $Equipo);
-            array_push($datos['respuesta'], $Equipo);
+            while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+                $Equipo->setId($row->id);
+                $Equipo->setNombre($row->nombre);
+                $Equipo->setCondicion_uso($row->condicion_uso);
+                $Equipo->setNum_economico($row->num_economico);
+                $Equipo->setNum_serie($row->num_serie);
+                $Equipo->setId_laboratorio($row->id_laboratorio);
+                $Equipo->setEliminado($row->eliminado);
 
-            $datos['mensaje'] = "informacion obtenida con exito.";
-            $datos['resultOper'] = 1;
+                array_push($datos['respuesta'], $Equipo); //se agrega cada registro a la variable de respuesta
+            }
+
+            if (count($datos['respuesta']) > 0) { //se valida que aya registros en la tabla
+                $datos['mensaje'] = count($datos['respuesta']) . " registros obtenidos con exito.";
+                $datos['resultOper'] = 1;
+            } else {
+                $datos['mensaje'] = "sin informacion para mostrar.";
+                $datos['resultOper'] = 2;
+            }
         } catch (Exception $e) {
             $datos['mensaje'] = $e;
             $datos['resultOper'] = -1;
         }
+        $Reactivo = null; //se libera de memoria
         return $datos;
     }
     public static function getMantenimientos($conexMySql)

@@ -9,7 +9,6 @@ $(document).ready(function () {
     llenarTabla(getDatosTabla());
     agregarFiltradoTabla("#tabla_id", "#body-table", "#filtrado", "#paginationTable");//agrega paginacion a tabla
 
-    disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
     initEvents();
 
 });
@@ -171,14 +170,12 @@ function llenarTabla(datos) {
 
     for (var i = 0; i < cantdatos; i++) {
         $('#tabla_id').append($(
-            ` <tr class="row` + (i + 1) + `  animated fadeInLeft">` +
+            ` <tr class="row` + (i + 1) + `  animated bounceInDown">` +
             `<td class="text-center">` + (i + 1) + `</td>` +
             `<td class="text-center">` + datos[i].nombre + `</td>` +
             `<td class="text-center">` + datos[i].condicion_uso + `</td>` +
-            `<td class="text-center">` + datos[i].mantenimiento + `</td>` +
             `<td class="text-center">` + datos[i].num_economico + `</td>` +
             `<td class="text-center">` + datos[i].num_serie + `</td>` +
-            `<td class="text-center">` + datos[i].fecha_alta + `</td>` +
             `<td class="text-center"> 
                 <div class="d-flex justify-content-evenly">
                    <button class="btn btn-outline-success" title="Ver" data-bs-toggle="modal" data-bs-target="#modalId" data-bs-id="`+ datos[i].id + `" data-bs-opcion="view"><i class="fas fa-eye"></i></button>
@@ -227,9 +224,15 @@ function getDatosTabla() {
 
             if (response.resultOper == 1) {
                 datos = response.respuesta;//datos a retornar
-            }
-            else {
-                enableNotifyAlerta("ATENCION !", response.mensaje, 5);
+                disableNotifyAlerta();//oculta el modal de loading
+            } else {
+                setTimeout(() => {
+                    if (response.mensaje.errorInfo) {
+                        enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                    } else {
+                        enableNotifyAlerta("ATENCION!", response.mensaje, 5);
+                    }
+                }, 1000);
             }
         },
         beforeSend: function () {

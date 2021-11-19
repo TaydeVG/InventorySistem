@@ -9,7 +9,6 @@ $(document).ready(function () {
    llenarTabla(getDatosTabla());
    agregarFiltradoTabla("#tabla_id", "#body-table", "#filtrado", "#paginationTable");
 
-   disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
    initEvents();
 });
 
@@ -107,7 +106,7 @@ function setFormModal(modal, datos) {
    modal.querySelector('#recipient-inflamabilida').value = datos.inflamabilida;
    modal.querySelector('#recipient-riesgoSalud').value = datos.riesgo_salud;
    modal.querySelector('#recipient-presentacion').value = datos.presentacion;
-   modal.querySelector('#recipient-nReactivo').value = datos.n_reactivo;
+   modal.querySelector('#recipient-nReactivo').value = datos.cantidad;
    modal.querySelector('#recipient-unidadMedida').value = datos.unidad_medida;
    modal.querySelector('#recipient-codigoAlmacenamiento').value = datos.codigo_almacenamiento;
    modal.querySelector('#recipient-caducidad').value = datos.caducidad;
@@ -143,13 +142,16 @@ function llenarTabla(datos) {
 
    for (var i = 0; i < cantdatos; i++) {
       $('#tabla_id').append($(
-         ` <tr class="row` + (i + 1) + `  animated fadeInLeft">` +
+         ` <tr class="row` + (i + 1) + `  animated bounceInDown">` +
          `<td class="text-center">` + (i + 1) + `</td>` +
          `<td class="text-center">` + datos[i].nombre + `</td>` +
+         `<td class="text-center">` + datos[i].cantidad + `</td>` +
          `<td class="text-center">` + datos[i].reactividad + `</td>` +
+         `<td class="text-center">` + datos[i].inflamabilida + `</td>` +
+         `<td class="text-center">` + datos[i].riesgo_salud + `</td>` +
          `<td class="text-center">` + datos[i].unidad_medida + `</td>` +
          `<td class="text-center">` + datos[i].caducidad + `</td>` +
-         `<td class="text-center">` + datos[i].fecha_alta + `</td>` +
+         `<td class="text-center">` + datos[i].n_mueble + `</td>` +
          `<td class="text-center"> 
                <div class="d-flex justify-content-evenly">
                   <button class="btn btn-outline-success" title="Ver" data-bs-toggle="modal" data-bs-target="#modalId" data-bs-id="`+ datos[i].id + `" data-bs-opcion="view"><i class="fas fa-eye"></i></button>
@@ -198,9 +200,16 @@ function getDatosTabla() {
 
          if (response.resultOper == 1) {
             datos = response.respuesta;//datos a retornar
+            disableNotifyAlerta();//oculta el modal de loading
          }
          else {
-            enableNotifyAlerta("ATENCION !", response.mensaje, 5);
+            setTimeout(() => {
+               if (response.mensaje.errorInfo) {
+                   enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+               } else {
+                   enableNotifyAlerta("ATENCION!", response.mensaje, 5);
+               }
+           }, 1000);
          }
       },
       beforeSend: function () {

@@ -46,16 +46,17 @@ define("CHARSET", "iso-8859-1");
 $conexMySql = new Conexion(); //se instancia la clase Conexion para acceder a sus funciones
 /* 
 estructura para consultas PDO = PHP Data Objects: extensión que provee una capa de abstracción de acceso a datos;
-1.- enviar conexion por parametros a funcion: $conexMySql->cnx
-2.- una vez ubicaod en la clase, antes de ejecutar la consulta se debe abrir conexion: $conexMySql->conectar();
-3.- luego seria preparar la consulta con la conexion recibida por parametro: $consulta = $cnx->prepare("SELECT * FROM tabla");
+1.- abrir conexion, antes de enviar como parametro a la clase: $conexMySql->conectar();
+2.- enviar conexion por parametros a funcion: $conexMySql->cnx
+3.- dentro de la funcion a la que se le paso la conexion como parametro, 
+	lo primero es preparar la consulta: $consulta = $conexMySql->prepare("SELECT * FROM tabla");
 4.- al preparar la consulta, debajo iria la ejecucion de la funcion: $consulta->execute();
 5.- al ejecutar la consulta, para obtener los registros: 
 $registros = [];
 while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
 	$registros[] = $row;
 }
-6.- una vez obtenida la informacion de base de datos seria, cerrar la conexion:  $cnx->desconectar();
+6.- una vez obtenida la informacion de base de datos seria, cerrar la conexion en el archivo que abrio la conxion: $conexMySql->desconectar();
 */
 
 switch ($opcion) {
@@ -66,19 +67,27 @@ switch ($opcion) {
 		echo json_encode($datosRespuesta);
 		break;
 	case 2: //obtiene todos los reactivos
-		$datosRespuesta = ClassReactivos::getReactivos($conexMySql);
+		$conexMySql->conectar();
+		$datosRespuesta = ClassReactivos::getReactivos($conexMySql->cnx);
+		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
 	case 3: //obtiene todos los reactivos
-		$datosRespuesta = ClassEquipos::getEquipos($conexMySql);
+		$conexMySql->conectar();
+		$datosRespuesta = ClassEquipos::getEquipos($conexMySql->cnx);
+		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
 	case 4: //obtiene todos los reactivos
-		$datosRespuesta = ClassRecipientes::getRecipientes($conexMySql);
+		$conexMySql->conectar();
+		$datosRespuesta = ClassRecipientes::getRecipientes($conexMySql->cnx);
+		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
 	case 5: //obtiene los mantenimientos de equipos
-		$datosRespuesta = ClassEquipos::getMantenimientos($conexMySql);
+		$conexMySql->conectar();
+		$datosRespuesta = ClassEquipos::getMantenimientos($conexMySql->cnx);
+		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
 	case 6: //subir imagen

@@ -3,67 +3,54 @@ require_once("../php/objetos/Reactivos.object.php");
 
 class ClassReactivos
 {
+
     public static function getReactivos($conexMySql)
     {
         $datos               = array();
         $datos['mensaje']    = "";
         $datos['respuesta']  = array();
         $datos['resultOper'] = 0;
+        $Reactivo = new Reactivo;
 
         try {
-            $Reactivo = new Reactivo;
 
-            $Reactivo->setId(1);
-            $Reactivo->setNombre("Azul de anilino 1");
-            $Reactivo->setReactividad(1);
-            $Reactivo->setUnidad_medida("Gramos");
-            $Reactivo->setCaducidad("2025-01-01");
-            $Reactivo->setInflamabilida(1);
-            $Reactivo->setRiesgo_salud(2);
-            $Reactivo->setPresentacion("");
-            $Reactivo->setCodigo_almacenamiento(0);
-            $Reactivo->setN_reactivo("");
-            $Reactivo->setN_mueble(1);
-            $Reactivo->setN_estante(1);
-            $Reactivo->setFecha_alta("27-10-2021");
+            $sql = "SELECT id, nombre, reactividad, inflamabilidad, riesgo_salud, presentacion, cantidad_reactivo, 
+            unidad_medida, codigo_almacenamiento, caducidad, num_mueble, num_estante, id_laboratorio, eliminado
+             FROM reactivo;";
+            $consulta = $conexMySql->prepare($sql);
+            $consulta->execute();
 
-            array_push($datos['respuesta'], $Reactivo);
-            $Reactivo = new Reactivo;
-            $Reactivo->setId(2);
-            $Reactivo->setNombre("Azul de anilino 2");
-            $Reactivo->setReactividad(1);
-            $Reactivo->setUnidad_medida("Gramos");
-            $Reactivo->setCaducidad("No se observa");
-            $Reactivo->setInflamabilida(1);
-            $Reactivo->setRiesgo_salud(2);
-            $Reactivo->setPresentacion("");
-            $Reactivo->setCodigo_almacenamiento(0);
-            $Reactivo->setN_reactivo("");
-            $Reactivo->setN_mueble(1);
-            $Reactivo->setN_estante(1);
-            $Reactivo->setFecha_alta("20-10-2021");
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
-            array_push($datos['respuesta'], $Reactivo);
+            while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+                $Reactivo->setId($row->id);
+                $Reactivo->setNombre($row->nombre);
+                $Reactivo->setReactividad($row->reactividad);
+                $Reactivo->setInflamabilida($row->inflamabilidad);
+                $Reactivo->setRiesgo_salud($row->riesgo_salud);
+                $Reactivo->setPresentacion($row->presentacion);
+                $Reactivo->setCantidad($row->cantidad_reactivo);
+                $Reactivo->setUnidad_medida($row->unidad_medida);
+                $Reactivo->setCodigo_almacenamiento($row->codigo_almacenamiento);
+                $Reactivo->setCaducidad($row->caducidad);
+                $Reactivo->setN_mueble($row->num_mueble);
+                $Reactivo->setN_estante($row->num_estante);
+                $Reactivo->setId_laboratorio($row->id_laboratorio);
+                $Reactivo->setEliminado($row->eliminado);
 
-            $datos['mensaje'] = "informacion obtenida con exito.";
-            $datos['resultOper'] = 1;
+                array_push($datos['respuesta'], $Reactivo); //se agrega cada registro a la variable de respuesta
+            }
+
+            if (count($datos['respuesta']) > 0) { //se valida que aya registros en la tabla
+                $datos['mensaje'] = count($datos['respuesta']) . " registros obtenidos con exito.";
+                $datos['resultOper'] = 1;
+            } else {
+                $datos['mensaje'] = "sin informacion para mostrar.";
+                $datos['resultOper'] = 2;
+            }
         } catch (Exception $e) {
             $datos['mensaje'] = $e;
             $datos['resultOper'] = -1;
         }
+        $Reactivo = null; //se libera de memoria
         return $datos;
     }
 }

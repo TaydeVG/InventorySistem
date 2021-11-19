@@ -74,16 +74,14 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table id="tabla_id" class="table table-striped table-hover">
+                            <table id="tabla_id" class="table table-striped table-hover table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Condicion de uso</th>
-                                        <th scope="col">Mantenimiento</th>
-                                        <th scope="col">No. Economico</th>
-                                        <th scope="col">No. Serie</th>
-                                        <th scope="col">Fecha Alta</th>
+                                        <th scope="col">Número economico</th>
+                                        <th scope="col">Número de serie</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>

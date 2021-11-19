@@ -2,7 +2,7 @@
 
 class ClassControllerFiles
 {
-    public static function subirArchivoAlServidor($archivo, $idUsuario)
+    public static function subirArchivoAlServidor($archivo, $id)
     {
         $datos                 = array();
         $datos['mensaje']      = null;
@@ -17,14 +17,14 @@ class ClassControllerFiles
                 //CLog::escribirLog("[CGenerales::CASE 10][".__LINE__."]:: No se Guardo La Imagen");
             }
 
-            $renameImagen = $idUsuario . "_" . $archivo['name'];
+            $renameImagen = $id . "_" . $archivo['name'];
 
-            $carpeta = "../resources/temp/$idUsuario/";
+            $carpeta = "../resources/imagenes/imagenes-upload/$id/";
             //si la carpeta temporal no existe, se crea en la ruta $carpeta
             if (!file_exists($carpeta)) {
                 mkdir($carpeta, 0777, true);
             }
-            ClassControllerFiles::eliminarImagen("resources/temp/" . $idUsuario . "/" . $renameImagen); //elimino la imagen si ya existe
+            ClassControllerFiles::eliminarImagen("resources/imagenes/imagenes-upload/" . $id . "/" . $renameImagen); //elimino la imagen si ya existe
 
             if (move_uploaded_file($_FILES['upl']['tmp_name'], $carpeta . $renameImagen)) {
                 $datos['resultOper'] = 1;

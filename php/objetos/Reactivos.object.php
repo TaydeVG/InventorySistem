@@ -14,10 +14,11 @@ class Reactivo
     public $riesgo_salud = "";
     public $presentacion = "";
     public $codigo_almacenamiento = "";
-    public $n_reactivo = "";
+    public $cantidad = "";
     public $n_mueble = "";
     public $n_estante = "";
-    public $fecha_alta = "";
+    public $id_laboratorio = "";
+    public $eliminado = false;
 
     public function getId()
     {
@@ -100,13 +101,13 @@ class Reactivo
         $this->codigo_almacenamiento = $codigo_almacenamiento;
     }
 
-    public function getN_reactivo()
+    public function getCantidad()
     {
-        return $this->n_reactivo;
+        return $this->cantidad;
     }
-    public function setN_reactivo($n_reactivo)
+    public function setCantidad($cantidad)
     {
-        $this->n_reactivo = $n_reactivo;
+        $this->cantidad = $cantidad;
     }
 
     public function getN_mueble()
@@ -127,13 +128,21 @@ class Reactivo
         $this->n_estante = $n_estante;
     }
 
-    public function getFecha_alta()
+    public function getId_laboratorio()
     {
-        return $this->fecha_alta;
+        return $this->id_laboratorio;
     }
-    public function setFecha_alta($fecha_alta)
+    public function setId_laboratorio($id_laboratorio)
     {
-        $this->fecha_alta = $fecha_alta;
+        $this->id_laboratorio = $id_laboratorio;
+    }
+    public function getEliminado()
+    {
+        return $this->eliminado;
+    }
+    public function setEliminado($eliminado)
+    {
+        $this->eliminado = $eliminado;
     }
 
 }

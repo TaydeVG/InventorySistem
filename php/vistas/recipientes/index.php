@@ -74,7 +74,7 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table id="tabla_id" class="table table-striped table-hover">
+                            <table id="tabla_id" class="table table-striped table-hover table-bordered">
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
