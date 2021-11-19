@@ -7,10 +7,11 @@ class Recipiente
 {
     public $id = 0;
     public $nombre = "";
-    public $tipo_material = 0;
+    public $id_tipo_material = 0;
+    public $nombre_tipo_material = 0;
     public $capacidad = "";
     public $id_laboratorio = 0;
-    public $fecha_alta = "";
+    public $eliminado = "";
 
     public function getId()
     {
@@ -30,13 +31,21 @@ class Recipiente
         $this->nombre = $nombre;
     }
 
-    public function getTipo_material()
+    public function getId_tipo_material()
     {
-        return $this->tipo_material;
+        return $this->id_tipo_material;
     }
-    public function setTipo_material($tipo_material)
+    public function setId_tipo_material($id_tipo_material)
     {
-        $this->tipo_material = $tipo_material;
+        $this->id_tipo_material = $id_tipo_material;
+    }
+    public function getNombre_tipo_material()
+    {
+        return $this->nombre_tipo_material;
+    }
+    public function setNombre_tipo_material($nombre_tipo_material)
+    {
+        $this->nombre_tipo_material = $nombre_tipo_material;
     }
 
     public function getCapacidad()
@@ -57,13 +66,13 @@ class Recipiente
         $this->id_laboratorio = $id_laboratorio;
     }
 
-    public function getFecha_alta()
+    public function getEliminado()
     {
-        return $this->fecha_alta;
+        return $this->eliminado;
     }
-    public function setFecha_alta($fecha_alta)
+    public function setEliminado($eliminado)
     {
-        $this->fecha_alta = $fecha_alta;
+        $this->eliminado = $eliminado;
     }
 
 }

@@ -1,3 +1,10 @@
+//obtiene y retorna el valor del parametros GET de la URL
+function _GET_Param(parametro_get_url) {
+   const queryString = window.location.search;
+   const urlParams = new URLSearchParams(queryString);
+   const data_param = urlParams.get(parametro_get_url);
+   return data_param;
+}
 //retorna un registro de un arreglo de objetos, buscando por su id
 function findRegistroById(id, arrayDatos) {
    const resultado = arrayDatos.find(registro => registro.id == id);

@@ -85,6 +85,8 @@ class Mantenimiento
     public $id = 0;
     public $fecha_mantenimiento = "";
     public $observaciones = "";
+    public $id_equipo = 0;
+    public $eliminado = false;
 
     public function getId()
     {
@@ -103,7 +105,7 @@ class Mantenimiento
     {
         $this->fecha_mantenimiento = $fecha_mantenimiento;
     }
-
+    
     public function getObservaciones()
     {
         return $this->observaciones;
@@ -111,5 +113,21 @@ class Mantenimiento
     public function setObservaciones($observaciones)
     {
         $this->observaciones = $observaciones;
+    }
+    public function getId_equipo()
+    {
+        return $this->id_equipo;
+    }
+    public function setId_equipo($id_equipo)
+    {
+        $this->id_equipo = $id_equipo;
+    }
+    public function getEliminado()
+    {
+        return $this->eliminado;
+    }
+    public function setEliminado($eliminado)
+    {
+        $this->eliminado = $eliminado;
     }
 }

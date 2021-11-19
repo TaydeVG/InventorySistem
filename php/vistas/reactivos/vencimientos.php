@@ -121,11 +121,11 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                             <div class="col-12 col-sm-12 col-md-6 col-xl-4 mt-0 mx-auto">
                                 <div class="form-floating ">
                                     <select class="form-select font-size-12px pt-3" name="slctPlazo" id="slctPlazo" aria-label="Floating label select" style="height: 47px !important;">
-                                        <option value="1">Última semana.</option>
-                                        <option value="2">Último Mes.</option>
-                                        <option value="3">Últimos 3 Meses.</option>
-                                        <option value="4">Últimos 6 Meses.</option>
-                                        <option value="5">Último año.</option>
+                                        <option value="7 DAY">Última semana.</option>
+                                        <option value="1 MONTH">Último Mes.</option>
+                                        <option value="3 MONTH">Últimos 3 Meses.</option>
+                                        <option value="6 MONTH">Últimos 6 Meses.</option>
+                                        <option value="1 YEAR">Último año.</option>
                                     </select>
                                     <label for="slctPlazo" class="pt-2"> Filtrar por:</label>
                                 </div>

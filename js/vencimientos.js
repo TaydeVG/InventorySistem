@@ -13,11 +13,7 @@ $(document).ready(function () {
 
         llenarTabla(getDatosTabla());
         agregarFiltradoTabla("#tabla_id", "#body-table", "#filtrado", "#paginationTable");
-
-        disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
     }
-
-
 });
 
 function initEvents() {
@@ -35,32 +31,36 @@ function initEvents() {
     $('.reload-2').on('click', function () {
 
         efectoLoadInSection($('.reload-2'));
-        $.when(llenarTabla_porvencer(getDatosTabla_porvencer())).then(function (data, textStatus, jqXHR) {
+        $.when(llenarTabla_porvencer(getDatosTabla_porvencer($('#slctPlazo').val()))).then(function (data, textStatus, jqXHR) {
             setTimeout(() => {
                 disableEfectoLoadInSection($('.reload-2'));
             }, 500);
         });
     });
+    $('#slctPlazo').change(function (e) {
+        e.preventDefault();
+        loadingNotify("Espere un momento...", "Cargando");//efecto loading al cambiar de opcion
+        llenarTabla_porvencer(getDatosTabla_porvencer($(this).val()));
+
+    });
     $('#btn_react_por_caducar').on('click', function () {
         sessionStorage.setItem("opcion-reactivos", "acaducar");
-        loadingNotify("Espere un momento...", "Cargando");//efecto loading al inicar pagina
+        loadingNotify("Espere un momento...", "Cargando");//efecto loading al dar click en boton
         $('#container-caducados').hide(1000);
-        $.when(llenarTabla_porvencer(getDatosTabla_porvencer())).then(function (data, textStatus, jqXHR) {
+        $.when(llenarTabla_porvencer(getDatosTabla_porvencer($('#slctPlazo').val()))).then(function (data, textStatus, jqXHR) {
             setTimeout(() => {
                 $('#container-por-caducados').show(1000);
-                disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
             }, 500);
         });
     });
     $('#btn_react_caducados').on('click', function () {
         sessionStorage.setItem("opcion-reactivos", "caducados");
 
-        loadingNotify("Espere un momento...", "Cargando");//efecto loading al inicar pagina
+        loadingNotify("Espere un momento...", "Cargando");//efecto loading al dar click en boton
         $('#container-por-caducados').hide(1000);
         $.when(llenarTabla(getDatosTabla())).then(function (data, textStatus, jqXHR) {
             setTimeout(() => {
                 $('#container-caducados').show(1000);
-                disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
             }, 500);
         });
     });
@@ -95,7 +95,7 @@ function llenarTabla(datos) {
 function getDatosTabla() {
     var datos = [];
     var objParam = {
-        'opcion': 2
+        'opcion': 11
     };
 
     $.ajax({
@@ -109,9 +109,15 @@ function getDatosTabla() {
 
             if (response.resultOper == 1) {
                 datos = response.respuesta;//datos a retornar
-            }
-            else {
-                enableNotifyAlerta("ATENCION !", response.mensaje, 5);
+                disableNotifyAlerta();//oculta el modal de loading
+            } else {
+                setTimeout(() => {
+                    if (response.mensaje.errorInfo) {
+                        enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                    } else {
+                        enableNotifyAlerta("ATENCION!", response.mensaje, 5);
+                    }
+                }, 1000);
             }
         },
         beforeSend: function () {
@@ -150,12 +156,14 @@ function llenarTabla_porvencer(datos) {
     paginacionTabla('#paginationTable-avencer', '#body-table-avencer', 1, '#slctRowsTable-avencer');
 
 }
-function getDatosTabla_porvencer() {
+function getDatosTabla_porvencer(tiempo_faltante_para_caducar) {
     var datos = [];
     var objParam = {
-        'opcion': 2
+        'opcion': 12,
+        'tiempo_para_caducar': tiempo_faltante_para_caducar
     };
 
+    console.log(objParam);
     $.ajax({
         async: false,
         cache: false,
@@ -167,9 +175,15 @@ function getDatosTabla_porvencer() {
 
             if (response.resultOper == 1) {
                 datos = response.respuesta;//datos a retornar
-            }
-            else {
-                enableNotifyAlerta("ATENCION !", response.mensaje, 5);
+                disableNotifyAlerta();//oculta el modal de loading
+            } else {
+                setTimeout(() => {
+                    if (response.mensaje.errorInfo) {
+                        enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                    } else {
+                        enableNotifyAlerta("ATENCION!", response.mensaje, 5);
+                    }
+                }, 1000);
             }
         },
         beforeSend: function () {

@@ -9,7 +9,6 @@ $(document).ready(function () {
    llenarTabla(getDatosTabla());
    agregarFiltradoTabla("#tabla_id", "#body-table", "#filtrado", "#paginationTable");
 
-   disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
    initEvents();
 });
 
@@ -33,32 +32,32 @@ function initEvents() {
       objParam.append("opcion", 6);
 
       $.ajax({
-          cache: false,
-          url: '../../../php/router_controller.php',
-          type: 'POST',
-          dataType: 'JSON',
-          data: objParam,
-          contentType: false,
-          processData: false,
-          success: function (response) {
+         cache: false,
+         url: '../../../php/router_controller.php',
+         type: 'POST',
+         dataType: 'JSON',
+         data: objParam,
+         contentType: false,
+         processData: false,
+         success: function (response) {
 
-              if (response.resultOper == 1) {
+            if (response.resultOper == 1) {
 
-                  console.log(response);
+               console.log(response);
 
-              } else {
-                  console.log(response);
-              }
-          },
-          beforeSend: function () {
-              console.log("cargando peticion");
-          },
-          error: function (xhr, status, error) {
-              console.log(xhr.responseText);
-              enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
-          }
+            } else {
+               console.log(response);
+            }
+         },
+         beforeSend: function () {
+            console.log("cargando peticion");
+         },
+         error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
+         }
       });
-  });
+   });
 
    $('#recipient-tipo_material').change(function (e) {
       var value = $(this).val();
@@ -170,10 +169,8 @@ function llenarTabla(datos) {
          ` <tr class="row` + (i + 1) + ` animated bounceInDown">` +
          `<td class="text-center">` + (i + 1) + `</td>` +
          `<td class="text-center">` + datos[i].nombre + `</td>` +
-         `<td class="text-center">` + datos[i].tipo_material + `</td>` +
+         `<td class="text-center">` + datos[i].nombre_tipo_material + `</td>` +
          `<td class="text-center">` + datos[i].capacidad + `</td>` +
-         `<td class="text-center">` + datos[i].id_laboratorio + `</td>` +
-         `<td class="text-center">` + datos[i].fecha_alta + `</td>` +
          `<td class="text-center"> 
                 <div class="d-flex justify-content-evenly">
                    <button class="btn btn-outline-success" title="Ver" data-bs-toggle="modal" data-bs-target="#modalId" data-bs-id="`+ datos[i].id + `" data-bs-opcion="view"><i class="fas fa-eye"></i></button>
@@ -222,9 +219,15 @@ function getDatosTabla() {
 
          if (response.resultOper == 1) {
             datos = response.respuesta;//datos a retornar
-         }
-         else {
-            enableNotifyAlerta("ATENCION !", response.mensaje, 5);
+            disableNotifyAlerta();//oculta el modal de loading
+         } else {
+            setTimeout(() => {
+               if (response.mensaje.errorInfo) {
+                  enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+               } else {
+                  enableNotifyAlerta("ATENCION!", response.mensaje, 5);
+               }
+            }, 1000);
          }
       },
       beforeSend: function () {

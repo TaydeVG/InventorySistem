@@ -1,6 +1,7 @@
 <?php
 require "../php/clases/conexion.php";
 include_once("../php/objetos/Usuario.php");
+include_once("../php/objetos/Equipos.object.php");
 include_once("../php/clases/ClassReactivos.php");
 include_once("../php/clases/ClassEquipos.php");
 include_once("../php/clases/ClassLogin.php");
@@ -13,11 +14,13 @@ session_start(); // se agrega luego de las importaciones para no tener problemas
 
 $datosRespuesta = array();
 $UsuarioRequest = new Usuario();
+$EquipoRequest = new Equipo();
 
 //obtencion opcion de peticion
 $opcion         = isset($_POST['opcion']) ? $_POST['opcion'] : 0;
 $opcion         = $opcion != 0 ? $opcion : (isset($_GET['opcion']) ? $_GET['opcion'] : 0);
 
+//obtencion de usuario de peticion
 $idUsuario         = isset($_POST['idUsuario']) ? $_POST['idUsuario'] : 0;
 $UsuarioRequest->setId($idUsuario != 0 ? $idUsuario : (isset($_GET['idUsuario']) ? $_GET['idUsuario'] : 0));
 
@@ -36,6 +39,9 @@ $UsuarioRequest->setNombre($nombre != 0 ? $nombre : (isset($_GET['nombre']) ? $_
 $is_password_random      = isset($_POST['is_password_random']) ? $_POST['is_password_random'] : 0;
 $UsuarioRequest->setIs_password_random($is_password_random != 0 ? $is_password_random : (isset($_GET['is_password_random']) ? $_GET['is_password_random'] : 0));
 
+//obtencion de equipo de peticion
+$id_equipo      = isset($_POST['id_equipo']) ? $_POST['id_equipo'] : 0;
+$EquipoRequest->setId($id_equipo != 0 ? $id_equipo : (isset($_GET['id_equipo']) ? $_GET['id_equipo'] : 0));
 ini_set('memory_limit', '-1');
 set_time_limit(0);
 
@@ -86,7 +92,7 @@ switch ($opcion) {
 		break;
 	case 5: //obtiene los mantenimientos de equipos
 		$conexMySql->conectar();
-		$datosRespuesta = ClassEquipos::getMantenimientos($conexMySql->cnx);
+		$datosRespuesta = ClassEquipos::getMantenimientos($conexMySql->cnx, $EquipoRequest->getId());
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
@@ -114,6 +120,22 @@ switch ($opcion) {
 		break;
 	case 10:
 		echo json_encode($_SESSION["usuario"]);
+		break;
+	case 11: //obtiene todos los reactivos
+		$conexMySql->conectar();
+		$datosRespuesta = ClassReactivos::getReactivosCaducados($conexMySql->cnx);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 12: //obtiene todos los reactivos por caducar en un intervalo de tiempo, 1 semana,1 mes, 3 meses, 6 meses, 1 año
+
+		//si no viene un valor por defecto mostrara los que faltan por caducar en 1 semana
+		$tiempo_para_caducar         = isset($_POST['tiempo_para_caducar']) ? $_POST['tiempo_para_caducar'] : '7 DAY';
+
+		$conexMySql->conectar();
+		$datosRespuesta = ClassReactivos::getReactivosPorCaducar($conexMySql->cnx, $tiempo_para_caducar);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
 		break;
 	case 0:
 		$datosRespuesta = ClassLogin::cerrarSesion();

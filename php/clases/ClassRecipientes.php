@@ -11,32 +11,34 @@ class ClassRecipientes
         $datos['resultOper'] = 0;
 
         try {
-            $Recipiente = new Recipiente;
+            $sql = "SELECT rec.id, rec.nombre, rec.id_tipo_material, rec.capacidad, rec.id_laboratorio, rec.eliminado,tm.tipo_material
+            FROM recipiente rec, tipo_material tm
+            WHERE rec.id_tipo_material = tm.id;";
+            $consulta = $conexMySql->prepare($sql);
+            $consulta->execute();
 
-            $Recipiente->setId(1);
-            $Recipiente->setNombre("basija 1");
-            $Recipiente->setTipo_material(1);
-            $Recipiente->setCapacidad("Gramos");
-            $Recipiente->setId_laboratorio(1);
-            $Recipiente->setFecha_alta("27-10-2021");
+            while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+                $Recipiente = new Recipiente;
 
-            array_push($datos['respuesta'], $Recipiente);
-            $Recipiente = new Recipiente;
-            $Recipiente->setId(2);
-            $Recipiente->setNombre("basija 2");
-            $Recipiente->setTipo_material(1);
-            $Recipiente->setCapacidad("Gramos");
-            $Recipiente->setId_laboratorio(1);
-            $Recipiente->setFecha_alta("20-10-2021");
-            array_push($datos['respuesta'], $Recipiente);
-            array_push($datos['respuesta'], $Recipiente);
-            array_push($datos['respuesta'], $Recipiente);
-            array_push($datos['respuesta'], $Recipiente);
-            array_push($datos['respuesta'], $Recipiente);
-            array_push($datos['respuesta'], $Recipiente);
+                $Recipiente->setId($row->id);
+                $Recipiente->setNombre($row->nombre);
+                $Recipiente->setId_tipo_material($row->id_tipo_material);
+                $Recipiente->setNombre_tipo_material($row->tipo_material);
+                $Recipiente->setCapacidad($row->capacidad);
+                $Recipiente->setId_laboratorio($row->id_laboratorio);
+                $Recipiente->setEliminado($row->eliminado);
 
-            $datos['mensaje'] = "informacion obtenida con exito.";
-            $datos['resultOper'] = 1;
+                array_push($datos['respuesta'], $Recipiente); //se agrega cada registro a la variable de respuesta
+                $Recipiente = null; //se libera de memoria
+            }
+
+            if (count($datos['respuesta']) > 0) { //se valida que aya registros en la tabla
+                $datos['mensaje'] = count($datos['respuesta']) . " registros obtenidos con exito.";
+                $datos['resultOper'] = 1;
+            } else {
+                $datos['mensaje'] = "sin informacion para mostrar.";
+                $datos['resultOper'] = 2;
+            }
         } catch (Exception $e) {
             $datos['mensaje'] = $e;
             $datos['resultOper'] = -1;

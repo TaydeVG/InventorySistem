@@ -81,8 +81,6 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Tipo material</th>
                                         <th scope="col">Capacidad</th>
-                                        <th scope="col">id laboratorio</th>
-                                        <th scope="col">Fecha Alta</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>

@@ -9,16 +9,17 @@ class ClassEquipos
         $datos['mensaje']    = "";
         $datos['respuesta']  = array();
         $datos['resultOper'] = 0;
-        $Equipo = new Equipo;
 
         try {
 
             $sql = "SELECT id, nombre, condicion_uso, num_economico, num_serie, id_laboratorio, eliminado
-             FROM equipo;";
+             FROM equipo WHERE eliminado = 0;";
             $consulta = $conexMySql->prepare($sql);
             $consulta->execute();
 
             while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+                $Equipo = new Equipo;
+
                 $Equipo->setId($row->id);
                 $Equipo->setNombre($row->nombre);
                 $Equipo->setCondicion_uso($row->condicion_uso);
@@ -28,6 +29,7 @@ class ClassEquipos
                 $Equipo->setEliminado($row->eliminado);
 
                 array_push($datos['respuesta'], $Equipo); //se agrega cada registro a la variable de respuesta
+                $Equipo = null;
             }
 
             if (count($datos['respuesta']) > 0) { //se valida que aya registros en la tabla
@@ -41,10 +43,10 @@ class ClassEquipos
             $datos['mensaje'] = $e;
             $datos['resultOper'] = -1;
         }
-        $Reactivo = null; //se libera de memoria
         return $datos;
     }
-    public static function getMantenimientos($conexMySql)
+    //obtiene los mantenimientos del id del equipo que se le pase por parametro
+    public static function getMantenimientos($conexMySql, $id_equipo)
     {
         $datos               = array();
         $datos['mensaje']    = "";
@@ -52,32 +54,32 @@ class ClassEquipos
         $datos['resultOper'] = 0;
 
         try {
-            $Mantenimiento = new Mantenimiento;
+            $sql = "SELECT id, fecha_mantenimiento, observaciones, id_equipo, eliminado
+            FROM mantenimiento WHERE id_equipo = $id_equipo AND eliminado = 0;";
+            $consulta = $conexMySql->prepare($sql);
+            $consulta->execute();
 
-            $Mantenimiento->setId(1);
-            $Mantenimiento->setFecha_mantenimiento("2020-10-10");
-            $Mantenimiento->setObservaciones("Se realizo mantenimiento preventivo");
+            while ($row = $consulta->fetch(PDO::FETCH_OBJ)) {
+                $Mantenimiento = new Mantenimiento;
 
-            array_push($datos['respuesta'], $Mantenimiento);
-            $Mantenimiento = new Mantenimiento;
-            $Mantenimiento->setId(2);
-            $Mantenimiento->setFecha_mantenimiento("2020-09-10");
-            $Mantenimiento->setObservaciones("Se realizo mantenimiento correctivo");
+                $Mantenimiento->setId($row->id);
+                $Mantenimiento->setFecha_mantenimiento($row->fecha_mantenimiento);
+                $Mantenimiento->setObservaciones($row->observaciones);
+                $Mantenimiento->setId_equipo($row->id_equipo);
+                $Mantenimiento->setEliminado($row->eliminado);
 
-            array_push($datos['respuesta'], $Mantenimiento);
-            array_push($datos['respuesta'], $Mantenimiento);
-            array_push($datos['respuesta'], $Mantenimiento);
-            array_push($datos['respuesta'], $Mantenimiento);
-            array_push($datos['respuesta'], $Mantenimiento);
-            array_push($datos['respuesta'], $Mantenimiento);
-            array_push($datos['respuesta'], $Mantenimiento);
-            array_push($datos['respuesta'], $Mantenimiento);
-            array_push($datos['respuesta'], $Mantenimiento);
-            array_push($datos['respuesta'], $Mantenimiento);
-            array_push($datos['respuesta'], $Mantenimiento);
+                array_push($datos['respuesta'], $Mantenimiento); //se agrega cada registro a la variable de respuesta
+                $Mantenimiento = null; //se libera de memoria
 
-            $datos['mensaje'] = "informacion obtenida con exito.";
-            $datos['resultOper'] = 1;
+            }
+
+            if (count($datos['respuesta']) > 0) { //se valida que aya registros en la tabla
+                $datos['mensaje'] = count($datos['respuesta']) . " registros obtenidos con exito.";
+                $datos['resultOper'] = 1;
+            } else {
+                $datos['mensaje'] = "sin informacion para mostrar.";
+                $datos['resultOper'] = 2;
+            }
         } catch (Exception $e) {
             $datos['mensaje'] = $e;
             $datos['resultOper'] = -1;

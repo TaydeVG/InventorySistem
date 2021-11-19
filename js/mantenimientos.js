@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     loadingNotify("Espere un momento...", "Cargando");//efecto loading al inicar pagina
 
@@ -6,18 +7,18 @@ $(document).ready(function () {
     modalLogicLoad();
 
 
-    llenarTabla(getDatosTabla());
+    llenarTabla(getDatosTabla(_GET_Param('ideq')));
     agregarFiltradoTabla("#tabla_id", "#body-table", "#filtrado", "#paginationTable");//agrega paginacion a tabla
 
-    disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
     initEvents();
 });
+
 function initEvents() {
     // Reload Card
     $('.reload').on('click', function () {
 
         efectoLoadInSection($('.reload'));
-        $.when(llenarTabla(getDatosTabla())).then(function (data, textStatus, jqXHR) {
+        $.when(llenarTabla(getDatosTabla(_GET_Param('ideq')))).then(function (data, textStatus, jqXHR) {
             setTimeout(() => {
                 disableEfectoLoadInSection($('.reload'));
             }, 500);
@@ -50,7 +51,7 @@ function modalLogicLoad() {
             case 'view':
                 modalTitle.textContent = 'Informacion del mantenimiento';
                 var id = button.getAttribute('data-bs-id');// se obtiene el id de la fila
-                var registro = findRegistroById(id, getDatosTabla());//se obtienen los datos de ese id
+                var registro = findRegistroById(id, getDatosTabla(_GET_Param('ideq')));//se obtienen los datos de ese id
                 setFormModal(modal, registro);//se carga la informacion en modal
                 deshabilitarFormModal(modal, true);//deshabilita formulario modal
                 btnModalSubmit.textContent = "Editar";
@@ -63,7 +64,7 @@ function modalLogicLoad() {
             case 'edit':
                 modalTitle.textContent = 'Ingresar datos del mantenimiento a editar';
                 var id = button.getAttribute('data-bs-id');// se obtiene el id de la fila
-                var registro = findRegistroById(id, getDatosTabla());//se obtienen los datos de ese id
+                var registro = findRegistroById(id, getDatosTabla(_GET_Param('ideq')));//se obtienen los datos de ese id
                 setFormModal(modal, registro);//se carga la informacion en modal
                 btnModalSubmit.textContent = "Guardar Cambios";
                 btnModalCancel.textContent = "Cancelar";
@@ -148,10 +149,11 @@ function llenarTabla(datos) {
 
 }
 
-function getDatosTabla() {
+function getDatosTabla(id_equipo) {
     var datos = [];
     var objParam = {
-        'opcion': 5
+        'opcion': 5,
+        'id_equipo': id_equipo ? id_equipo : 0
     };
 
     $.ajax({
@@ -165,9 +167,15 @@ function getDatosTabla() {
 
             if (response.resultOper == 1) {
                 datos = response.respuesta;//datos a retornar
-            }
-            else {
-                enableNotifyAlerta("ATENCION !", response.mensaje, 5);
+                disableNotifyAlerta();//oculta el modal de loading
+            } else {
+                setTimeout(() => {
+                    if (response.mensaje.errorInfo) {
+                        enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                    } else {
+                        enableNotifyAlerta("ATENCION!", response.mensaje, 5);
+                    }
+                }, 1000);
             }
         },
         beforeSend: function () {
