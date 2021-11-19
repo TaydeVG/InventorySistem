@@ -55,7 +55,7 @@
                             Reactivos</a>
                     </li>
                     <li class="nav-link">
-                        <a href="../reportes/bajas.php" class="btn hover w-100 text-start">* Reportes de
+                        <a href="../reportes/" class="btn hover w-100 text-start">* Reportes de
                             Bajas</a>
                     </li>
                 </div>
