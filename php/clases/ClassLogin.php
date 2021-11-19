@@ -41,6 +41,7 @@ class ClassLogin
 					$datos['respuesta'] = $Usuario;
 					$datos['mensaje'] = "Ups... Usuario o contraseña incorrectos!";
 					$datos['resultOper'] = 2;
+					$_SESSION["usuario"] = null;
 				}
 			} catch (Exception $e) {
 				$datos['mensaje'] = $e;

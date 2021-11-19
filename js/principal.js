@@ -48,8 +48,11 @@ function modalLogicLoad() {
 }
 //valida que si el usuario se le acaba de generar una contraseña aleatoria por olvido de contraseña, le pida ingresar una nueva
 function getUserSesion() {
+
     var objParam = {
-        'opcion': 10
+        'opcion': 10,
+        "email": localStorage.getItem("user"),
+        "password": localStorage.getItem("pass")
     };
 
     $.ajax({
@@ -59,6 +62,7 @@ function getUserSesion() {
         dataType: 'JSON',
         data: objParam,
         success: function (response) {
+            console.log(response);
             disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
             if (response.id > 0 && response.is_password_random == 1) {
                 //is_password_random =1: significa que utilizo el olvide mi contraseña
@@ -97,6 +101,7 @@ function cambiar_password(pass) {
                 if (response.resultOper == 1) {
 
                     enableNotifyAlerta("Exito!", response.mensaje, 3);
+                    localStorage.setItem("pass", pass);//se actualiza la contraseña guardada en navegador por la nueva
                     $("#btnModal").click(function () {
                         //  window.location = "principal.php";
                     });

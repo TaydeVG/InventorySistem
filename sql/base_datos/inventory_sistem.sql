@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2021 a las 06:14:39
+-- Tiempo de generación: 19-11-2021 a las 17:35:17
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -41,7 +41,7 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`id`, `nombre`, `apellido`, `correo`, `password`, `is_password_random`) VALUES
-(18, 'Juan', 'Perez', '180080049@upve.edu.mx', 'e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', 0);
+(18, 'Juan', 'Perez', '180080049@upve.edu.mx', '6c3c3a4e52c08d971c3608c398579cf3c6992dd90c9742ab28f92e3422b490e15485b1e8cd01e6773f491bbac73412e6d0d70f4d2700b70dab50b8f7fdceced9', 1);
 
 --
 -- Disparadores `administrador`
@@ -101,79 +101,33 @@ CREATE TABLE `bitacora` (
 --
 
 INSERT INTO `bitacora` (`id`, `usuario`, `fecha_movimiento`, `tabla`, `accion`, `informacion_actual`, `informacion_anterior`) VALUES
-(7, 'root@localhost', '2021-11-11 20:55:39', 'administrador', 'INSERT', '5|usuario|user appel|user@gmail.com|23r', ''),
-(8, 'root@localhost', '2021-11-11 20:56:24', 'administrador', 'UPDATE', '5|usuario|cambio|user@gmail.com|23r', '5|usuario|user appel|user@gmail.com|23r'),
-(9, 'root@localhost', '2021-11-11 20:56:39', 'administrador', 'DELETE', '', '5|usuario|cambio|user@gmail.com|23r'),
-(10, 'root@localhost', '2021-11-11 20:57:09', 'equipo', 'INSERT', '2|equipo 1|24|23f|23|12|1', ''),
-(11, 'root@localhost', '2021-11-11 20:57:20', 'equipo', 'UPDATE', '2|equipo 1|25|23f|23|12|1', '2|equipo 1|24|23f|23|12|1'),
-(12, 'root@localhost', '2021-11-11 20:57:37', 'equipo', 'DELETE', '', '2|equipo 1|25|23f|23|12|1'),
-(13, 'root@localhost', '2021-11-11 20:58:01', 'laboratorio', 'INSERT', '2|lab 1|1|23f', ''),
-(14, 'root@localhost', '2021-11-11 20:58:27', 'laboratorio', 'UPDATE', '2|lab 1|1|23f333', '2|lab 1|1|23f'),
-(15, 'root@localhost', '2021-11-11 20:58:43', 'laboratorio', 'DELETE', '', '2|lab 1|1|23f333'),
-(16, 'root@localhost', '2021-11-11 21:12:33', 'equipo', 'INSERT', '4|equipo 1|todo bien|animo|876|fdjj3|1', ''),
-(17, 'root@localhost', '2021-11-11 21:12:44', 'mantenimiento', 'INSERT', '1|0|todo bien|4', ''),
-(18, 'root@localhost', '2021-11-11 21:13:05', 'mantenimiento', 'INSERT', '2|0|todo bien|4', ''),
-(19, 'root@localhost', '2021-11-11 21:13:48', 'mantenimiento', 'DELETE', '', '1|0000-00-00 00:00:00|todo bien|4'),
-(20, 'root@localhost', '2021-11-11 21:13:48', 'mantenimiento', 'DELETE', '', '2|0000-00-00 00:00:00|todo bien|4'),
-(21, 'root@localhost', '2021-11-11 21:14:14', 'mantenimiento', 'INSERT', '3|2021-11-11 14:14:14|todo bien|4', ''),
-(22, 'root@localhost', '2021-11-11 21:15:13', 'reactivo', 'INSERT', '1|reactivo 1|1|12|todo bien|2323|323f23fss23|2021-11-302|3|1', ''),
-(23, 'root@localhost', '2021-11-11 21:15:37', 'reactivo', 'INSERT', '2|reactivo 2|1|12|todo bien|2323|323f23fss23|2021-11-302|3|1', ''),
-(24, 'root@localhost', '2021-11-11 21:15:54', 'reactivo', 'UPDATE', '1|reactivo 1|1|13|todo bien|2323|323f23fss23|2021-11-302|3|1', '1|reactivo 1|1|12|todo bien|2323|323f23fss23|2021-11-302|3|1'),
-(25, 'root@localhost', '2021-11-11 21:16:03', 'reactivo', 'DELETE', '', '2|reactivo 2|1|12|todo bien|2323|323f23fss23|2021-11-302|3|1'),
-(26, 'root@localhost', '2021-11-11 21:16:46', 'tipo_material', 'INSERT', '1|corcho', ''),
-(27, 'root@localhost', '2021-11-11 21:16:46', 'tipo_material', 'INSERT', '2|carton', ''),
-(28, 'root@localhost', '2021-11-11 21:17:06', 'tipo_material', 'INSERT', '3|vidrio', ''),
-(29, 'root@localhost', '2021-11-11 21:17:06', 'tipo_material', 'INSERT', '4|plastico', ''),
-(30, 'root@localhost', '2021-11-11 21:17:14', 'tipo_material', 'UPDATE', '3|Bidrio', '3|vidrio'),
-(31, 'root@localhost', '2021-11-11 21:17:21', 'tipo_material', 'DELETE', '', '3|Bidrio'),
-(32, 'root@localhost', '2021-11-11 21:18:22', 'recipiente', 'INSERT', '1|recipiente 1|2|10 lt|1', ''),
-(33, 'root@localhost', '2021-11-11 21:18:22', 'recipiente', 'INSERT', '2|recipiente 2|1|3 lt|1', ''),
-(34, 'root@localhost', '2021-11-11 21:18:34', 'recipiente', 'UPDATE', '2|recipiente 2|1|35 lt|1', '2|recipiente 2|1|3 lt|1'),
-(35, 'root@localhost', '2021-11-11 21:18:38', 'recipiente', 'DELETE', '', '2|recipiente 2|1|35 lt|1'),
-(36, 'root@localhost', '2021-11-14 21:31:34', 'administrador', 'INSERT', '6||||', ''),
-(37, 'root@localhost', '2021-11-14 21:32:44', 'administrador', 'INSERT', '7||||', ''),
-(38, 'root@localhost', '2021-11-14 21:34:21', 'administrador', 'INSERT', '8|prueba 1|||', ''),
-(39, 'root@localhost', '2021-11-14 21:38:10', 'administrador', 'INSERT', '9|prueba 1|prueba 2|prueba@gmail.com|12341234', ''),
-(40, 'root@localhost', '2021-11-14 21:44:40', 'administrador', 'INSERT', '10|prueba 1|prueba 2|prueba@gmail.com|12341234', ''),
-(41, 'root@localhost', '2021-11-14 21:45:14', 'administrador', 'DELETE', '', '6||||'),
-(42, 'root@localhost', '2021-11-14 21:45:14', 'administrador', 'DELETE', '', '7||||'),
-(43, 'root@localhost', '2021-11-14 21:45:14', 'administrador', 'DELETE', '', '8|prueba 1|||'),
-(44, 'root@localhost', '2021-11-14 21:45:14', 'administrador', 'DELETE', '', '9|prueba 1|prueba 2|prueba@gmail.com|12341234'),
-(45, 'root@localhost', '2021-11-14 21:46:09', 'administrador', 'INSERT', '11|prueba 1|prueba 2|prueba1@gmail.com|4d93efb3f585e5cd386af821667357b5dd65bd000dd1c2cbda', ''),
-(46, 'root@localhost', '2021-11-14 21:55:21', 'administrador', 'INSERT', '16|gato|gatop|gato@gmail.com|54b40d8b8c1d49a42bbf4bb673e2f63cf392806476520931e6', ''),
-(47, 'root@localhost', '2021-11-14 21:57:26', 'administrador', 'INSERT', '17|gato|prueba 2|gato2@gmail.com|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406', ''),
-(48, 'root@localhost', '2021-11-15 20:19:17', 'administrador', 'DELETE', '', '17|gato|prueba 2|gato2@gmail.com|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406'),
-(49, 'root@localhost', '2021-11-15 20:19:22', 'administrador', 'DELETE', '', '16|gato|gatop|gato@gmail.com|54b40d8b8c1d49a42bbf4bb673e2f63cf392806476520931e6'),
-(50, 'root@localhost', '2021-11-15 20:19:25', 'administrador', 'DELETE', '', '11|prueba 1|prueba 2|prueba1@gmail.com|4d93efb3f585e5cd386af821667357b5dd65bd000dd1c2cbda'),
-(51, 'root@localhost', '2021-11-15 20:19:50', 'administrador', 'INSERT', '18|admin|admin apellido|admin@gmail.com|4d93efb3f585e5cd386af821667357b5dd65bd000dd1c2cbdaaf53eb017fea65a9cdf9db19808b88e7ecaf2d497f1c8ca5aa5cbef3c1b8502ddf558960e0c108', ''),
-(52, 'root@localhost', '2021-11-16 01:04:35', 'administrador', 'UPDATE', '18|admin|admin apellido|150050112@upve.edu.mx|4d93efb3f585e5cd386af821667357b5dd65bd000dd1c2cbdaaf53eb017fea65a9cdf9db19808b88e7ecaf2d497f1c8ca5aa5cbef3c1b8502ddf558960e0c108', '18|admin|admin apellido|admin@gmail.com|4d93efb3f585e5cd386af821667357b5dd65bd000dd1c2cbdaaf53eb017fea65a9cdf9db19808b88e7ecaf2d497f1c8ca5aa5cbef3c1b8502ddf558960e0c108'),
-(53, 'root@localhost', '2021-11-16 20:21:15', 'administrador', 'UPDATE', '18|admin|admin apellido|150050112@upve.edu.mx|fa1719fcdfad3fce8bfd786d43f42e54f723df54ac4d5636c3dd82335cded8016d928e2887bcfdeb6a49e616d0d77b8afa047825a017e66cf0fc0948ee0e9d74', '18|admin|admin apellido|150050112@upve.edu.mx|4d93efb3f585e5cd386af821667357b5dd65bd000dd1c2cbdaaf53eb017fea65a9cdf9db19808b88e7ecaf2d497f1c8ca5aa5cbef3c1b8502ddf558960e0c108'),
-(54, 'root@localhost', '2021-11-16 20:22:33', 'administrador', 'UPDATE', '18|admin|admin apellido|150050112@upve.edu.mx|55e51cb7ecb0dbb2305fc4582922ed2508810d8292c6c7c94d754daf94aac58ab6ace103ae6abcebeeac5819423cf1a91db7bb30618df73417845ab1bb4cd2e6', '18|admin|admin apellido|150050112@upve.edu.mx|fa1719fcdfad3fce8bfd786d43f42e54f723df54ac4d5636c3dd82335cded8016d928e2887bcfdeb6a49e616d0d77b8afa047825a017e66cf0fc0948ee0e9d74'),
-(55, 'root@localhost', '2021-11-16 20:23:47', 'administrador', 'UPDATE', '1|juan|perez|juan@gmail.com|42094c7e2a650ef8b31f49ea6ed05bc96187c7ab922b28482189c6f315838b3664a3c92bd78419f6608ea50767b18c4ce05f87d1ce823db9e7aec587aff9d89a', '1|juan|perez|juan@gmail.com|1234'),
-(56, 'root@localhost', '2021-11-16 20:26:19', 'mantenimiento', 'DELETE', '', '3|2021-11-11 14:14:14|todo bien|4'),
-(57, 'root@localhost', '2021-11-16 20:26:29', 'equipo', 'DELETE', '', '4|equipo 1|todo bien|animo|876|fdjj3|1'),
-(58, 'root@localhost', '2021-11-16 20:26:43', 'reactivo', 'DELETE', '', '1|reactivo 1|1|13|todo bien|2323|323f23fss23|2021-11-302|3|1'),
-(59, 'root@localhost', '2021-11-16 20:27:10', 'recipiente', 'DELETE', '', '1|recipiente 1|2|10 lt|1'),
-(60, 'root@localhost', '2021-11-16 20:27:38', 'laboratorio', 'DELETE', '', '1|gya|1|qwf'),
-(61, 'root@localhost', '2021-11-16 20:27:44', 'administrador', 'DELETE', '', '1|juan|perez|juan@gmail.com|42094c7e2a650ef8b31f49ea6ed05bc96187c7ab922b28482189c6f315838b3664a3c92bd78419f6608ea50767b18c4ce05f87d1ce823db9e7aec587aff9d89a'),
-(62, 'root@localhost', '2021-11-16 20:27:48', 'administrador', 'DELETE', '', '3|Maria|Lopez Atondo|maria@gmail.com|1234'),
-(63, 'root@localhost', '2021-11-16 20:27:52', 'administrador', 'DELETE', '', '10|prueba 1|prueba 2|prueba@gmail.com|12341234'),
-(64, 'root@localhost', '2021-11-16 22:00:44', 'administrador', 'UPDATE', '18|admin|admin apellido|150050112@upve.edu.mx|4aabe28dabf6194f502ed15ea23f7e63f661b12beca7345c2c135a516c56f3603095c6399bf2a4b96ecde58162b12eb21a9ce3fbe0420c0281d5a13cc9b8672b', '18|admin|admin apellido|150050112@upve.edu.mx|55e51cb7ecb0dbb2305fc4582922ed2508810d8292c6c7c94d754daf94aac58ab6ace103ae6abcebeeac5819423cf1a91db7bb30618df73417845ab1bb4cd2e6'),
-(65, 'root@localhost', '2021-11-16 22:04:52', 'administrador', 'UPDATE', '18|admin|admin apellido|150050112@upve.edu.mx|fa1ce21ae2e8525dfff73655d4ffbf13c00f6038e067b9fa0dde036ad115c398e364bc4c238564f1b8044b43cff8ef0017485699d06c867f0d1ab29c91d8308f', '18|admin|admin apellido|150050112@upve.edu.mx|4aabe28dabf6194f502ed15ea23f7e63f661b12beca7345c2c135a516c56f3603095c6399bf2a4b96ecde58162b12eb21a9ce3fbe0420c0281d5a13cc9b8672b'),
-(66, 'root@localhost', '2021-11-16 22:06:48', 'administrador', 'UPDATE', '18|admin|santos|150050112@upve.edu.mx|fa1ce21ae2e8525dfff73655d4ffbf13c00f6038e067b9fa0dde036ad115c398e364bc4c238564f1b8044b43cff8ef0017485699d06c867f0d1ab29c91d8308f', '18|admin|admin apellido|150050112@upve.edu.mx|fa1ce21ae2e8525dfff73655d4ffbf13c00f6038e067b9fa0dde036ad115c398e364bc4c238564f1b8044b43cff8ef0017485699d06c867f0d1ab29c91d8308f'),
-(67, 'root@localhost', '2021-11-16 22:06:55', 'administrador', 'UPDATE', '18|Juan|santos|150050112@upve.edu.mx|fa1ce21ae2e8525dfff73655d4ffbf13c00f6038e067b9fa0dde036ad115c398e364bc4c238564f1b8044b43cff8ef0017485699d06c867f0d1ab29c91d8308f', '18|admin|santos|150050112@upve.edu.mx|fa1ce21ae2e8525dfff73655d4ffbf13c00f6038e067b9fa0dde036ad115c398e364bc4c238564f1b8044b43cff8ef0017485699d06c867f0d1ab29c91d8308f'),
-(68, 'root@localhost', '2021-11-16 22:07:00', 'administrador', 'UPDATE', '18|Juan|Perez|150050112@upve.edu.mx|fa1ce21ae2e8525dfff73655d4ffbf13c00f6038e067b9fa0dde036ad115c398e364bc4c238564f1b8044b43cff8ef0017485699d06c867f0d1ab29c91d8308f', '18|Juan|santos|150050112@upve.edu.mx|fa1ce21ae2e8525dfff73655d4ffbf13c00f6038e067b9fa0dde036ad115c398e364bc4c238564f1b8044b43cff8ef0017485699d06c867f0d1ab29c91d8308f'),
-(69, 'root@localhost', '2021-11-16 22:07:24', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|fa1ce21ae2e8525dfff73655d4ffbf13c00f6038e067b9fa0dde036ad115c398e364bc4c238564f1b8044b43cff8ef0017485699d06c867f0d1ab29c91d8308f', '18|Juan|Perez|150050112@upve.edu.mx|fa1ce21ae2e8525dfff73655d4ffbf13c00f6038e067b9fa0dde036ad115c398e364bc4c238564f1b8044b43cff8ef0017485699d06c867f0d1ab29c91d8308f'),
-(70, 'root@localhost', '2021-11-16 22:07:46', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|b25c002453f0c1459c5c93a3afa8041edaf80b8b585adb942b762baa2b0e6980caf18e67c6b50069a29300f77d42fd92a6c63c8e386ee2807c2948d7f1146b35', '18|Juan|Perez|180080049@upve.edu.mx|fa1ce21ae2e8525dfff73655d4ffbf13c00f6038e067b9fa0dde036ad115c398e364bc4c238564f1b8044b43cff8ef0017485699d06c867f0d1ab29c91d8308f'),
-(71, 'root@localhost', '2021-11-16 22:12:29', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|bbda7c2d297463e437ea09aa47ac38391d9362eeab7270c42bb93d39d1178846feb55909fb375cc3f1b2f40440805d4be485da05b3ccbc778e87246251af7184', '18|Juan|Perez|180080049@upve.edu.mx|b25c002453f0c1459c5c93a3afa8041edaf80b8b585adb942b762baa2b0e6980caf18e67c6b50069a29300f77d42fd92a6c63c8e386ee2807c2948d7f1146b35'),
-(72, 'root@localhost', '2021-11-16 22:43:15', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|741cfa24e1992873684f7521c2cb5afd19a9b9d11841f0dabd12657565ca872ac971c4c12bf58723317d0d192c4d88be76f660bbdbb252e1aa73e408e6282450', '18|Juan|Perez|180080049@upve.edu.mx|bbda7c2d297463e437ea09aa47ac38391d9362eeab7270c42bb93d39d1178846feb55909fb375cc3f1b2f40440805d4be485da05b3ccbc778e87246251af7184'),
-(73, 'root@localhost', '2021-11-16 23:05:11', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|741cfa24e1992873684f7521c2cb5afd19a9b9d11841f0dabd12657565ca872ac971c4c12bf58723317d0d192c4d88be76f660bbdbb252e1aa73e408e6282450', '18|Juan|Perez|180080049@upve.edu.mx|741cfa24e1992873684f7521c2cb5afd19a9b9d11841f0dabd12657565ca872ac971c4c12bf58723317d0d192c4d88be76f660bbdbb252e1aa73e408e6282450'),
-(74, 'root@localhost', '2021-11-16 23:10:14', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|b5ed0a7fd8c7ecdd56106548990419c4e43fc16b6684aa4bd42c9bb20f0ed36860e69d41c61cdf2820df6c47486605adef5332adc4000839c87063958db42571', '18|Juan|Perez|180080049@upve.edu.mx|741cfa24e1992873684f7521c2cb5afd19a9b9d11841f0dabd12657565ca872ac971c4c12bf58723317d0d192c4d88be76f660bbdbb252e1aa73e408e6282450'),
-(75, 'root@localhost', '2021-11-16 23:54:03', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|b5ed0a7fd8c7ecdd56106548990419c4e43fc16b6684aa4bd42c9bb20f0ed36860e69d41c61cdf2820df6c47486605adef5332adc4000839c87063958db42571'),
-(76, 'root@localhost', '2021-11-16 23:55:10', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|642c648989e091e3e94d6ccf80a5ca65510d7704c640826f5a0235187b7fe3e3f61820d112cc564f7704d5c07a3ac9134ba24aa0cd7188d0391dbd9be9b1ba9c', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
-(77, 'root@localhost', '2021-11-16 23:55:47', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|642c648989e091e3e94d6ccf80a5ca65510d7704c640826f5a0235187b7fe3e3f61820d112cc564f7704d5c07a3ac9134ba24aa0cd7188d0391dbd9be9b1ba9c'),
-(78, 'root@localhost', '2021-11-16 23:57:25', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|2af886eed91e4b69b102acc90ef910316ff948e843b5f3a7467f6c5086f92002ef62c5fae4e27588c0ebb1e8d57b23fd0ecb8b830151c1923a148b1d893f7fbc', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
-(79, 'root@localhost', '2021-11-17 00:10:52', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|2af886eed91e4b69b102acc90ef910316ff948e843b5f3a7467f6c5086f92002ef62c5fae4e27588c0ebb1e8d57b23fd0ecb8b830151c1923a148b1d893f7fbc');
+(82, 'root@localhost', '2021-11-18 06:42:07', 'administrador', 'INSERT', '19|prueba|appel|pruea@gmail.com|792d7149fbe05092e25c638869d1b076580a072cc10d0f3136d6e05c493ff3a0c6b39471420d90100b0398e23265717157a40a306d9552a52052769beca11e7a', ''),
+(83, 'root@localhost', '2021-11-18 06:43:03', 'administrador', 'UPDATE', '19|prueba|appelll|pruea@gmail.com|792d7149fbe05092e25c638869d1b076580a072cc10d0f3136d6e05c493ff3a0c6b39471420d90100b0398e23265717157a40a306d9552a52052769beca11e7a', '19|prueba|appel|pruea@gmail.com|792d7149fbe05092e25c638869d1b076580a072cc10d0f3136d6e05c493ff3a0c6b39471420d90100b0398e23265717157a40a306d9552a52052769beca11e7a'),
+(84, 'root@localhost', '2021-11-18 06:43:28', 'administrador', 'DELETE', '', '19|prueba|appelll|pruea@gmail.com|792d7149fbe05092e25c638869d1b076580a072cc10d0f3136d6e05c493ff3a0c6b39471420d90100b0398e23265717157a40a306d9552a52052769beca11e7a'),
+(85, 'root@localhost', '2021-11-18 06:51:31', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|962f5b8ffc2d504b4f47f65e7a7df13c37a2f4a14a1ef2f2f9f3477b9c243d6f4306470744e62c458f7b06527d6450b35f3b4270f04f5d9b1d658c2cd5fc1f30', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
+(86, 'root@localhost', '2021-11-18 06:55:12', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|962f5b8ffc2d504b4f47f65e7a7df13c37a2f4a14a1ef2f2f9f3477b9c243d6f4306470744e62c458f7b06527d6450b35f3b4270f04f5d9b1d658c2cd5fc1f30'),
+(87, 'root@localhost', '2021-11-18 18:23:47', 'laboratorio', 'INSERT', '3|quimica|18|laboratorio de quimica', ''),
+(88, 'root@localhost', '2021-11-18 18:30:47', 'reactivo', 'INSERT', '3|butamol|1|11|presentacion|50lts|334JFEWD2|2022-09-281|1|3|0', ''),
+(89, 'root@localhost', '2021-11-18 18:33:10', 'reactivo', 'UPDATE', '3|butamol|1|11|frasco vidrio|50lts|334JFEWD2|2022-09-281|1|3|0', '3|butamol|1|11|presentacion|50lts|334JFEWD2|2022-09-281|1|3|0'),
+(90, 'root@localhost', '2021-11-18 18:33:35', 'reactivo', 'UPDATE', '3|butamol|1|11|Frasco vidrio|50lts|334JFEWD2|2022-09-281|1|3|0', '3|butamol|1|11|frasco vidrio|50lts|334JFEWD2|2022-09-281|1|3|0'),
+(91, 'root@localhost', '2021-11-18 20:25:07', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|b94a0e9da4327cac5c4b3690e94ff45134622c6172fa2608d2de369d7e2a0a8f06975521a2a3093d0cd985f9b39a895f03b464c58375ff0d0d8858423635cad5', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
+(92, 'root@localhost', '2021-11-18 23:34:25', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|528a5fc4442e10492b7f088c9d1cdf86fba6ce1bc4a185aed1990cb0528e7d6741cad5c775e266bd8bad3baa6a535c77b28ee3270c278b5a9cbb85ac8062cba9', '18|Juan|Perez|180080049@upve.edu.mx|b94a0e9da4327cac5c4b3690e94ff45134622c6172fa2608d2de369d7e2a0a8f06975521a2a3093d0cd985f9b39a895f03b464c58375ff0d0d8858423635cad5'),
+(93, 'root@localhost', '2021-11-18 23:35:35', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|528a5fc4442e10492b7f088c9d1cdf86fba6ce1bc4a185aed1990cb0528e7d6741cad5c775e266bd8bad3baa6a535c77b28ee3270c278b5a9cbb85ac8062cba9'),
+(94, 'root@localhost', '2021-11-18 23:36:06', 'equipo', 'INSERT', '5|Vaso de precipitados|en buenas condiciones|mantienido|1|1|3', ''),
+(95, 'root@localhost', '2021-11-19 00:27:45', 'administrador', 'UPDATE', '18|Juan|Perez|180080043@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
+(96, 'root@localhost', '2021-11-19 00:28:06', 'administrador', 'UPDATE', '18|Juan|Perez|180080043@upve.edu.mx|83938af5334590068f6f96f56883eb1d6d00eb7a20cc0a7f08f47eecc5bc24fcab66c77448b9617d672375276a488d24b21b29b52050d03c6b3b914b378959b4', '18|Juan|Perez|180080043@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
+(97, 'root@localhost', '2021-11-19 00:58:33', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|83938af5334590068f6f96f56883eb1d6d00eb7a20cc0a7f08f47eecc5bc24fcab66c77448b9617d672375276a488d24b21b29b52050d03c6b3b914b378959b4', '18|Juan|Perez|180080043@upve.edu.mx|83938af5334590068f6f96f56883eb1d6d00eb7a20cc0a7f08f47eecc5bc24fcab66c77448b9617d672375276a488d24b21b29b52050d03c6b3b914b378959b4'),
+(98, 'root@localhost', '2021-11-19 00:58:52', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|c62bcca9e21f323c2fa0899a4dfa55ef482c51ea5ff01ffd23b100638084e0622017cba0c4fcacfffa673884b111d888dc78d5949008b73bc8bb6e7e6df3628b', '18|Juan|Perez|180080049@upve.edu.mx|83938af5334590068f6f96f56883eb1d6d00eb7a20cc0a7f08f47eecc5bc24fcab66c77448b9617d672375276a488d24b21b29b52050d03c6b3b914b378959b4'),
+(99, 'root@localhost', '2021-11-19 00:59:49', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|c62bcca9e21f323c2fa0899a4dfa55ef482c51ea5ff01ffd23b100638084e0622017cba0c4fcacfffa673884b111d888dc78d5949008b73bc8bb6e7e6df3628b'),
+(100, 'root@localhost', '2021-11-19 16:01:21', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|f3b27a7574f7264642a7f00f6771737477617ac92d2e5e89ae3cceb01e5b5fbe633e2d57287388f5d2a4a0573414fac0c5226b906688cbde9f98003454b0a540', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
+(101, 'root@localhost', '2021-11-19 16:09:51', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|f3b27a7574f7264642a7f00f6771737477617ac92d2e5e89ae3cceb01e5b5fbe633e2d57287388f5d2a4a0573414fac0c5226b906688cbde9f98003454b0a540'),
+(102, 'root@localhost', '2021-11-19 16:18:36', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|5e08b926dd557f931d49ec1bf0b52a0efc4fd963a21078a476a45653530553d4f1f94183a154f74007a24023d820c8dc69e9d76fc8df5189678f3a06c4110969', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
+(103, 'root@localhost', '2021-11-19 16:19:52', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|5e08b926dd557f931d49ec1bf0b52a0efc4fd963a21078a476a45653530553d4f1f94183a154f74007a24023d820c8dc69e9d76fc8df5189678f3a06c4110969'),
+(104, 'root@localhost', '2021-11-19 16:21:28', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|b583c2bb16666253c9a01b041e5a67d1b75b857e10e71e81ca76c22c4ca4dcbd8fd70d9237235deeb2933995f702d6bf2dfeaef0aeafa3b06497b627cfa09b2e', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
+(105, 'root@localhost', '2021-11-19 16:22:22', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|b583c2bb16666253c9a01b041e5a67d1b75b857e10e71e81ca76c22c4ca4dcbd8fd70d9237235deeb2933995f702d6bf2dfeaef0aeafa3b06497b627cfa09b2e'),
+(106, 'root@localhost', '2021-11-19 16:27:40', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|bd6862617c266a35aa8d5e7abf40f2960c4e91d019ab1d2fd80f8e9b2adc50e840ba388f6b8db3f528a2e4c182efda5b41f6ddcb40820f367a2cd174b6a62dcc', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
+(107, 'root@localhost', '2021-11-19 16:30:52', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|bd6862617c266a35aa8d5e7abf40f2960c4e91d019ab1d2fd80f8e9b2adc50e840ba388f6b8db3f528a2e4c182efda5b41f6ddcb40820f367a2cd174b6a62dcc', '18|Juan|Perez|180080049@upve.edu.mx|bd6862617c266a35aa8d5e7abf40f2960c4e91d019ab1d2fd80f8e9b2adc50e840ba388f6b8db3f528a2e4c182efda5b41f6ddcb40820f367a2cd174b6a62dcc'),
+(108, 'root@localhost', '2021-11-19 16:32:29', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|6c3c3a4e52c08d971c3608c398579cf3c6992dd90c9742ab28f92e3422b490e15485b1e8cd01e6773f491bbac73412e6d0d70f4d2700b70dab50b8f7fdceced9', '18|Juan|Perez|180080049@upve.edu.mx|bd6862617c266a35aa8d5e7abf40f2960c4e91d019ab1d2fd80f8e9b2adc50e840ba388f6b8db3f528a2e4c182efda5b41f6ddcb40820f367a2cd174b6a62dcc');
 
 -- --------------------------------------------------------
 
@@ -185,11 +139,18 @@ CREATE TABLE `equipo` (
   `id` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `condicion_uso` varchar(50) NOT NULL,
-  `mantenimiento` varchar(200) NOT NULL,
   `num_economico` int(11) NOT NULL,
   `num_serie` varchar(20) NOT NULL,
-  `id_laboratorio` int(11) NOT NULL
+  `id_laboratorio` int(11) NOT NULL,
+  `eliminado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `equipo`
+--
+
+INSERT INTO `equipo` (`id`, `nombre`, `condicion_uso`, `num_economico`, `num_serie`, `id_laboratorio`, `eliminado`) VALUES
+(5, 'Vaso de precipitados', 'en buenas condiciones', 1, '1', 3, 0);
 
 --
 -- Disparadores `equipo`
@@ -199,7 +160,7 @@ CREATE TRIGGER `TRIGGER_EQUIPO_BITACORA_DELETE` AFTER DELETE ON `equipo` FOR EAC
 
 INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
 VALUES(CURRENT_USER,'equipo','DELETE',CONCAT(OLD.id,'|',
-OLD.nombre,'|',OLD.condicion_uso,'|',                          OLD.mantenimiento,'|',OLD.num_economico,'|',
+OLD.nombre,'|',OLD.condicion_uso,'|',              OLD.num_economico,'|',
 OLD.num_serie,'|',OLD.id_laboratorio));
 
 END
@@ -210,7 +171,7 @@ CREATE TRIGGER `TRIGGER_EQUIPO_BITACORA_INSERT` AFTER INSERT ON `equipo` FOR EAC
 
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
 VALUES(CURRENT_USER,'equipo','INSERT',CONCAT(NEW.id,'|',
-NEW.nombre,'|',NEW.condicion_uso,'|',                          NEW.mantenimiento,'|',NEW.num_economico,'|',
+NEW.nombre,'|',NEW.condicion_uso,'|',                          NEW.num_economico,'|',
 NEW.num_serie,'|',NEW.id_laboratorio));
 
 END
@@ -223,11 +184,11 @@ INSERT INTO bitacora
 (usuario,tabla,accion,informacion_actual,
 informacion_anterior)
 VALUES(CURRENT_USER,'equipo','UPDATE',CONCAT(NEW.id,'|',
-NEW.nombre,'|',NEW.condicion_uso,'|',                    NEW.mantenimiento,'|',NEW.num_economico,'|',
+NEW.nombre,'|',NEW.condicion_uso,'|',                    NEW.num_economico,'|',
 NEW.num_serie,'|',NEW.id_laboratorio),
 CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.condicion_uso,'|',
-OLD.mantenimiento,'|',OLD.num_economico,'|',
+OLD.num_economico,'|',
 OLD.num_serie,'|',OLD.id_laboratorio));
 
 END
@@ -246,6 +207,13 @@ CREATE TABLE `laboratorio` (
   `admin` int(11) NOT NULL,
   `descripcion` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `laboratorio`
+--
+
+INSERT INTO `laboratorio` (`id`, `nombre`, `admin`, `descripcion`) VALUES
+(3, 'quimica', 18, 'laboratorio de quimica');
 
 --
 -- Disparadores `laboratorio`
@@ -353,8 +321,16 @@ CREATE TABLE `reactivo` (
   `caducidad` date NOT NULL,
   `num_mueble` int(11) NOT NULL,
   `num_estante` int(11) NOT NULL,
-  `id_laboratorio` int(11) NOT NULL
+  `id_laboratorio` int(11) NOT NULL,
+  `eliminado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `reactivo`
+--
+
+INSERT INTO `reactivo` (`id`, `nombre`, `reactividad`, `inflamabilidad`, `riesgo_salud`, `presentacion`, `cantidad_reactivo`, `unidad_medida`, `codigo_almacenamiento`, `caducidad`, `num_mueble`, `num_estante`, `id_laboratorio`, `eliminado`) VALUES
+(3, 'butamol', 1, 1, 1, 'Frasco vidrio', 50, 'lts', '334JFEWD2', '2022-09-28', 1, 1, 3, 0);
 
 --
 -- Disparadores `reactivo`
@@ -367,7 +343,7 @@ VALUES(CURRENT_USER,'reactivo','DELETE',CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.reactividad,'|',OLD.inflamabilidad,
 OLD.riesgo_salud,'|',OLD.presentacion,'|',OLD.cantidad_reactivo,
 OLD.unidad_medida,'|',OLD.codigo_almacenamiento,'|',OLD.caducidad,
-OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio));
+OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio,'|',OLD.eliminado));
 
 END
 $$
@@ -380,7 +356,8 @@ VALUES(CURRENT_USER,'reactivo','INSERT',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.reactividad,'|',NEW.inflamabilidad,
 NEW.riesgo_salud,'|',NEW.presentacion,'|',NEW.cantidad_reactivo,
 NEW.unidad_medida,'|',NEW.codigo_almacenamiento,'|',NEW.caducidad,
-NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio));
+NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio,'|',
+NEW.eliminado));
 
 END
 $$
@@ -393,12 +370,12 @@ VALUES(CURRENT_USER,'reactivo','UPDATE',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.reactividad,'|',NEW.inflamabilidad,
 NEW.riesgo_salud,'|',NEW.presentacion,'|',NEW.cantidad_reactivo,
 NEW.unidad_medida,'|',NEW.codigo_almacenamiento,'|',NEW.caducidad,
-NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio),
+NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio,'|',NEW.eliminado),
 CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.reactividad,'|',OLD.inflamabilidad,
 OLD.riesgo_salud,'|',OLD.presentacion,'|',OLD.cantidad_reactivo,
 OLD.unidad_medida,'|',OLD.codigo_almacenamiento,'|',OLD.caducidad,
-OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio));
+OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio,'|',OLD.eliminado));
 
 END
 $$
@@ -579,25 +556,25 @@ ALTER TABLE `tipo_material`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorio`
 --
 ALTER TABLE `laboratorio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `mantenimiento`
@@ -609,7 +586,7 @@ ALTER TABLE `mantenimiento`
 -- AUTO_INCREMENT de la tabla `reactivo`
 --
 ALTER TABLE `reactivo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `recipiente`

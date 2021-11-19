@@ -120,7 +120,7 @@ class ClassAdministradores
 		$sql = "";
 		try {
 			$sql = "UPDATE administrador SET is_password_random = 0, password='" . Password::hash($password) .
-				"' WHERE correo = '$email' and is_password_random = 1;";
+				"' WHERE correo = '$email';";
 
 			$consulta = $conexMySql->prepare($sql);
 
@@ -129,6 +129,8 @@ class ClassAdministradores
 				$datos['respuesta'] = $isSave;
 				$datos['mensaje'] = "Contraseña actualizada con exito!!!";
 				$datos['resultOper'] = 1;
+				$_SESSION["usuario"]->is_password_random = 0;//se setea a 0, el valor is_password_random del usuario de sesion 
+				$_SESSION["usuario"]->password = Password::hash($password);//se setea con la nueva contraseña del usuario de sesion
 			} else {
 				$datos['respuesta'] = $isSave;
 				$datos['mensaje'] = "Ups... No fue posible actualizar la constraseña.";
