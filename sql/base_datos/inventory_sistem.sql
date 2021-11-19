@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-11-2021 a las 17:35:17
+-- Tiempo de generación: 19-11-2021 a las 23:52:39
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -41,7 +41,7 @@ CREATE TABLE `administrador` (
 --
 
 INSERT INTO `administrador` (`id`, `nombre`, `apellido`, `correo`, `password`, `is_password_random`) VALUES
-(18, 'Juan', 'Perez', '180080049@upve.edu.mx', '6c3c3a4e52c08d971c3608c398579cf3c6992dd90c9742ab28f92e3422b490e15485b1e8cd01e6773f491bbac73412e6d0d70f4d2700b70dab50b8f7fdceced9', 1);
+(18, 'Juan', 'Perez', '180080049@upve.edu.mx', 'e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', 0);
 
 --
 -- Disparadores `administrador`
@@ -127,7 +127,22 @@ INSERT INTO `bitacora` (`id`, `usuario`, `fecha_movimiento`, `tabla`, `accion`, 
 (105, 'root@localhost', '2021-11-19 16:22:22', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|b583c2bb16666253c9a01b041e5a67d1b75b857e10e71e81ca76c22c4ca4dcbd8fd70d9237235deeb2933995f702d6bf2dfeaef0aeafa3b06497b627cfa09b2e'),
 (106, 'root@localhost', '2021-11-19 16:27:40', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|bd6862617c266a35aa8d5e7abf40f2960c4e91d019ab1d2fd80f8e9b2adc50e840ba388f6b8db3f528a2e4c182efda5b41f6ddcb40820f367a2cd174b6a62dcc', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
 (107, 'root@localhost', '2021-11-19 16:30:52', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|bd6862617c266a35aa8d5e7abf40f2960c4e91d019ab1d2fd80f8e9b2adc50e840ba388f6b8db3f528a2e4c182efda5b41f6ddcb40820f367a2cd174b6a62dcc', '18|Juan|Perez|180080049@upve.edu.mx|bd6862617c266a35aa8d5e7abf40f2960c4e91d019ab1d2fd80f8e9b2adc50e840ba388f6b8db3f528a2e4c182efda5b41f6ddcb40820f367a2cd174b6a62dcc'),
-(108, 'root@localhost', '2021-11-19 16:32:29', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|6c3c3a4e52c08d971c3608c398579cf3c6992dd90c9742ab28f92e3422b490e15485b1e8cd01e6773f491bbac73412e6d0d70f4d2700b70dab50b8f7fdceced9', '18|Juan|Perez|180080049@upve.edu.mx|bd6862617c266a35aa8d5e7abf40f2960c4e91d019ab1d2fd80f8e9b2adc50e840ba388f6b8db3f528a2e4c182efda5b41f6ddcb40820f367a2cd174b6a62dcc');
+(108, 'root@localhost', '2021-11-19 16:32:29', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|6c3c3a4e52c08d971c3608c398579cf3c6992dd90c9742ab28f92e3422b490e15485b1e8cd01e6773f491bbac73412e6d0d70f4d2700b70dab50b8f7fdceced9', '18|Juan|Perez|180080049@upve.edu.mx|bd6862617c266a35aa8d5e7abf40f2960c4e91d019ab1d2fd80f8e9b2adc50e840ba388f6b8db3f528a2e4c182efda5b41f6ddcb40820f367a2cd174b6a62dcc'),
+(109, 'root@localhost', '2021-11-19 16:38:32', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|6c3c3a4e52c08d971c3608c398579cf3c6992dd90c9742ab28f92e3422b490e15485b1e8cd01e6773f491bbac73412e6d0d70f4d2700b70dab50b8f7fdceced9'),
+(110, 'root@localhost', '2021-11-19 16:39:16', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|6ab6e44ce162746e8f9530b8c3c17581b9cc1b750e7323ed5a31c7803c36be836b1852cbd30666781b3b914cda4807d6ff2baa74220562f4fcfeb0ec5b26f881', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
+(111, 'root@localhost', '2021-11-19 16:39:46', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|6ab6e44ce162746e8f9530b8c3c17581b9cc1b750e7323ed5a31c7803c36be836b1852cbd30666781b3b914cda4807d6ff2baa74220562f4fcfeb0ec5b26f881'),
+(112, 'root@localhost', '2021-11-19 16:43:39', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|1471acd30dc2338fddbb1b461b04b237ee633b1c5876fd5c0b9880cc65d517b25ce6d58e47764541163155fedf49c3692c6b22bef0cb0c7c98f7447f7fe45c0a', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
+(113, 'root@localhost', '2021-11-19 16:47:11', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|1471acd30dc2338fddbb1b461b04b237ee633b1c5876fd5c0b9880cc65d517b25ce6d58e47764541163155fedf49c3692c6b22bef0cb0c7c98f7447f7fe45c0a'),
+(114, 'root@localhost', '2021-11-19 18:58:12', 'mantenimiento', 'INSERT', '4|2021-11-19 11:58:12|se aplico mantenimiento|5|0', ''),
+(115, 'root@localhost', '2021-11-19 18:58:26', 'mantenimiento', 'INSERT', '5|2021-11-19 11:58:26|se aplico mantenimiento otra vez|5|0', ''),
+(116, 'root@localhost', '2021-11-19 20:08:11', 'recipiente', 'INSERT', '3|recipiente 1|4|10 lt|3|0', ''),
+(117, 'root@localhost', '2021-11-19 20:26:16', 'reactivo', 'INSERT', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|0', ''),
+(118, 'root@localhost', '2021-11-19 22:09:46', 'reactivo', 'UPDATE', '3|butamol|1|11|Frasco vidrio|50lts|334JFEWD2|2022-09-281|1|3|1', '3|butamol|1|11|Frasco vidrio|50lts|334JFEWD2|2022-09-281|1|3|0'),
+(119, 'root@localhost', '2021-11-19 22:09:59', 'reactivo', 'UPDATE', '3|butamol|1|11|Frasco vidrio|50lts|334JFEWD2|2022-09-281|1|3|0', '3|butamol|1|11|Frasco vidrio|50lts|334JFEWD2|2022-09-281|1|3|1'),
+(120, 'root@localhost', '2021-11-19 22:20:04', 'reactivo', 'INSERT', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|0', ''),
+(121, 'root@localhost', '2021-11-19 22:20:39', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-262|3|3|0', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|0'),
+(122, 'root@localhost', '2021-11-19 22:21:08', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-272|3|3|0', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-262|3|3|0'),
+(123, 'root@localhost', '2021-11-19 22:21:29', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|0', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-272|3|3|0');
 
 -- --------------------------------------------------------
 
@@ -262,8 +277,17 @@ CREATE TABLE `mantenimiento` (
   `id` int(11) NOT NULL,
   `fecha_mantenimiento` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `observaciones` varchar(200) NOT NULL,
-  `id_equipo` int(11) NOT NULL
+  `id_equipo` int(11) NOT NULL,
+  `eliminado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `mantenimiento`
+--
+
+INSERT INTO `mantenimiento` (`id`, `fecha_mantenimiento`, `observaciones`, `id_equipo`, `eliminado`) VALUES
+(4, '2021-11-19 18:58:12', 'se aplico mantenimiento', 5, 0),
+(5, '2021-11-19 18:58:26', 'se aplico mantenimiento otra vez', 5, 0);
 
 --
 -- Disparadores `mantenimiento`
@@ -273,7 +297,8 @@ CREATE TRIGGER `TRIGGER_MANT_BITACORA_DELETE` AFTER DELETE ON `mantenimiento` FO
 
 INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
 VALUES(CURRENT_USER,'mantenimiento','DELETE',CONCAT(OLD.id,'|',
-OLD.fecha_mantenimiento,'|',OLD.observaciones,'|',OLD.id_equipo));
+OLD.fecha_mantenimiento,'|',OLD.observaciones,'|',OLD.id_equipo
+,'|',OLD.eliminado));
 
 END
 $$
@@ -283,7 +308,8 @@ CREATE TRIGGER `TRIGGER_MANT_BITACORA_INSERT` AFTER INSERT ON `mantenimiento` FO
 
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
 VALUES(CURRENT_USER,'mantenimiento','INSERT',CONCAT(NEW.id,'|',
-NEW.fecha_mantenimiento,'|',NEW.observaciones,'|',NEW.id_equipo));
+NEW.fecha_mantenimiento,'|',NEW.observaciones,'|',NEW.id_equipo,
+'|',NEW.eliminado));
 
 END
 $$
@@ -294,9 +320,11 @@ CREATE TRIGGER `TRIGGER_MANT_BITACORA_UPDATE` AFTER UPDATE ON `mantenimiento` FO
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual,
                      informacion_anterior)
 VALUES(CURRENT_USER,'mantenimiento','UPDATE',CONCAT(NEW.id,'|',
-NEW.fecha_mantenimiento,'|',NEW.observaciones,'|',NEW.id_equipo),
+NEW.fecha_mantenimiento,'|',NEW.observaciones,'|',NEW.id_equipo,
+'|',NEW.eliminado),
 CONCAT(OLD.id,'|',
-OLD.fecha_mantenimiento,'|',OLD.observaciones,'|',OLD.id_equipo));
+OLD.fecha_mantenimiento,'|',OLD.observaciones,'|',OLD.id_equipo
+,'|',OLD.eliminado));
 
 END
 $$
@@ -330,7 +358,9 @@ CREATE TABLE `reactivo` (
 --
 
 INSERT INTO `reactivo` (`id`, `nombre`, `reactividad`, `inflamabilidad`, `riesgo_salud`, `presentacion`, `cantidad_reactivo`, `unidad_medida`, `codigo_almacenamiento`, `caducidad`, `num_mueble`, `num_estante`, `id_laboratorio`, `eliminado`) VALUES
-(3, 'butamol', 1, 1, 1, 'Frasco vidrio', 50, 'lts', '334JFEWD2', '2022-09-28', 1, 1, 3, 0);
+(3, 'butamol', 1, 1, 1, 'Frasco vidrio', 50, 'lts', '334JFEWD2', '2022-09-28', 1, 1, 3, 0),
+(4, 'octanol', 2, 1, 2, 'Frasco vidrio', 23, 'ml', 'HHSJ332K', '2021-11-02', 3, 6, 3, 0),
+(5, 'sulfónico', 1, 2, 3, 'Frasco vidrio', 45, 'gr', 'JJD344300D', '2021-11-24', 2, 3, 3, 0);
 
 --
 -- Disparadores `reactivo`
@@ -392,8 +422,16 @@ CREATE TABLE `recipiente` (
   `nombre` varchar(50) NOT NULL,
   `id_tipo_material` int(11) NOT NULL,
   `capacidad` varchar(50) NOT NULL,
-  `id_laboratorio` int(11) NOT NULL
+  `id_laboratorio` int(11) NOT NULL,
+  `eliminado` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `recipiente`
+--
+
+INSERT INTO `recipiente` (`id`, `nombre`, `id_tipo_material`, `capacidad`, `id_laboratorio`, `eliminado`) VALUES
+(3, 'recipiente 1', 4, '10 lt', 3, 0);
 
 --
 -- Disparadores `recipiente`
@@ -404,7 +442,8 @@ CREATE TRIGGER `TRIGGER_RECIPIENTE_BITACORA_DELETE` AFTER DELETE ON `recipiente`
 INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
 VALUES(CURRENT_USER,'recipiente','DELETE',CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.id_tipo_material,'|',OLD.capacidad,
-'|',OLD.id_laboratorio));
+'|',OLD.id_laboratorio,
+'|',OLD.eliminado));
 
 END
 $$
@@ -415,7 +454,8 @@ CREATE TRIGGER `TRIGGER_RECIPIENTE_BITACORA_INSERT` AFTER INSERT ON `recipiente`
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
 VALUES(CURRENT_USER,'recipiente','INSERT',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.id_tipo_material,'|',NEW.capacidad,
-'|',NEW.id_laboratorio));
+'|',NEW.id_laboratorio,
+'|',NEW.eliminado));
 
 END
 $$
@@ -426,9 +466,11 @@ CREATE TRIGGER `TRIGGER_RECIPIENTE_BITACORA_UPDATE` AFTER UPDATE ON `recipiente`
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual,informacion_anterior)
 VALUES(CURRENT_USER,'recipiente','UPDATE',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.id_tipo_material,'|',NEW.capacidad,
-'|',NEW.id_laboratorio),CONCAT(OLD.id,'|',
+'|',NEW.id_laboratorio,
+'|',NEW.eliminado),CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.id_tipo_material,'|',OLD.capacidad,
-'|',OLD.id_laboratorio));
+'|',OLD.id_laboratorio,
+'|',OLD.eliminado));
 
 END
 $$
@@ -562,7 +604,7 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
@@ -580,19 +622,19 @@ ALTER TABLE `laboratorio`
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `reactivo`
 --
 ALTER TABLE `reactivo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `recipiente`
 --
 ALTER TABLE `recipiente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_material`
