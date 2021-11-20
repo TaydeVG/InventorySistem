@@ -19,6 +19,7 @@ class Reactivo
     public $n_estante = "";
     public $id_laboratorio = "";
     public $eliminado = false;
+    public $fecha_baja = "";
 
     public function getId()
     {
@@ -145,4 +146,12 @@ class Reactivo
         $this->eliminado = $eliminado;
     }
 
+    public function getFecha_baja()
+    {
+        return $this->fecha_baja;
+    }
+    public function setFecha_baja($fecha_baja)
+    {
+        $this->fecha_baja = $fecha_baja;
+    }
 }

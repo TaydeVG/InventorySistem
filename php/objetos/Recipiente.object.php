@@ -11,7 +11,8 @@ class Recipiente
     public $nombre_tipo_material = 0;
     public $capacidad = "";
     public $id_laboratorio = 0;
-    public $eliminado = "";
+    public $eliminado = 0;
+    public $fecha_baja = "";
 
     public function getId()
     {
@@ -75,4 +76,12 @@ class Recipiente
         $this->eliminado = $eliminado;
     }
 
+    public function getFecha_baja()
+    {
+        return $this->fecha_baja;
+    }
+    public function setFecha_baja($fecha_baja)
+    {
+        $this->fecha_baja = $fecha_baja;
+    }
 }

@@ -37,10 +37,8 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Condicion de uso</th>
                         <th scope="col">Número economico</th>
-                        <th scope="col">Número de serie</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">Fecha de baja</th>
                     </tr>
                 </thead>
                 <tbody id="body-table"></tbody>

@@ -37,9 +37,8 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Tipo material</th>
                         <th scope="col">Capacidad</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">Fecha de baja</th>
                     </tr>
                 </thead>
                 <tbody id="body-table"></tbody>

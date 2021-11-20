@@ -39,13 +39,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Cantidad</th>
-                        <th scope="col">Reactividad</th>
-                        <th scope="col">Inflamabilidad</th>
-                        <th scope="col">Riesgo a la salud</th>
-                        <th scope="col">U. de medida</th>
-                        <th scope="col">Caducidad</th>
-                        <th scope="col">Numero de mueble</th>
-                        <th scope="col">Acciones</th>
+                        <th scope="col">fecha de baja</th>
                     </tr>
                 </thead>
                 <tbody id="body-table"></tbody>

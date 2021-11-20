@@ -12,6 +12,7 @@ class Equipo
     public $num_serie = "";
     public $id_laboratorio = 0;
     public $eliminado = false;
+    public $fecha_baja = "";
 
     public function getId()
     {
@@ -74,6 +75,15 @@ class Equipo
     public function setEliminado($eliminado)
     {
         $this->eliminado = $eliminado;
+    }
+
+    public function getFecha_baja()
+    {
+        return $this->fecha_baja;
+    }
+    public function setFecha_baja($fecha_baja)
+    {
+        $this->fecha_baja = $fecha_baja;
     }
 }
 
