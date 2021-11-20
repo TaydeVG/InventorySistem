@@ -25,6 +25,10 @@
                     <a id="navRecipientes" class="nav-link" style="color:white !important;"
                         href="../recipientes">Recipientes</a>
                 </li>
+                <li class="nav-item hover">
+                    <a id="navBajas" class="nav-link" style="color:white !important;"
+                        href="../reportes/">Bajas de laboratorio</a>
+                </li>
             </ul>
         </div>
     </div>
