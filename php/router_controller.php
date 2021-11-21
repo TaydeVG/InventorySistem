@@ -137,6 +137,24 @@ switch ($opcion) {
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
+	case 13: //obtiene todos los reactivos
+		$conexMySql->conectar();
+		$datosRespuesta = ClassReactivos::getReactivos_eliminados($conexMySql->cnx);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 14: //obtiene todos los reactivos
+		$conexMySql->conectar();
+		$datosRespuesta = ClassEquipos::getEquipos_eliminados($conexMySql->cnx);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 15: //obtiene todos los reactivos
+		$conexMySql->conectar();
+		$datosRespuesta = ClassRecipientes::getRecipientes_eliminados($conexMySql->cnx);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
 	case 0:
 		$datosRespuesta = ClassLogin::cerrarSesion();
 		$conexMySql = null;

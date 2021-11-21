@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-11-2021 a las 20:07:34
+-- Tiempo de generación: 21-11-2021 a las 20:17:13
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -143,7 +143,13 @@ INSERT INTO `bitacora` (`id`, `usuario`, `fecha_movimiento`, `tabla`, `accion`, 
 (121, 'root@localhost', '2021-11-19 22:20:39', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-262|3|3|0', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|0'),
 (122, 'root@localhost', '2021-11-19 22:21:08', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-272|3|3|0', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-262|3|3|0'),
 (123, 'root@localhost', '2021-11-19 22:21:29', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|0', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-272|3|3|0'),
-(138, 'root@localhost', '2021-11-20 18:29:08', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|1', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|0');
+(138, 'root@localhost', '2021-11-20 18:29:08', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|1', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|0'),
+(139, 'root@localhost', '2021-11-20 19:25:57', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|0', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|1'),
+(140, 'root@localhost', '2021-11-21 18:43:50', 'equipo', 'UPDATE', '5|Vaso de precipitados|en buenas condiciones|1|1|3', '5|Vaso de precipitados|en buenas condiciones|1|1|3'),
+(141, 'root@localhost', '2021-11-21 18:44:22', 'reactivo', 'UPDATE', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|1', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|0'),
+(142, 'root@localhost', '2021-11-21 18:44:51', 'recipiente', 'UPDATE', '3|recipiente 1|4|10 lt|3|1', '3|recipiente 1|4|10 lt|3|0'),
+(143, 'root@localhost', '2021-11-21 18:45:49', 'equipo', 'INSERT', '6|equipo 2|muy bueno|124234|11009934|3', ''),
+(144, 'root@localhost', '2021-11-21 18:46:22', 'recipiente', 'INSERT', '4|recipiente 2|1|40 lt|3|0', '');
 
 -- --------------------------------------------------------
 
@@ -167,7 +173,8 @@ CREATE TABLE `equipo` (
 --
 
 INSERT INTO `equipo` (`id`, `nombre`, `condicion_uso`, `num_economico`, `num_serie`, `id_laboratorio`, `eliminado`, `fecha_baja`) VALUES
-(5, 'Vaso de precipitados', 'en buenas condiciones', 1, '1', 3, 0, NULL);
+(5, 'Vaso de precipitados', 'en buenas condiciones', 1, '1', 3, 1, NULL),
+(6, 'equipo 2', 'muy bueno', 124234, '11009934', 3, 0, '2021-11-21 19:45:20');
 
 --
 -- Disparadores `equipo`
@@ -362,8 +369,8 @@ CREATE TABLE `reactivo` (
 
 INSERT INTO `reactivo` (`id`, `nombre`, `reactividad`, `inflamabilidad`, `riesgo_salud`, `presentacion`, `cantidad_reactivo`, `unidad_medida`, `codigo_almacenamiento`, `caducidad`, `num_mueble`, `num_estante`, `id_laboratorio`, `eliminado`, `fecha_baja`) VALUES
 (3, 'butamol', 1, 1, 1, 'Frasco vidrio', 50, 'lts', '334JFEWD2', '2022-09-28', 1, 1, 3, 0, NULL),
-(4, 'octanol', 2, 1, 2, 'Frasco vidrio', 23, 'ml', 'HHSJ332K', '2021-11-02', 3, 6, 3, 0, NULL),
-(5, 'sulfónico', 1, 2, 3, 'Frasco vidrio', 45, 'gr', 'JJD344300D', '2021-11-24', 2, 3, 3, 1, NULL);
+(4, 'octanol', 2, 1, 2, 'Frasco vidrio', 23, 'ml', 'HHSJ332K', '2021-11-02', 3, 6, 3, 1, NULL),
+(5, 'sulfónico', 1, 2, 3, 'Frasco vidrio', 45, 'gr', 'JJD344300D', '2021-11-24', 2, 3, 3, 0, NULL);
 
 --
 -- Disparadores `reactivo`
@@ -435,7 +442,8 @@ CREATE TABLE `recipiente` (
 --
 
 INSERT INTO `recipiente` (`id`, `nombre`, `id_tipo_material`, `capacidad`, `id_laboratorio`, `eliminado`, `fecha_baja`) VALUES
-(3, 'recipiente 1', 4, '10 lt', 3, 0, NULL);
+(3, 'recipiente 1', 4, '10 lt', 3, 1, NULL),
+(4, 'recipiente 2', 1, '40 lt', 3, 0, '2021-11-21 19:45:57');
 
 --
 -- Disparadores `recipiente`
@@ -608,13 +616,13 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorio`
@@ -638,7 +646,7 @@ ALTER TABLE `reactivo`
 -- AUTO_INCREMENT de la tabla `recipiente`
 --
 ALTER TABLE `recipiente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_material`
