@@ -17,10 +17,7 @@
                         </div>
                         <div class="col-12 col-sm-12">
                             <div class="form-floating pb-1">
-                                <input type="email"
-                                    class="rounded-0 rounded-top form-control border-0 border-bottom border-primary"
-                                    id="recipient-mail-retry" name="recipient-mail-retry" placeholder="name@example.com"
-                                    required style="height: 40px !important;">
+                                <input type="email" class="rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="recipient-mail-retry" name="recipient-mail-retry" placeholder="name@example.com" required style="height: 40px !important;">
                                 <label for="floatingInput" class="form-text pt-1">Correo Electronico</label>
                             </div>
                         </div>
@@ -28,10 +25,8 @@
                 </form>
             </div>
             <div class="modal-footer justify-content-evenly">
-                <button type="button" class="btn btn-primary" id="btnModalSubmit"
-                    data-bs-dismiss="modal">Enviar</button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                    id="btnModalCancel">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="btnModalSubmit" data-bs-dismiss="modal">Enviar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnModalCancel">Cancelar</button>
             </div>
         </div>
     </div>
@@ -55,20 +50,21 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 px-5">
-                        <div class="form-floating pb-1">
-                            <input type="password"
-                                class="rounded-0 rounded-top form-control border-0 border-bottom border-primary"
-                                id="recipient-pass-cambio" name="recipient-pass-cambio" placeholder="Escribe Aquí"
-                                minlength="8" maxlength="8" required style="height: 40px !important;">
-                            <label for="floatingInput" class="form-text pt-1">Contraseña</label>
+                        <div class="d-flex justify-content-end">
+                            <div class="form-floating pb-1 w-100">
+                                <input type="password" class="rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="recipient-pass-cambio" name="recipient-pass-cambio" placeholder="Escribe Aquí" minlength="8" maxlength="8" required style="height: 40px !important;">
+                                <label for="floatingInput" class="form-text pt-1">Contraseña</label>
+                            </div>
+                            <button class="btn btn-sm btn-outline-light text-dark h-75 mt-2 border-0" type="button" id="btnPassword-cambiar">
+                                <i id="iconShowHide" class="fas fa-eye-slash"></i>
+                            </button>
                         </div>
                         <label class="text-muted ps-2">Minimo 8 caracteres</label>
                     </div>
                 </div>
             </div>
             <div class="modal-footer justify-content-evenly">
-                <button type="button" class="btn btn-primary" id="btnModalPassSubmit"
-                    data-bs-dismiss="modal">Enviar</button>
+                <button type="button" class="btn btn-primary" id="btnModalPassSubmit" data-bs-dismiss="modal">Enviar</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnModalCancel">Recodar mas
                     tarde</button>
             </div>

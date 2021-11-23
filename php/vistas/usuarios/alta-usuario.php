@@ -72,9 +72,14 @@ session_start();
                     </div>
                 </div>
                 <div class="col-12 pb-1">
-                    <div class="form-floating pb-0">
-                        <input type="password" class="rounded-0 rounded-top form-control border-0 border-bottom border-primary pb-0" id="txtPass" name="txtPass" style="height: 40px !important;" minlength="8" maxlength="8" placeholder="Password" required>
-                        <label for="floatingPassword" class="form-text pt-1">Contraseña</label>
+                    <div class="d-flex justify-content-end">
+                        <div class="form-floating pb-0 w-100">
+                            <input type="password" class="rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="txtPass" name="txtPass" style="height: 40px !important;" minlength="8" maxlength="8" placeholder="Password" required>
+                            <label for="floatingPassword" class="form-text pt-1">Contraseña</label>
+                        </div>
+                        <button class="btn btn-sm btn-outline-light text-dark h-75 mt-2 border-0" type="button" id="btnPassword">
+                            <i id="iconShowHide" class="fas fa-eye-slash"></i>
+                        </button>
                     </div>
                     <label class="text-muted ps-2">Minimo 8 caracteres</label>
                 </div>

@@ -45,6 +45,24 @@ function modalLogicLoad() {
             });
         }
     });
+
+    var showPass = false;
+    var textPassword = document.querySelector("#recipient-pass-cambio");
+    var btnPassword = document.querySelector("#btnPassword-cambiar");
+
+    btnPassword.addEventListener('click', function (event) {// controla cuando muestra o oculta el password
+        var iconBtn = this.querySelector("#iconShowHide");
+        if (showPass) {
+            iconBtn.classList.remove("fa-eye");
+            iconBtn.classList.add("fa-eye-slash");
+            textPassword.setAttribute("type", "password");
+        } else {
+            iconBtn.classList.add("fa-eye");
+            iconBtn.classList.remove("fa-eye-slash");
+            textPassword.setAttribute("type", "text");
+        }
+        showPass = !showPass;
+    });
 }
 //valida que si el usuario se le acaba de generar una contraseña aleatoria por olvido de contraseña, le pida ingresar una nueva
 function getUserSesion() {

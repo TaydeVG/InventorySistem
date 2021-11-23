@@ -13,30 +13,30 @@ if (isset($_SESSION["usuario"])) { //si hay sesion iniciar lo manda a la ventana
 
     <title>LOGIN</title>
     <style>
-    .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-    }
-
-    @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-            font-size: 3.5rem;
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
         }
-    }
 
-    #contenedorLoad {
-        background-color: white;
-        height: 100%;
-        width: 100%;
-        position: fixed;
-        -webkit-transition: all 1s ease;
-        -o-transition: all 1s ease;
-        transition: all 1s ease;
-        z-index: 10000;
-    }
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        #contenedorLoad {
+            background-color: white;
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            -webkit-transition: all 1s ease;
+            -o-transition: all 1s ease;
+            transition: all 1s ease;
+            z-index: 10000;
+        }
     </style>
 
     <link rel="stylesheet" href="../../../css/login.css">
@@ -50,21 +50,17 @@ if (isset($_SESSION["usuario"])) { //si hay sesion iniciar lo manda a la ventana
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center">
-                    <img style="width: 85%; "
-                        class="animated zoomIn shadow-lg position-absolute top-50 start-50 translate-middle border border-5 rounded p-3"
-                        src="../../../resources/imagenes/UPVE_IdEX_@3x.png" alt="">
+                    <img style="width: 85%; " class="animated zoomIn shadow-lg position-absolute top-50 start-50 translate-middle border border-5 rounded p-3" src="../../../resources/imagenes/UPVE_IdEX_@3x.png" alt="">
                 </div>
             </div>
         </div>
     </div>
-    <img class="float-end rounded-circle shadow-sm d-none d-sm-none d-md-block"
-        src="../../../resources/imagenes/users_icon.png" alt="" width="200" height="200">
+    <img class="float-end rounded-circle shadow-sm d-none d-sm-none d-md-block" src="../../../resources/imagenes/users_icon.png" alt="" width="200" height="200">
     <br><br><br><br>
     <div class="container pb-5">
         <main class="form-signin card border-focus" style="max-width: 430px;">
             <div>
-                <img class="mx-auto rounded-circle shadow-sm d-block d-sm-block d-md-none"
-                    src="../../../resources/imagenes/users_icon.png" alt="" width="200" height="200">
+                <img class="mx-auto rounded-circle shadow-sm d-block d-sm-block d-md-none" src="../../../resources/imagenes/users_icon.png" alt="" width="200" height="200">
             </div>
             <form id="frmLogin">
                 <div class="text-center">
@@ -74,16 +70,17 @@ if (isset($_SESSION["usuario"])) { //si hay sesion iniciar lo manda a la ventana
                     <h4 class="fw-normal">Inicia Sesión con tu correo electronico</h4>
                 </div>
                 <div class="form-floating pb-1">
-                    <input type="email" class="rounded-0 rounded-top form-control border-0 border-bottom border-primary"
-                        id="txtMail" name="txtMail" placeholder="name@example.com" required
-                        style="height: 40px !important;">
+                    <input type="email" class="rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="txtMail" name="txtMail" placeholder="name@example.com" required style="height: 40px !important;">
                     <label for="floatingInput" class="form-text pt-1">Correo Electronico</label>
                 </div>
-                <div class="form-floating pb-1">
-                    <input type="password"
-                        class="rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="txtPass"
-                        name="txtPass" placeholder="Password" required style="height: 40px !important;">
-                    <label for="floatingPassword" class="form-text pt-1">Contraseña</label>
+                <div class="d-flex justify-content-end">
+                    <div class="form-floating pb-1 w-100">
+                        <input type="password" class="rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="txtPass" name="txtPass" placeholder="Password" required style="height: 40px !important;">
+                        <label for="floatingPassword" class="form-text pt-1">Contraseña</label>
+                    </div>
+                    <button class="btn btn-sm btn-outline-light text-dark h-75 mt-2 border-0" type="button" id="btnPassword">
+                        <i id="iconShowHide" class="fas fa-eye-slash"></i>
+                    </button>
                 </div>
                 <div class="row">
                     <div class="col-6">
@@ -110,14 +107,14 @@ if (isset($_SESSION["usuario"])) { //si hay sesion iniciar lo manda a la ventana
 
     <?php include("../../../footer.php"); ?>
     <script>
-    window.onload = function() {
-        setTimeout(() => {
-            var contenedor = document.getElementById('contenedorLoad');
-            contenedor.style.visibility = 'hidden';
-            contenedor.style.opacity = '0';
+        window.onload = function() {
+            setTimeout(() => {
+                var contenedor = document.getElementById('contenedorLoad');
+                contenedor.style.visibility = 'hidden';
+                contenedor.style.opacity = '0';
 
-        }, 1500);
-    }
+            }, 1500);
+        }
     </script>
     <script type="text/javascript" src="../../../js/login.js"></script>
 </body>

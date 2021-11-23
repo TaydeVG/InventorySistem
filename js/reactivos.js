@@ -23,20 +23,21 @@ function initEvents() {
          }, 500);
       });
    });
-
 }
 
 function modalLogicLoad() {
    var modal = document.getElementById('modalId');
    modal.addEventListener('show.bs.modal', function (event) {
+
       initFormModal(modal);//reinicia el modal cada que se detona
       var button = event.relatedTarget;//obtiene la info del boton que detono el modal
       var modalTitle = modal.querySelector('.modal-title');
-      var btnModalSubmit = modal.querySelector('#btnModalSubmit'); 
+      var btnModalSubmit = modal.querySelector('#btnModalSubmit');
       var btnModalCancel = modal.querySelector('#btnModalCancel');
       // Extrae info del atributo data-bs-*
       var opcion = button.getAttribute('data-bs-opcion');// se obtiene la opcion que levanta el modal
 
+      var formOpcion = 0;
       switch (opcion) {//dependiendo la accion se aplica logica
          case 'new':
             modalTitle.textContent = 'Ingresar datos del reactivo';
@@ -45,9 +46,9 @@ function modalLogicLoad() {
 
             $('#btnModalSubmit').addClass("d-block");
             $('#btnModalSubmit').removeClass("d-none");
-            
-            $('#btnClearModal').show();
 
+            $('#btnClearModal').show();
+            formOpcion = 1; // insert
             break;
          case 'view':
             modalTitle.textContent = 'Informacion del reactivo';
@@ -75,28 +76,64 @@ function modalLogicLoad() {
             $('#btnModalSubmit').removeClass("d-none");
             $('#btnClearModal').hide();
 
+            formOpcion = 2; // update
             break;
          default:
             modalTitle.textContent = 'Se desconoce detonador de modal';
             btnModalSubmit.textContent = "";
             $('#btnClearModal').hide();
-
             break;
       }
+      var form = $("#frmModalReactivos");
+      // Loop over them and prevent submission
+      Array.prototype.slice.call(form)
+         .forEach(function (formInput) {
+            formInput.addEventListener('submit', function (event) {
+               if (!formInput.checkValidity()) {
+                  event.preventDefault()
+                  event.stopPropagation()
+               }
+               formInput.classList.add('was-validated')
+            }, false)
+         });
+
+      form.submit(function (event) {
+         event.preventDefault();
+
+         var nombre = this.querySelector('#recipient-nombre').value;
+         var reactividad = this.querySelector('#recipient-reactividad').value;
+         var inflamabilida = this.querySelector('#recipient-inflamabilida').value;
+         var riesgoSalud = this.querySelector('#recipient-riesgoSalud').value;
+         var presentacion = this.querySelector('#recipient-presentacion').value;
+         var nReactivo = this.querySelector('#recipient-nReactivo').value;
+         var unidadMedida = this.querySelector('#recipient-unidadMedida').value;
+         var codigoAlmacenamiento = this.querySelector('#recipient-codigoAlmacenamiento').value;
+         var caducidad = this.querySelector('#recipient-caducidad').value;
+         var nMueble = this.querySelector('#recipient-nMueble').value;
+         var nEstante = this.querySelector('#recipient-nEstante').value;
+
+         if (nombre.length > 0 && reactividad.length > 0 && inflamabilida.length > 0 && riesgoSalud.length > 0 && presentacion.length > 0 && nReactivo.length > 0 && unidadMedida.length > 0 && codigoAlmacenamiento.length > 0 && caducidad.length > 0 && nMueble.length > 0 && nEstante.length > 0) {
+
+            if (formOpcion == 1) {
+               console.log("insert");
+               this.querySelector("#btnModalCancel").click();//oculta modal al insertar
+            } else if (formOpcion == 2) {
+               console.log("update");
+               this.querySelector("#btnModalCancel").click();//oculta modal al actualizar
+            } else {
+               console.log("opcion invalida");
+            }
+         } else {
+            console.log("form invalid");
+         }
+
+      });
    });
 }
 function initFormModal(modal) {
-   modal.querySelector('#recipient-nombre').value = "";
-   modal.querySelector('#recipient-reactividad').value = "0";
-   modal.querySelector('#recipient-inflamabilida').value = "0";
-   modal.querySelector('#recipient-riesgoSalud').value = "0";
-   modal.querySelector('#recipient-presentacion').value = "0";
-   modal.querySelector('#recipient-nReactivo').value = "0";
-   modal.querySelector('#recipient-unidadMedida').value = "0";
-   modal.querySelector('#recipient-codigoAlmacenamiento').value = "0";
-   modal.querySelector('#recipient-caducidad').value = "";
-   modal.querySelector('#recipient-nMueble').value = "";
-   modal.querySelector('#recipient-nEstante').value = "";
+
+   $("#frmModalReactivos").removeClass("was-validated");//elimina las validaciones activas
+   $("#frmModalReactivos")[0].reset();//vacia los inputs del form
    deshabilitarFormModal(modal, false);//habilita formulario modal
 
 }
@@ -205,11 +242,11 @@ function getDatosTabla() {
          else {
             setTimeout(() => {
                if (response.mensaje.errorInfo) {
-                   enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                  enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
                } else {
-                   enableNotifyAlerta("ATENCION!", response.mensaje, 5);
+                  enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                }
-           }, 1000);
+            }, 1000);
          }
       },
       beforeSend: function () {

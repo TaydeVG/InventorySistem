@@ -19,6 +19,24 @@ function initEvents() {
 
     });
 
+    var showPass = false;
+    var textPassword = document.querySelector("#txtPass");
+    var btnPassword = document.querySelector("#btnPassword");
+
+    btnPassword.addEventListener('click', function (event) {// controla cuando muestra o oculta el password
+        var iconBtn = this.querySelector("#iconShowHide");
+        if (showPass) {
+            iconBtn.classList.remove("fa-eye");
+            iconBtn.classList.add("fa-eye-slash");
+            textPassword.setAttribute("type", "password");
+        } else {
+            iconBtn.classList.add("fa-eye");
+            iconBtn.classList.remove("fa-eye-slash");
+            textPassword.setAttribute("type", "text");
+        }
+        showPass = !showPass;
+    });
+
 }
 
 function insert(form,nombre, apellido, mail, pass) {
