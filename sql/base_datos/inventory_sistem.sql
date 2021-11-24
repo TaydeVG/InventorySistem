@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2021 a las 20:17:13
+-- Tiempo de generación: 24-11-2021 a las 01:44:00
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -149,7 +149,13 @@ INSERT INTO `bitacora` (`id`, `usuario`, `fecha_movimiento`, `tabla`, `accion`, 
 (141, 'root@localhost', '2021-11-21 18:44:22', 'reactivo', 'UPDATE', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|1', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|0'),
 (142, 'root@localhost', '2021-11-21 18:44:51', 'recipiente', 'UPDATE', '3|recipiente 1|4|10 lt|3|1', '3|recipiente 1|4|10 lt|3|0'),
 (143, 'root@localhost', '2021-11-21 18:45:49', 'equipo', 'INSERT', '6|equipo 2|muy bueno|124234|11009934|3', ''),
-(144, 'root@localhost', '2021-11-21 18:46:22', 'recipiente', 'INSERT', '4|recipiente 2|1|40 lt|3|0', '');
+(144, 'root@localhost', '2021-11-21 18:46:22', 'recipiente', 'INSERT', '4|recipiente 2|1|40 lt|3|0', ''),
+(145, 'root@localhost', '2021-11-22 18:20:03', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|b8478a763f60027807d0268b68f5695490cfada44fc3dd2837da4e027dd5dfd38d5aab8c6651c2c7c3dac2f4fabf635782b5cbb36aa4683d8d341827049743bf', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd'),
+(146, 'root@localhost', '2021-11-22 18:23:16', 'administrador', 'UPDATE', '18|Juan|Perez|180080049@upve.edu.mx|e7354e85f120abcc0e4654d1dc56ffb285f44b9a9a7c10e406460f38d3738756dd401539603872e19800d26ad6eed57a751620396242b148366901831d967ebd', '18|Juan|Perez|180080049@upve.edu.mx|b8478a763f60027807d0268b68f5695490cfada44fc3dd2837da4e027dd5dfd38d5aab8c6651c2c7c3dac2f4fabf635782b5cbb36aa4683d8d341827049743bf'),
+(147, 'root@localhost', '2021-11-23 20:16:19', 'tipo_material', 'UPDATE', '1|Vidrio', '1|corcho'),
+(148, 'root@localhost', '2021-11-23 20:16:27', 'tipo_material', 'UPDATE', '2|Plástico', '2|carton'),
+(149, 'root@localhost', '2021-11-23 20:16:55', 'tipo_material', 'UPDATE', '4|Plástico', '4|plastico'),
+(150, 'root@localhost', '2021-11-23 20:16:59', 'tipo_material', 'DELETE', '', '2|Plástico');
 
 -- --------------------------------------------------------
 
@@ -352,7 +358,7 @@ CREATE TABLE `reactivo` (
   `inflamabilidad` int(11) NOT NULL,
   `riesgo_salud` int(11) NOT NULL,
   `presentacion` varchar(50) NOT NULL,
-  `cantidad_reactivo` int(11) NOT NULL,
+  `cantidad_reactivo` varchar(50) NOT NULL,
   `unidad_medida` varchar(50) NOT NULL,
   `codigo_almacenamiento` varchar(50) NOT NULL,
   `caducidad` date NOT NULL,
@@ -368,9 +374,9 @@ CREATE TABLE `reactivo` (
 --
 
 INSERT INTO `reactivo` (`id`, `nombre`, `reactividad`, `inflamabilidad`, `riesgo_salud`, `presentacion`, `cantidad_reactivo`, `unidad_medida`, `codigo_almacenamiento`, `caducidad`, `num_mueble`, `num_estante`, `id_laboratorio`, `eliminado`, `fecha_baja`) VALUES
-(3, 'butamol', 1, 1, 1, 'Frasco vidrio', 50, 'lts', '334JFEWD2', '2022-09-28', 1, 1, 3, 0, NULL),
-(4, 'octanol', 2, 1, 2, 'Frasco vidrio', 23, 'ml', 'HHSJ332K', '2021-11-02', 3, 6, 3, 1, NULL),
-(5, 'sulfónico', 1, 2, 3, 'Frasco vidrio', 45, 'gr', 'JJD344300D', '2021-11-24', 2, 3, 3, 0, NULL);
+(3, 'butamol', 1, 1, 1, 'Frasco vidrio', '50', 'lts', '334JFEWD2', '2022-09-28', 1, 1, 3, 0, NULL),
+(4, 'octanol', 2, 1, 2, 'Frasco vidrio', '23', 'ml', 'HHSJ332K', '2021-11-02', 3, 6, 3, 1, NULL),
+(5, 'sulfónico', 1, 2, 3, 'Frasco vidrio', '45', 'gr', 'JJD344300D', '2021-11-24', 2, 3, 3, 0, NULL);
 
 --
 -- Disparadores `reactivo`
@@ -504,9 +510,8 @@ CREATE TABLE `tipo_material` (
 --
 
 INSERT INTO `tipo_material` (`id`, `tipo_material`) VALUES
-(1, 'corcho'),
-(2, 'carton'),
-(4, 'plastico');
+(1, 'Vidrio'),
+(4, 'Plástico');
 
 --
 -- Disparadores `tipo_material`
@@ -616,7 +621,7 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
