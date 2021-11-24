@@ -5,6 +5,19 @@ function _GET_Param(parametro_get_url) {
    const data_param = urlParams.get(parametro_get_url);
    return data_param;
 }
+//aplica validacion al formulario
+function aplicarValidacionFormulario(form) {
+   Array.prototype.slice.call(form)
+      .forEach(function (formInput) {
+         formInput.addEventListener('submit', function (event) {
+            if (!formInput.checkValidity()) {
+               event.preventDefault()
+               event.stopPropagation()
+            }
+            formInput.classList.add('was-validated')
+         }, false)
+      });
+}
 //retorna un registro de un arreglo de objetos, buscando por su id
 function findRegistroById(id, arrayDatos) {
    const resultado = arrayDatos.find(registro => registro.id == id);

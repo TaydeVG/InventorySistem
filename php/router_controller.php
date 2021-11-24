@@ -2,6 +2,8 @@
 require "../php/clases/conexion.php";
 include_once("../php/objetos/Usuario.php");
 include_once("../php/objetos/Equipos.object.php");
+include_once("../php/objetos/Recipiente.object.php");
+include_once("../php/objetos/Reactivos.object.php");
 include_once("../php/clases/ClassReactivos.php");
 include_once("../php/clases/ClassEquipos.php");
 include_once("../php/clases/ClassLogin.php");
@@ -15,6 +17,8 @@ session_start(); // se agrega luego de las importaciones para no tener problemas
 $datosRespuesta = array();
 $UsuarioRequest = new Usuario();
 $EquipoRequest = new Equipo();
+$RecipienteRequest = new Recipiente();
+$ReactivoRequest = new Reactivo();
 
 //obtencion opcion de peticion
 $opcion         = isset($_POST['opcion']) ? $_POST['opcion'] : 0;
@@ -25,23 +29,97 @@ $idUsuario         = isset($_POST['idUsuario']) ? $_POST['idUsuario'] : 0;
 $UsuarioRequest->setId($idUsuario != 0 ? $idUsuario : (isset($_GET['idUsuario']) ? $_GET['idUsuario'] : 0));
 
 $email         = isset($_POST['email']) ? $_POST['email'] : 0;
-$UsuarioRequest->setCorreo($email != 0 ? $email : (isset($_GET['email']) ? $_GET['email'] : 0));
+$UsuarioRequest->setCorreo($email != 0 ? $email : (isset($_GET['email']) ? $_GET['email'] : ""));
 
 $password      = isset($_POST['password']) ? $_POST['password'] : 0;
-$UsuarioRequest->setPassword($password != 0 ? $password : (isset($_GET['password']) ? $_GET['password'] : 0));
+$UsuarioRequest->setPassword($password != 0 ? $password : (isset($_GET['password']) ? $_GET['password'] : ""));
 
 $apellido      = isset($_POST['apellido']) ? $_POST['apellido'] : 0;
-$UsuarioRequest->setApellido($apellido != 0 ? $apellido : (isset($_GET['apellido']) ? $_GET['apellido'] : 0));
+$UsuarioRequest->setApellido($apellido != 0 ? $apellido : (isset($_GET['apellido']) ? $_GET['apellido'] : ""));
 
 $nombre      = isset($_POST['nombre']) ? $_POST['nombre'] : 0;
-$UsuarioRequest->setNombre($nombre != 0 ? $nombre : (isset($_GET['nombre']) ? $_GET['nombre'] : 0));
+$UsuarioRequest->setNombre($nombre != 0 ? $nombre : (isset($_GET['nombre']) ? $_GET['nombre'] : ""));
 
 $is_password_random      = isset($_POST['is_password_random']) ? $_POST['is_password_random'] : 0;
-$UsuarioRequest->setIs_password_random($is_password_random != 0 ? $is_password_random : (isset($_GET['is_password_random']) ? $_GET['is_password_random'] : 0));
+$UsuarioRequest->setIs_password_random($is_password_random != 0 ? $is_password_random : (isset($_GET['is_password_random']) ? $_GET['is_password_random'] : ""));
 
 //obtencion de equipo de peticion
-$id_equipo      = isset($_POST['id_equipo']) ? $_POST['id_equipo'] : 0;
+$id_equipo = isset($_POST['id_equipo']) ? $_POST['id_equipo'] : 0;
 $EquipoRequest->setId($id_equipo != 0 ? $id_equipo : (isset($_GET['id_equipo']) ? $_GET['id_equipo'] : 0));
+
+//obtencion de reacipiente de la peticion
+$id_recipiente = isset($_POST['id_recipiente']) ? $_POST['id_recipiente'] : null;
+$RecipienteRequest->setId($id_recipiente != null ? $id_recipiente : (isset($_GET['id_recipiente']) ? $_GET['id_recipiente'] : null));
+
+$nombre_recipiente = isset($_POST['nombre_recipiente']) ? $_POST['nombre_recipiente'] : null;
+$RecipienteRequest->setNombre($nombre_recipiente != null ? $nombre_recipiente : (isset($_GET['nombre_recipiente']) ? $_GET['nombre_recipiente'] : null));
+
+$id_tipo_material_recipiente = isset($_POST['id_tipo_material_recipiente']) ? $_POST['id_tipo_material_recipiente'] : null;
+$RecipienteRequest->setId_tipo_material($id_tipo_material_recipiente != null ? $id_tipo_material_recipiente : (isset($_GET['id_tipo_material_recipiente']) ? $_GET['id_tipo_material_recipiente'] : null));
+
+$nombre_tipo_material_recipiente = isset($_POST['nombre_tipo_material_recipiente']) ? $_POST['nombre_tipo_material_recipiente'] : null;
+$RecipienteRequest->setNombre_tipo_material($nombre_tipo_material_recipiente != null ? $nombre_tipo_material_recipiente : (isset($_GET['nombre_tipo_material_recipiente']) ? $_GET['nombre_tipo_material_recipiente'] : null));
+
+$capacidad_recipiente = isset($_POST['capacidad_recipiente']) ? $_POST['capacidad_recipiente'] : null;
+$RecipienteRequest->setCapacidad($capacidad_recipiente != null ? $capacidad_recipiente : (isset($_GET['capacidad_recipiente']) ? $_GET['capacidad_recipiente'] : null));
+
+$id_laboratorio_recipiente = isset($_POST['id_laboratorio_recipiente']) ? $_POST['id_laboratorio_recipiente'] : null;
+$RecipienteRequest->setId_laboratorio($id_laboratorio_recipiente != null ? $id_laboratorio_recipiente : (isset($_GET['id_laboratorio_recipiente']) ? $_GET['id_laboratorio_recipiente'] : null));
+
+$eliminado_recipiente = isset($_POST['eliminado_recipiente']) ? $_POST['eliminado_recipiente'] : null;
+$RecipienteRequest->setEliminado($eliminado_recipiente != null ? $eliminado_recipiente : (isset($_GET['eliminado_recipiente']) ? $_GET['eliminado_recipiente'] : null));
+
+$fecha_baja_recipiente = isset($_POST['fecha_baja_recipiente']) ? $_POST['fecha_baja_recipiente'] : null;
+$RecipienteRequest->setFecha_baja($fecha_baja_recipiente != null ? $fecha_baja_recipiente : (isset($_GET['fecha_baja_recipiente']) ? $_GET['fecha_baja_recipiente'] : null));
+
+$RecipienteRequest->setImagen(isset($_FILES['upl']) ? $_FILES['upl'] : null);
+
+//obtencion de reactivos de la peticion
+$id_reactivo = isset($_POST['id_reactivo']) ? $_POST['id_reactivo'] : null;
+$ReactivoRequest->setId($id_reactivo != null ? $id_reactivo : (isset($_GET['id_reactivo']) ? $_GET['id_reactivo'] : null));
+
+$nombre_reactivo = isset($_POST['nombre_reactivo']) ? $_POST['nombre_reactivo'] : null;
+$ReactivoRequest->setNombre($nombre_reactivo != null ? $nombre_reactivo : (isset($_GET['nombre_reactivo']) ? $_GET['nombre_reactivo'] : null));
+
+$reactividad_reactivo = isset($_POST['reactividad_reactivo']) ? $_POST['reactividad_reactivo'] : null;
+$ReactivoRequest->setReactividad($reactividad_reactivo != null ? $reactividad_reactivo : (isset($_GET['reactividad_reactivo']) ? $_GET['reactividad_reactivo'] : null));
+
+$inflamabilida_reactivo = isset($_POST['inflamabilida_reactivo']) ? $_POST['inflamabilida_reactivo'] : null;
+$ReactivoRequest->setInflamabilida($inflamabilida_reactivo != null ? $inflamabilida_reactivo : (isset($_GET['inflamabilida_reactivo']) ? $_GET['inflamabilida_reactivo'] : null));
+
+$riesgoSalud_reactivo = isset($_POST['riesgoSalud_reactivo']) ? $_POST['riesgoSalud_reactivo'] : null;
+$ReactivoRequest->setRiesgo_salud($riesgoSalud_reactivo != null ? $riesgoSalud_reactivo : (isset($_GET['riesgoSalud_reactivo']) ? $_GET['riesgoSalud_reactivo'] : null));
+
+$presentacion_reactivo = isset($_POST['presentacion_reactivo']) ? $_POST['presentacion_reactivo'] : null;
+$ReactivoRequest->setPresentacion($presentacion_reactivo != null ? $presentacion_reactivo : (isset($_GET['presentacion_reactivo']) ? $_GET['presentacion_reactivo'] : null));
+
+$nReactivo_reactivo = isset($_POST['nReactivo_reactivo']) ? $_POST['nReactivo_reactivo'] : null;
+$ReactivoRequest->setCantidad($nReactivo_reactivo != null ? $nReactivo_reactivo : (isset($_GET['nReactivo_reactivo']) ? $_GET['nReactivo_reactivo'] : null));
+
+$unidadMedida_reactivo = isset($_POST['unidadMedida_reactivo']) ? $_POST['unidadMedida_reactivo'] : null;
+$ReactivoRequest->setUnidad_medida($unidadMedida_reactivo != null ? $unidadMedida_reactivo : (isset($_GET['unidadMedida_reactivo']) ? $_GET['unidadMedida_reactivo'] : null));
+
+$codigoAlmacenamiento_reactivo = isset($_POST['codigoAlmacenamiento_reactivo']) ? $_POST['codigoAlmacenamiento_reactivo'] : null;
+$ReactivoRequest->setCodigo_almacenamiento($codigoAlmacenamiento_reactivo != null ? $codigoAlmacenamiento_reactivo : (isset($_GET['codigoAlmacenamiento_reactivo']) ? $_GET['codigoAlmacenamiento_reactivo'] : null));
+
+$caducidad_reactivo = isset($_POST['caducidad_reactivo']) ? $_POST['caducidad_reactivo'] : null;
+$ReactivoRequest->setCaducidad($caducidad_reactivo != null ? $caducidad_reactivo : (isset($_GET['caducidad_reactivo']) ? $_GET['caducidad_reactivo'] : null));
+
+$nMueble_reactivo = isset($_POST['nMueble_reactivo']) ? $_POST['nMueble_reactivo'] : null;
+$ReactivoRequest->setN_mueble($nMueble_reactivo != null ? $nMueble_reactivo : (isset($_GET['nMueble_reactivo']) ? $_GET['nMueble_reactivo'] : null));
+
+$nEstante_reactivo = isset($_POST['nEstante_reactivo']) ? $_POST['nEstante_reactivo'] : null;
+$ReactivoRequest->setN_estante($nEstante_reactivo != null ? $nEstante_reactivo : (isset($_GET['nEstante_reactivo']) ? $_GET['nEstante_reactivo'] : null));
+
+$id_laboratorio_reactivo = isset($_POST['id_laboratorio_reactivo']) ? $_POST['id_laboratorio_reactivo'] : null;
+$ReactivoRequest->setId_laboratorio($id_laboratorio_reactivo != null ? $id_laboratorio_reactivo : (isset($_GET['id_laboratorio_reactivo']) ? $_GET['id_laboratorio_reactivo'] : null));
+
+$eliminado_reactivo = isset($_POST['eliminado_reactivo']) ? $_POST['eliminado_reactivo'] : null;
+$ReactivoRequest->setEliminado($eliminado_reactivo != null ? $eliminado_reactivo : (isset($_GET['eliminado_reactivo']) ? $_GET['eliminado_reactivo'] : null));
+
+$fecha_baja_reactivo = isset($_POST['fecha_baja_reactivo']) ? $_POST['fecha_baja_reactivo'] : null;
+$ReactivoRequest->setFecha_baja($fecha_baja_reactivo != null ? $fecha_baja_reactivo : (isset($_GET['fecha_baja_reactivo']) ? $_GET['fecha_baja_reactivo'] : null));
+
 ini_set('memory_limit', '-1');
 set_time_limit(0);
 
@@ -97,8 +175,9 @@ switch ($opcion) {
 		echo json_encode($datosRespuesta);
 		break;
 	case 6: //subir imagen
-		$datosRespuesta = ClassControllerFiles::subirArchivoAlServidor($_FILES['upl'], $UsuarioRequest->getId());
-		echo json_encode($datosRespuesta);
+		/* $datosRespuesta = ClassControllerFiles::subirArchivoAlServidor($_FILES['upl'], $UsuarioRequest->getId());
+		echo json_encode($datosRespuesta); */
+		echo json_encode($RecipienteRequest);
 		break;
 	case 7:
 		$conexMySql->conectar();
@@ -154,6 +233,15 @@ switch ($opcion) {
 		$datosRespuesta = ClassRecipientes::getRecipientes_eliminados($conexMySql->cnx);
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
+		break;
+	case 16: //obtiene todos los reactivos
+		$conexMySql->conectar();
+		$datosRespuesta = ClassRecipientes::getTipo_materiales($conexMySql->cnx);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 17: //obtiene todos los reactivos
+		echo json_encode($ReactivoRequest);
 		break;
 	case 0:
 		$datosRespuesta = ClassLogin::cerrarSesion();

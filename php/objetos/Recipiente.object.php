@@ -13,6 +13,7 @@ class Recipiente
     public $id_laboratorio = 0;
     public $eliminado = 0;
     public $fecha_baja = "";
+    public $imagen = "";
 
     public function getId()
     {
@@ -83,5 +84,14 @@ class Recipiente
     public function setFecha_baja($fecha_baja)
     {
         $this->fecha_baja = $fecha_baja;
+    }
+
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
     }
 }

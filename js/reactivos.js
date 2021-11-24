@@ -23,6 +23,44 @@ function initEvents() {
          }, 500);
       });
    });
+
+   var formModal = $("#frmModalReactivos");
+   // controla los mensajes de error o exito en campos formulario
+   aplicarValidacionFormulario(formModal);
+
+   formModal.submit(function (event) {
+      event.preventDefault();
+      var modal = document.getElementById('modalId');
+      var formOpcion = document.querySelector('#btnModalSubmit').getAttribute('data-opcion');// se obtiene la opcion del form del modal
+
+      var nombre = modal.querySelector('#recipient-nombre').value;
+      var reactividad = modal.querySelector('#recipient-reactividad').value;
+      var inflamabilida = modal.querySelector('#recipient-inflamabilida').value;
+      var riesgoSalud = modal.querySelector('#recipient-riesgoSalud').value;
+      var presentacion = modal.querySelector('#recipient-presentacion').value;
+      var nReactivo = modal.querySelector('#recipient-nReactivo').value;
+      var unidadMedida = modal.querySelector('#recipient-unidadMedida').value;
+      var codigoAlmacenamiento = modal.querySelector('#recipient-codigoAlmacenamiento').value;
+      var caducidad = modal.querySelector('#recipient-caducidad').value;
+      var nMueble = modal.querySelector('#recipient-nMueble').value;
+      var nEstante = modal.querySelector('#recipient-nEstante').value;
+
+      if (nombre.length > 0 && reactividad.length > 0 && inflamabilida.length > 0 && riesgoSalud.length > 0 && presentacion.length > 0 && nReactivo.length > 0 && unidadMedida.length > 0 && codigoAlmacenamiento.length > 0 && caducidad.length > 0 && nMueble.length > 0 && nEstante.length > 0) {
+
+         if (formOpcion == "new") {
+            console.log("insert");
+            insert($(this)[0]);//se le envian los campos del formulario, cada name del formulario hace referencia a un campo de base de datos
+            this.querySelector("#btnModalCancel").click();//oculta modal al insertar
+         } else if (formOpcion == "edit") {
+            console.log("update");
+            this.querySelector("#btnModalCancel").click();//oculta modal al actualizar
+         } else {
+            console.log("opcion invalida");
+         }
+      } else {
+         console.log("form invalid");
+      }
+   });
 }
 
 function modalLogicLoad() {
@@ -37,7 +75,7 @@ function modalLogicLoad() {
       // Extrae info del atributo data-bs-*
       var opcion = button.getAttribute('data-bs-opcion');// se obtiene la opcion que levanta el modal
 
-      var formOpcion = 0;
+      btnModalSubmit.setAttribute("data-opcion", opcion);
       switch (opcion) {//dependiendo la accion se aplica logica
          case 'new':
             modalTitle.textContent = 'Ingresar datos del reactivo';
@@ -48,7 +86,6 @@ function modalLogicLoad() {
             $('#btnModalSubmit').removeClass("d-none");
 
             $('#btnClearModal').show();
-            formOpcion = 1; // insert
             break;
          case 'view':
             modalTitle.textContent = 'Informacion del reactivo';
@@ -76,7 +113,6 @@ function modalLogicLoad() {
             $('#btnModalSubmit').removeClass("d-none");
             $('#btnClearModal').hide();
 
-            formOpcion = 2; // update
             break;
          default:
             modalTitle.textContent = 'Se desconoce detonador de modal';
@@ -84,50 +120,7 @@ function modalLogicLoad() {
             $('#btnClearModal').hide();
             break;
       }
-      var form = $("#frmModalReactivos");
-      // Loop over them and prevent submission
-      Array.prototype.slice.call(form)
-         .forEach(function (formInput) {
-            formInput.addEventListener('submit', function (event) {
-               if (!formInput.checkValidity()) {
-                  event.preventDefault()
-                  event.stopPropagation()
-               }
-               formInput.classList.add('was-validated')
-            }, false)
-         });
 
-      form.submit(function (event) {
-         event.preventDefault();
-
-         var nombre = this.querySelector('#recipient-nombre').value;
-         var reactividad = this.querySelector('#recipient-reactividad').value;
-         var inflamabilida = this.querySelector('#recipient-inflamabilida').value;
-         var riesgoSalud = this.querySelector('#recipient-riesgoSalud').value;
-         var presentacion = this.querySelector('#recipient-presentacion').value;
-         var nReactivo = this.querySelector('#recipient-nReactivo').value;
-         var unidadMedida = this.querySelector('#recipient-unidadMedida').value;
-         var codigoAlmacenamiento = this.querySelector('#recipient-codigoAlmacenamiento').value;
-         var caducidad = this.querySelector('#recipient-caducidad').value;
-         var nMueble = this.querySelector('#recipient-nMueble').value;
-         var nEstante = this.querySelector('#recipient-nEstante').value;
-
-         if (nombre.length > 0 && reactividad.length > 0 && inflamabilida.length > 0 && riesgoSalud.length > 0 && presentacion.length > 0 && nReactivo.length > 0 && unidadMedida.length > 0 && codigoAlmacenamiento.length > 0 && caducidad.length > 0 && nMueble.length > 0 && nEstante.length > 0) {
-
-            if (formOpcion == 1) {
-               console.log("insert");
-               this.querySelector("#btnModalCancel").click();//oculta modal al insertar
-            } else if (formOpcion == 2) {
-               console.log("update");
-               this.querySelector("#btnModalCancel").click();//oculta modal al actualizar
-            } else {
-               console.log("opcion invalida");
-            }
-         } else {
-            console.log("form invalid");
-         }
-
-      });
    });
 }
 function initFormModal(modal) {
@@ -260,4 +253,38 @@ function getDatosTabla() {
    });
 
    return datos;
+}
+
+//recibe como parametro el formulario, NOTA: en el formulario cada input debe tener el atributo name, correspondiente al campo de base de datos
+function insert(form) {
+   //se genera form data para poder mandar el archivo file
+   var objParam = new FormData(form);
+   objParam.append("opcion", 17);//opcion del router a ejecutar
+
+   $.ajax({
+      cache: false,
+      url: '../../../php/router_controller.php',
+      type: 'POST',
+      dataType: 'JSON',
+      data: objParam,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+
+         if (response.resultOper == 1) {
+
+            console.log(response);
+
+         } else {
+            console.log(response);
+         }
+      },
+      beforeSend: function () {
+         console.log("cargando peticion");
+      },
+      error: function (xhr, status, error) {
+         console.log(xhr.responseText);
+         enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
+      }
+   });
 }
