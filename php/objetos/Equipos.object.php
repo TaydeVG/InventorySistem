@@ -13,6 +13,7 @@ class Equipo
     public $id_laboratorio = 0;
     public $eliminado = false;
     public $fecha_baja = "";
+    public $imagen = "";
 
     public function getId()
     {
@@ -85,6 +86,15 @@ class Equipo
     {
         $this->fecha_baja = $fecha_baja;
     }
+
+    public function getImagen()
+    {
+        return $this->imagen;
+    }
+    public function setImagen($imagen)
+    {
+        $this->imagen = $imagen;
+    }
 }
 
 /**
@@ -115,7 +125,7 @@ class Mantenimiento
     {
         $this->fecha_mantenimiento = $fecha_mantenimiento;
     }
-    
+
     public function getObservaciones()
     {
         return $this->observaciones;

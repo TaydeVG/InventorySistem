@@ -1,6 +1,10 @@
 
 $(document).ready(function () {
     loadingNotify("Espere un momento...", "Cargando");//efecto loading al inicar pagina
+    var valida_equipo = _GET_Param('ideq') != null ? _GET_Param('ideq').length : 0;
+    if (valida_equipo == 0) {//valida que venga un id del equipo como parametros si no lo regresara a equipos
+        window.location = "../equipos/";
+    }
 
     $('#navEquipos').addClass("active-nav");
     //$('#navEquipos').attr('href', '#');
@@ -25,6 +29,35 @@ function initEvents() {
         });
     });
 
+    var formModal = $("#formModal");
+    // controla los mensajes de error o exito en campos formulario
+    aplicarValidacionFormulario(formModal);
+    //evento de cuando se le da submit al formulario del modal
+    formModal.submit(function (e) {
+        e.preventDefault();
+        var modal = document.getElementById('modalId');
+        var formOpcion = document.querySelector('#btnModalSubmit').getAttribute('data-opcion');// se obtiene la opcion del form del modal
+
+        var fecha_mantenimiento = modal.querySelector('#recipient-fecha_mantenimiento').value;
+        var observaciones = modal.querySelector('#recipient-observaciones').value;
+
+        //valida los datos obligatorios a guardar
+        if (fecha_mantenimiento.length > 0 && observaciones.length > 0) {
+            if (formOpcion == "new") {
+                console.log("insert");
+                insert($(this)[0], _GET_Param('ideq'));//se le envian los campos del formulario, cada name del formulario hace referencia a un campo de base de datos
+                this.querySelector("#btnModalCancel").click();//oculta modal al insertar
+            } else if (formOpcion == "edit") {
+                console.log("update");
+                this.querySelector("#btnModalCancel").click();//oculta modal al actualizar
+            } else {
+                console.log("opcion invalida");
+            }
+        } else {
+            console.log("form invalid");
+        }
+    });
+
 }
 
 function modalLogicLoad() {
@@ -38,6 +71,7 @@ function modalLogicLoad() {
         // Extrae info del atributo data-bs-*
         var opcion = button.getAttribute('data-bs-opcion');// se obtiene la opcion que levanta el modal
 
+        btnModalSubmit.setAttribute("data-opcion", opcion);
         switch (opcion) {//dependiendo la accion se aplica logica
             case 'new':
                 modalTitle.textContent = 'Ingresar datos del mantenimiento';
@@ -80,11 +114,43 @@ function modalLogicLoad() {
         }
     });
 }
+//recibe como parametro el formulario, NOTA: en el formulario cada input debe tener el atributo name, correspondiente al campo de base de datos
+function insert(form, id_equipo) {
+    //se genera form data para poder mandar el archivo file
+    var objParam = new FormData(form);
+    objParam.append("id_equipo_mantenimiento", id_equipo);
+    objParam.append("opcion", 20);
 
+    $.ajax({
+        cache: false,
+        url: '../../../php/router_controller.php',
+        type: 'POST',
+        dataType: 'JSON',
+        data: objParam,
+        contentType: false,
+        processData: false,
+        success: function (response) {
 
+            if (response.resultOper == 1) {
+
+                console.log(response);
+
+            } else {
+                console.log(response);
+            }
+        },
+        beforeSend: function () {
+            console.log("cargando peticion");
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
+        }
+    });
+}
 function initFormModal(modal) {
-    modal.querySelector('#recipient-fecha_mantenimiento').value = "";
-    modal.querySelector('#recipient-observaciones').value = "";
+    $("#formModal").removeClass("was-validated");//elimina las validaciones activas
+    $("#formModal")[0].reset();
     deshabilitarFormModal(modal, false);//habilita formulario modal
 }
 

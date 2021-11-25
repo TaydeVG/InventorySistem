@@ -34,7 +34,6 @@ function initEvents() {
       $('#recipient-tipo_material').attr("required", true);
    });
 
-
    var formModal = $("#formModal");
    // controla los mensajes de error o exito en campos formulario
    aplicarValidacionFormulario(formModal);

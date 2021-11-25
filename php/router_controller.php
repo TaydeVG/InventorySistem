@@ -19,6 +19,7 @@ $UsuarioRequest = new Usuario();
 $EquipoRequest = new Equipo();
 $RecipienteRequest = new Recipiente();
 $ReactivoRequest = new Reactivo();
+$MantenimientoRequest = new Mantenimiento();
 
 //obtencion opcion de peticion
 $opcion         = isset($_POST['opcion']) ? $_POST['opcion'] : 0;
@@ -44,8 +45,47 @@ $is_password_random      = isset($_POST['is_password_random']) ? $_POST['is_pass
 $UsuarioRequest->setIs_password_random($is_password_random != 0 ? $is_password_random : (isset($_GET['is_password_random']) ? $_GET['is_password_random'] : ""));
 
 //obtencion de equipo de peticion
-$id_equipo = isset($_POST['id_equipo']) ? $_POST['id_equipo'] : 0;
-$EquipoRequest->setId($id_equipo != 0 ? $id_equipo : (isset($_GET['id_equipo']) ? $_GET['id_equipo'] : 0));
+$id_equipo = isset($_POST['id_equipo']) ? $_POST['id_equipo'] : null;
+$EquipoRequest->setId($id_equipo != null ? $id_equipo : (isset($_GET['id_equipo']) ? $_GET['id_equipo'] : null));
+
+$nombre_equipo = isset($_POST['nombre_equipo']) ? $_POST['nombre_equipo'] : null;
+$EquipoRequest->setNombre($nombre_equipo != null ? $nombre_equipo : (isset($_GET['nombre_equipo']) ? $_GET['nombre_equipo'] : null));
+
+$condicion_uso_equipo = isset($_POST['condicion_uso_equipo']) ? $_POST['condicion_uso_equipo'] : null;
+$EquipoRequest->setCondicion_uso($condicion_uso_equipo != null ? $condicion_uso_equipo : (isset($_GET['condicion_uso_equipo']) ? $_GET['condicion_uso_equipo'] : null));
+
+$num_economico_equipo = isset($_POST['num_economico_equipo']) ? $_POST['num_economico_equipo'] : null;
+$EquipoRequest->setNum_economico($num_economico_equipo != null ? $num_economico_equipo : (isset($_GET['num_economico_equipo']) ? $_GET['num_economico_equipo'] : null));
+
+$num_serie_equipo = isset($_POST['num_serie_equipo']) ? $_POST['num_serie_equipo'] : null;
+$EquipoRequest->setNum_serie($num_serie_equipo != null ? $num_serie_equipo : (isset($_GET['num_serie_equipo']) ? $_GET['num_serie_equipo'] : null));
+
+$id_laboratorio_equipo = isset($_POST['id_laboratorio_equipo']) ? $_POST['id_laboratorio_equipo'] : null;
+$EquipoRequest->setId_laboratorio($id_laboratorio_equipo != null ? $id_laboratorio_equipo : (isset($_GET['id_laboratorio_equipo']) ? $_GET['id_laboratorio_equipo'] : null));
+
+$eliminado_equipo = isset($_POST['eliminado_equipo']) ? $_POST['eliminado_equipo'] : null;
+$EquipoRequest->setEliminado($eliminado_equipo != null ? $eliminado_equipo : (isset($_GET['eliminado_equipo']) ? $_GET['eliminado_equipo'] : null));
+
+$fecha_baja_equipo = isset($_POST['fecha_baja_equipo']) ? $_POST['fecha_baja_equipo'] : null;
+$EquipoRequest->setFecha_baja($fecha_baja_equipo != null ? $fecha_baja_equipo : (isset($_GET['fecha_baja_equipo']) ? $_GET['fecha_baja_equipo'] : null));
+
+$EquipoRequest->setImagen(isset($_FILES['upl']) ? $_FILES['upl'] : null);
+
+//obtencion del Mantenimiento de la peticion
+$id_mantenimiento = isset($_POST['id_mantenimiento']) ? $_POST['id_mantenimiento'] : null;
+$MantenimientoRequest->setid($id_mantenimiento != null ? $id_mantenimiento : (isset($_GET['id_mantenimiento']) ? $_GET['id_mantenimiento'] : null));
+
+$fecha_mantenimiento_mantenimiento = isset($_POST['fecha_mantenimiento_mantenimiento']) ? $_POST['fecha_mantenimiento_mantenimiento'] : null;
+$MantenimientoRequest->setFecha_mantenimiento($fecha_mantenimiento_mantenimiento != null ? $fecha_mantenimiento_mantenimiento : (isset($_GET['fecha_mantenimiento_mantenimiento']) ? $_GET['fecha_mantenimiento_mantenimiento'] : null));
+
+$observaciones_mantenimiento = isset($_POST['observaciones_mantenimiento']) ? $_POST['observaciones_mantenimiento'] : null;
+$MantenimientoRequest->setObservaciones($observaciones_mantenimiento != null ? $observaciones_mantenimiento : (isset($_GET['observaciones_mantenimiento']) ? $_GET['observaciones_mantenimiento'] : null));
+
+$id_equipo_mantenimiento = isset($_POST['id_equipo_mantenimiento']) ? $_POST['id_equipo_mantenimiento'] : null;
+$MantenimientoRequest->setId_equipo($id_equipo_mantenimiento != null ? $id_equipo_mantenimiento : (isset($_GET['id_equipo_mantenimiento']) ? $_GET['id_equipo_mantenimiento'] : null));
+
+$eliminado_mantenimiento = isset($_POST['eliminado_mantenimiento']) ? $_POST['eliminado_mantenimiento'] : null;
+$MantenimientoRequest->seteliminado($eliminado_mantenimiento != null ? $eliminado_mantenimiento : (isset($_GET['eliminado_mantenimiento']) ? $_GET['eliminado_mantenimiento'] : null));
 
 //obtencion de reacipiente de la peticion
 $id_recipiente = isset($_POST['id_recipiente']) ? $_POST['id_recipiente'] : null;
@@ -119,6 +159,7 @@ $ReactivoRequest->setEliminado($eliminado_reactivo != null ? $eliminado_reactivo
 
 $fecha_baja_reactivo = isset($_POST['fecha_baja_reactivo']) ? $_POST['fecha_baja_reactivo'] : null;
 $ReactivoRequest->setFecha_baja($fecha_baja_reactivo != null ? $fecha_baja_reactivo : (isset($_GET['fecha_baja_reactivo']) ? $_GET['fecha_baja_reactivo'] : null));
+
 
 ini_set('memory_limit', '-1');
 set_time_limit(0);
@@ -242,6 +283,22 @@ switch ($opcion) {
 		break;
 	case 17: //obtiene todos los reactivos
 		echo json_encode($ReactivoRequest);
+		break;
+	case 18: //subir imagen
+		/* $datosRespuesta = ClassControllerFiles::subirArchivoAlServidor($_FILES['upl'], $UsuarioRequest->getId());
+			echo json_encode($datosRespuesta); */
+		echo json_encode($EquipoRequest);
+		break;
+	case 19: //obtiene todos los reactivos
+		$conexMySql->conectar();
+		$datosRespuesta = ClassEquipos::getLaboratorios($conexMySql->cnx);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 20: //guardar mantenimiento
+		/* $datosRespuesta = ClassControllerFiles::subirArchivoAlServidor($_FILES['upl'], $UsuarioRequest->getId());
+				echo json_encode($datosRespuesta); */
+		echo json_encode($MantenimientoRequest);
 		break;
 	case 0:
 		$datosRespuesta = ClassLogin::cerrarSesion();
