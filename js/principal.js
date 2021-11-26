@@ -127,6 +127,7 @@ function cambiar_password(pass) {
                 else {
                     if (response.mensaje.errorInfo) {
                         enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                        console.log(response.mensaje.errorInfo[2]);
                     } else {
                         enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                     }

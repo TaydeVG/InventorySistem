@@ -87,6 +87,7 @@ function restablecer_password(mail) {
                 setTimeout(() => {
                     if (response.mensaje.errorInfo) {
                         enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                        console.log(response.mensaje.errorInfo[2]);
                     } else {
                         enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                     }
@@ -134,6 +135,7 @@ function validarDatosLogin(usuario, password, recordar) {
             else {
                 if (response.mensaje.errorInfo) {
                     enableNotifyAlerta("ADVERTENCIA!", response.mensaje.errorInfo[2], 5);
+                    console.log(response.mensaje.errorInfo[2]);
                 } else {
                     enableNotifyAlerta("Datos Invalidos!", response.mensaje, 5);
                 }

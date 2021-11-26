@@ -7,6 +7,7 @@
             </div>
             <form id="frmModalReactivos" class="needs-validation" novalidate>
                 <div class="modal-body">
+                    <input type="text" class="form-control d-none" id="recipient-id_reactivo" name="id_reactivo" placeholder="">
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
@@ -50,13 +51,13 @@
                                 <label for="recipient-presentacion" class="col-form-label fw-bold">Presentación:</label>
                                 <select class="form-select" aria-label="Default select example" id="recipient-presentacion" name="presentacion_reactivo" required>
                                     <option selected disabled value="">Selección</option>
-                                    <option value="1">Frasco Vidrio</option>
-                                    <option value="2">Frasco Plástico</option>
-                                    <option value="3">Bidón Vidrio</option>
-                                    <option value="4">Bidón Plástico</option>
-                                    <option value="5">Galón Vidrio</option>
-                                    <option value="6">Galón Plástico</option>
-                                    <option value="7">Bolsa</option>
+                                    <option value="Frasco Vidrio">Frasco Vidrio</option>
+                                    <option value="Frasco Plástico">Frasco Plástico</option>
+                                    <option value="Bidón Vidrio">Bidón Vidrio</option>
+                                    <option value="Bidón Plástico">Bidón Plástico</option>
+                                    <option value="Galón Vidrio">Galón Vidrio</option>
+                                    <option value="Galón Plástico">Galón Plástico</option>
+                                    <option value="Bolsa">Bolsa</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Seleccione una opcion.
@@ -69,10 +70,10 @@
                                     reactivo:</label>
                                 <select class="form-select" aria-label="Default select example" id="recipient-nReactivo" name="nReactivo_reactivo" required>
                                     <option selected disabled value="">Selección</option>
-                                    <option value="1">Lleno</option>
-                                    <option value="2">Medio</option>
-                                    <option value="3">Poco</option>
-                                    <option value="4">Vacio</option>
+                                    <option value="Lleno">Lleno</option>
+                                    <option value="Medio">Medio</option>
+                                    <option value="Poco">Poco</option>
+                                    <option value="Vacio">Vacio</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Seleccione una opcion.
@@ -85,10 +86,10 @@
                                     medida:</label>
                                 <select class="form-select" aria-label="Default select example" id="recipient-unidadMedida" name="unidadMedida_reactivo" required>
                                     <option selected disabled value="">Selección</option>
-                                    <option value="1">Mililitro</option>
-                                    <option value="2">Gramo</option>
-                                    <option value="3">Litro</option>
-                                    <option value="4">Kilogramo</option>
+                                    <option value="Mililitro">Mililitro</option>
+                                    <option value="Gramo">Gramo</option>
+                                    <option value="Litro">Litro</option>
+                                    <option value="Kilogramo">Kilogramo</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Seleccione una opcion.
@@ -102,11 +103,11 @@
                                 <div class="input-group">
                                     <select class="form-select" aria-label="Default select example" id="recipient-codigoAlmacenamiento" name="codigoAlmacenamiento_reactivo" required>
                                         <option selected disabled value="">Selección</option>
-                                        <option value="1">Inflamable</option>
-                                        <option value="2">Oxidante</option>
-                                        <option value="3">Corrosivo</option>
-                                        <option value="4">Tóxico</option>
-                                        <option value="5">No preligroso</option>
+                                        <option value="Inflamable">Inflamable</option>
+                                        <option value="Oxidante">Oxidante</option>
+                                        <option value="Corrosivo">Corrosivo</option>
+                                        <option value="Tóxico">Tóxico</option>
+                                        <option value="No preligroso">No preligroso</option>
                                     </select>
                                     <button class="btn btn-outline-light text-dark border" type="button" data-bs-toggle="popover" data-bs-placement="top" title="Ayuda" data-bs-content=" 
                                         <div class='row'>
@@ -148,7 +149,7 @@
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
                                 <label for="recipient-nMueble" class="col-form-label fw-bold">No. de mueble:</label>
-                                <input type="number" class="form-control" id="recipient-nMueble" name="nMueble_reactivo" placeholder="Escribe Aquí" required>
+                                <input type="number" class="form-control" id="recipient-nMueble" name="nMueble_reactivo" placeholder="Escribe Aquí" min="0" required>
                                 <div class="invalid-feedback">
                                     Campo invalido.
                                 </div>
@@ -157,9 +158,20 @@
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
                                 <label for="recipient-nEstante" class="col-form-label fw-bold">No. de estante:</label>
-                                <input type="number" class="form-control" id="recipient-nEstante" name="nEstante_reactivo" placeholder="Escribe Aquí" required>
+                                <input type="number" class="form-control" id="recipient-nEstante" name="nEstante_reactivo" placeholder="Escribe Aquí" min="0" required>
                                 <div class="invalid-feedback">
                                     Campo invalido.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="mb-1">
+                                <label for="recipient-id_laboratorio" class="col-form-label fw-bold">Laboratorio:</label>
+                                <select class="form-select" aria-label="Default select example" id="recipient-id_laboratorio" name="id_laboratorio_reactivo" required>
+                                    <option selected disabled value="">Selección</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Seleccione una opcion.
                                 </div>
                             </div>
                         </div>

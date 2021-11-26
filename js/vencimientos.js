@@ -114,6 +114,7 @@ function getDatosTabla() {
                 setTimeout(() => {
                     if (response.mensaje.errorInfo) {
                         enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                        console.log(response.mensaje.errorInfo[2]);
                     } else {
                         enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                     }
@@ -180,6 +181,7 @@ function getDatosTabla_porvencer(tiempo_faltante_para_caducar) {
                 setTimeout(() => {
                     if (response.mensaje.errorInfo) {
                         enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                        console.log(response.mensaje.errorInfo[2]);
                     } else {
                         enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                     }

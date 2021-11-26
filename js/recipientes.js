@@ -265,6 +265,7 @@ function getDatosTabla() {
             setTimeout(() => {
                if (response.mensaje.errorInfo) {
                   enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                  console.log(response.mensaje.errorInfo[2]);
                } else {
                   enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                }
@@ -332,6 +333,7 @@ function getTiposMaterial() {
             setTimeout(() => {
                if (response.mensaje.errorInfo) {
                   enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                  console.log(response.mensaje.errorInfo[2]);
                } else {
                   enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                }

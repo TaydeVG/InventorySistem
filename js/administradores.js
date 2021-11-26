@@ -12,7 +12,7 @@ function initEvents() {
         var txtPass = $("#txtPass").val();
 
         if (txtNombre.length > 0 && txtApellido.length > 0 && txtMail.length > 0 && txtPass.length > 0) {
-            insert($(this),txtNombre, txtApellido, txtMail, txtPass);
+            insert($(this), txtNombre, txtApellido, txtMail, txtPass);
         } else {
             enableNotifyAlerta("ADVERTENCIA!", "Todos los campos son obligatorios.", 5);
         }
@@ -39,7 +39,7 @@ function initEvents() {
 
 }
 
-function insert(form,nombre, apellido, mail, pass) {
+function insert(form, nombre, apellido, mail, pass) {
     var objParam = {
         'opcion': 7,
         'nombre': nombre,
@@ -63,6 +63,7 @@ function insert(form,nombre, apellido, mail, pass) {
             else {
                 if (response.mensaje.errorInfo) {
                     enableNotifyAlerta("ADVERTENCIA!", response.mensaje.errorInfo[2], 5);
+                    console.log(response.mensaje.errorInfo[2]);
                 } else {
                     enableNotifyAlerta("ADVERTENCIA!", response.mensaje, 5);
                 }

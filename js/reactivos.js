@@ -5,11 +5,13 @@ $(document).ready(function () {
    $('#navReactivos').attr('href', '#');
    modalLogicLoad();
 
-
    llenarTabla(getDatosTabla());
    agregarFiltradoTabla("#tabla_id", "#body-table", "#filtrado", "#paginationTable");
 
+   LoadLaboratorios();
+
    initEvents();
+   disableNotifyAlerta();//oculta el modal de loading
 });
 
 function initEvents() {
@@ -44,14 +46,16 @@ function initEvents() {
       var caducidad = modal.querySelector('#recipient-caducidad').value;
       var nMueble = modal.querySelector('#recipient-nMueble').value;
       var nEstante = modal.querySelector('#recipient-nEstante').value;
+      var id_laboratorio = modal.querySelector('#recipient-id_laboratorio').value;
 
-      if (nombre.length > 0 && reactividad.length > 0 && inflamabilida.length > 0 && riesgoSalud.length > 0 && presentacion.length > 0 && nReactivo.length > 0 && unidadMedida.length > 0 && codigoAlmacenamiento.length > 0 && caducidad.length > 0 && nMueble.length > 0 && nEstante.length > 0) {
+      if (nombre.length > 0 && reactividad.length > 0 && inflamabilida.length > 0 && riesgoSalud.length > 0 && presentacion.length > 0 && nReactivo.length > 0 && unidadMedida.length > 0 && codigoAlmacenamiento.length > 0 && caducidad.length > 0 && nMueble.length > 0 && nEstante.length > 0 && id_laboratorio.length > 0) {
 
          if (formOpcion == "new") {
             console.log("insert");
-            insert($(this)[0]);//se le envian los campos del formulario, cada name del formulario hace referencia a un campo de base de datos
+            insert_or_update($(this)[0], "new");//se le envian los campos del formulario, cada name del formulario hace referencia a un campo de base de datos
             this.querySelector("#btnModalCancel").click();//oculta modal al insertar
          } else if (formOpcion == "edit") {
+            insert_or_update($(this)[0], "edit");//se le envian los campos del formulario, cada name del formulario hace referencia a un campo de base de datos
             console.log("update");
             this.querySelector("#btnModalCancel").click();//oculta modal al actualizar
          } else {
@@ -66,7 +70,6 @@ function initEvents() {
 function modalLogicLoad() {
    var modal = document.getElementById('modalId');
    modal.addEventListener('show.bs.modal', function (event) {
-
       initFormModal(modal);//reinicia el modal cada que se detona
       var button = event.relatedTarget;//obtiene la info del boton que detono el modal
       var modalTitle = modal.querySelector('.modal-title');
@@ -131,6 +134,7 @@ function initFormModal(modal) {
 
 }
 function setFormModal(modal, datos) {
+   modal.querySelector('#recipient-id_reactivo').value = datos.id;
    modal.querySelector('#recipient-nombre').value = datos.nombre;
    modal.querySelector('#recipient-reactividad').value = datos.reactividad;
    modal.querySelector('#recipient-inflamabilida').value = datos.inflamabilida;
@@ -142,8 +146,11 @@ function setFormModal(modal, datos) {
    modal.querySelector('#recipient-caducidad').value = datos.caducidad;
    modal.querySelector('#recipient-nMueble').value = datos.n_mueble;
    modal.querySelector('#recipient-nEstante').value = datos.n_estante;
+   modal.querySelector('#recipient-id_laboratorio').value = datos.id_laboratorio;
+
 }
 function deshabilitarFormModal(modal, isDisabled) {
+   modal.querySelector('#recipient-id_reactivo').disabled = isDisabled;
    modal.querySelector('#recipient-nombre').disabled = isDisabled;
    modal.querySelector('#recipient-reactividad').disabled = isDisabled;
    modal.querySelector('#recipient-inflamabilida').disabled = isDisabled;
@@ -155,13 +162,14 @@ function deshabilitarFormModal(modal, isDisabled) {
    modal.querySelector('#recipient-caducidad').disabled = isDisabled;
    modal.querySelector('#recipient-nMueble').disabled = isDisabled;
    modal.querySelector('#recipient-nEstante').disabled = isDisabled;
+   modal.querySelector('#recipient-id_laboratorio').disabled = isDisabled;
 
    if (isDisabled) { //si es true, se deshabilitan inputs
-      $('#recipient-nombre,#recipient-reactividad,#recipient-inflamabilida,#recipient-riesgoSalud,#recipient-presentacion,#recipient-nReactivo,#recipient-unidadMedida,#recipient-codigoAlmacenamiento,#recipient-caducidad,#recipient-nMueble,#recipient-nEstante').addClass("form-control-plaintext");
-      $('#recipient-nombre,#recipient-reactividad,#recipient-inflamabilida,#recipient-riesgoSalud,#recipient-presentacion,#recipient-nReactivo,#recipient-unidadMedida,#recipient-codigoAlmacenamiento,#recipient-caducidad,#recipient-nMueble,#recipient-nEstante').removeClass("form-control");
+      $('#recipient-id_reactivo,#recipient-nombre,#recipient-reactividad,#recipient-inflamabilida,#recipient-riesgoSalud,#recipient-presentacion,#recipient-nReactivo,#recipient-unidadMedida,#recipient-codigoAlmacenamiento,#recipient-caducidad,#recipient-nMueble,#recipient-nEstante,#recipient-id_laboratorio').addClass("form-control-plaintext");
+      $('#recipient-id_reactivo,#recipient-nombre,#recipient-reactividad,#recipient-inflamabilida,#recipient-riesgoSalud,#recipient-presentacion,#recipient-nReactivo,#recipient-unidadMedida,#recipient-codigoAlmacenamiento,#recipient-caducidad,#recipient-nMueble,#recipient-nEstante,#recipient-id_laboratorio').removeClass("form-control");
    } else {//si es false, se habilitan inputs
-      $('#recipient-nombre,#recipient-reactividad,#recipient-inflamabilida,#recipient-riesgoSalud,#recipient-presentacion,#recipient-nReactivo,#recipient-unidadMedida,#recipient-codigoAlmacenamiento,#recipient-caducidad,#recipient-nMueble,#recipient-nEstante').removeClass("form-control-plaintext");
-      $('#recipient-nombre,#recipient-reactividad,#recipient-inflamabilida,#recipient-riesgoSalud,#recipient-presentacion,#recipient-nReactivo,#recipient-unidadMedida,#recipient-codigoAlmacenamiento,#recipient-caducidad,#recipient-nMueble,#recipient-nEstante').addClass("form-control");
+      $('#recipient-id_reactivo,#recipient-nombre,#recipient-reactividad,#recipient-inflamabilida,#recipient-riesgoSalud,#recipient-presentacion,#recipient-nReactivo,#recipient-unidadMedida,#recipient-codigoAlmacenamiento,#recipient-caducidad,#recipient-nMueble,#recipient-nEstante,#recipient-id_laboratorio').removeClass("form-control-plaintext");
+      $('#recipient-id_reactivo,#recipient-nombre,#recipient-reactividad,#recipient-inflamabilida,#recipient-riesgoSalud,#recipient-presentacion,#recipient-nReactivo,#recipient-unidadMedida,#recipient-codigoAlmacenamiento,#recipient-caducidad,#recipient-nMueble,#recipient-nEstante,#recipient-id_laboratorio').addClass("form-control");
    }
 }
 
@@ -203,7 +211,7 @@ function llenarTabla(datos) {
       $("#btnModalYesOrCancel").click(function () {
          $.when(disableNotifyYesOrCancel())// funcion para cerrar el modal a continuacion ira las acciones a seguir
             .then(function (data, textStatus, jqXHR) {
-               enableNotifyAlerta("Exito!", "¡Reactivo eliminado con exito!", 3);
+               deleted(id);
             });
       });
 
@@ -230,25 +238,27 @@ function getDatosTabla() {
 
          if (response.resultOper == 1) {
             datos = response.respuesta;//datos a retornar
-            disableNotifyAlerta();//oculta el modal de loading
-         }
-         else {
+         } else {
             setTimeout(() => {
                if (response.mensaje.errorInfo) {
                   enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                  console.log(response.mensaje.errorInfo[2]);
                } else {
                   enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                }
-            }, 1000);
+            }, 1500);
          }
       },
       beforeSend: function () {
          console.log("cargando peticion");
       },
       error: function (xhr, status, error) {
+         //disableNotifyAlerta();//oculta el modal de loading
+         setTimeout(() => {
+            console.log("Error En Ajax " + xhr.responseText + " " + status + " " + error + ".");
+            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
+         }, 1500);
 
-         console.log("Error En Ajax " + xhr.responseText + " " + status + " " + error + ".");
-         enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
       }
    });
 
@@ -256,10 +266,14 @@ function getDatosTabla() {
 }
 
 //recibe como parametro el formulario, NOTA: en el formulario cada input debe tener el atributo name, correspondiente al campo de base de datos
-function insert(form) {
+function insert_or_update(form, opcion) {
    //se genera form data para poder mandar el archivo file
    var objParam = new FormData(form);
-   objParam.append("opcion", 17);//opcion del router a ejecutar
+   if (opcion == "new") {
+      objParam.append("opcion", 17);//opcion del router a ejecutar: insert
+   } else {
+      objParam.append("opcion", 21);//opcion del router a ejecutar: update
+   }
 
    $.ajax({
       cache: false,
@@ -270,13 +284,55 @@ function insert(form) {
       contentType: false,
       processData: false,
       success: function (response) {
-
+         console.log(response);
+         llenarTabla(getDatosTabla());
          if (response.resultOper == 1) {
-
-            console.log(response);
-
+            enableNotifyAlerta("Exito!", response.mensaje, 3);
          } else {
-            console.log(response);
+            if (response.mensaje.errorInfo) {
+               enableNotifyAlerta("ADVERTENCIA!", response.mensaje.errorInfo[2], 5);
+               console.log(response.mensaje.errorInfo[2]);
+            } else {
+               enableNotifyAlerta("ADVERTENCIA!", response.mensaje, 5);
+            }
+         }
+
+      },
+      beforeSend: function () {
+         console.log("cargando peticion");
+      },
+      error: function (xhr, status, error) {
+         console.log(xhr.responseText);
+         enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
+      }
+   });
+}
+function deleted(id) {
+   //se genera form data para poder mandar el archivo file
+   var objParam = new FormData();
+   objParam.append("id_reactivo", id);//opcion del router a ejecutar: update
+   objParam.append("opcion", 22);//opcion del router a ejecutar: update
+
+   $.ajax({
+      cache: false,
+      url: '../../../php/router_controller.php',
+      type: 'POST',
+      dataType: 'JSON',
+      data: objParam,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+         console.log(response);
+         llenarTabla(getDatosTabla());
+         if (response.resultOper == 1) {
+            enableNotifyAlerta("Exito!", response.mensaje, 3);
+         } else {
+            if (response.mensaje.errorInfo) {
+               enableNotifyAlerta("ADVERTENCIA!", response.mensaje.errorInfo[2], 5);
+               console.log(response.mensaje.errorInfo[2]);
+            } else {
+               enableNotifyAlerta("ADVERTENCIA!", response.mensaje, 5);
+            }
          }
       },
       beforeSend: function () {
@@ -287,4 +343,62 @@ function insert(form) {
          enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
       }
    });
+}
+
+function LoadLaboratorios() {
+   // Cargamos los estados
+   var laboratorios = getLaboratorios();
+   var laboratorio = "<option selected disabled value=''>Selección</option>";
+
+   for (let index = 0; index < laboratorios.length; index++) {
+      laboratorio = laboratorio + "<option value='" + laboratorios[index].id + "'>" + laboratorios[index].nombre + "</option>";
+
+   }
+   if (laboratorios.length == 0) {
+      laboratorio = laboratorio + "<option disabled value=''>favor de registrar un laboratorio para continuar...</option>";
+   }
+
+   $('#recipient-id_laboratorio').html(laboratorio);
+}
+
+function getLaboratorios() {
+   var datos = [];
+   var objParam = {
+      'opcion': 19
+   };
+
+   $.ajax({
+      async: false,
+      cache: false,
+      url: '../../../php/router_controller.php',
+      type: 'POST',
+      dataType: 'JSON',
+      data: objParam,
+      success: function (response) {
+
+         if (response.resultOper == 1) {
+            datos = response.respuesta;//datos a retornar
+         } else {
+            setTimeout(() => {
+               if (response.mensaje.errorInfo) {
+                  enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                  console.log(response.mensaje.errorInfo[2]);
+               } else {
+                  enableNotifyAlerta("ATENCION!", response.mensaje, 5);
+               }
+            }, 1500);
+         }
+      },
+      beforeSend: function () {
+         console.log("cargando peticion");
+      },
+      error: function (xhr, status, error) {
+         console.log("Error En Ajax " + xhr.responseText + " " + status + " " + error + ".");
+         setTimeout(() => {
+            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
+         }, 1500);
+      }
+   });
+
+   return datos;
 }

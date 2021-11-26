@@ -137,6 +137,7 @@ function getDatosTabla_equipos() {
                 setTimeout(() => {
                     if (response.mensaje.errorInfo) {
                         enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                        console.log(response.mensaje.errorInfo[2]);
                     } else {
                         enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                     }
@@ -178,6 +179,7 @@ function getDatosTabla_recipientes() {
                 setTimeout(() => {
                     if (response.mensaje.errorInfo) {
                         enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                        console.log(response.mensaje.errorInfo[2]);
                     } else {
                         enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                     }
@@ -244,6 +246,7 @@ function getDatosTabla_reactivos() {
                 setTimeout(() => {
                     if (response.mensaje.errorInfo) {
                         enableNotifyAlerta("ATENCION!", response.mensaje.errorInfo[2], 5);
+                        console.log(response.mensaje.errorInfo[2]);
                     } else {
                         enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                     }

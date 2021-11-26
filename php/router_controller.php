@@ -281,8 +281,11 @@ switch ($opcion) {
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
-	case 17: //obtiene todos los reactivos
-		echo json_encode($ReactivoRequest);
+	case 17: //inserta un reactivos
+		$conexMySql->conectar();
+		$datosRespuesta = ClassReactivos::insert($conexMySql->cnx, $ReactivoRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
 		break;
 	case 18: //subir imagen
 		/* $datosRespuesta = ClassControllerFiles::subirArchivoAlServidor($_FILES['upl'], $UsuarioRequest->getId());
@@ -299,6 +302,18 @@ switch ($opcion) {
 		/* $datosRespuesta = ClassControllerFiles::subirArchivoAlServidor($_FILES['upl'], $UsuarioRequest->getId());
 				echo json_encode($datosRespuesta); */
 		echo json_encode($MantenimientoRequest);
+		break;
+	case 21: //actualiza un reactivo
+		$conexMySql->conectar();
+		$datosRespuesta = ClassReactivos::update($conexMySql->cnx, $ReactivoRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 22: //actualiza el estatus eliminado a 1 a un reactivo
+		$conexMySql->conectar();
+		$datosRespuesta = ClassReactivos::delete($conexMySql->cnx, $ReactivoRequest->getId());
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
 		break;
 	case 0:
 		$datosRespuesta = ClassLogin::cerrarSesion();
