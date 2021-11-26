@@ -2,10 +2,10 @@
 
 class ClassControllerFiles
 {
-    public static function subirArchivoAlServidor($archivo, $id)
+    public static function subirArchivoAlServidor($imagen_anterior, $archivo, $renameImagen, $id, $carpeta)
     {
         $datos                 = array();
-        $datos['mensaje']      = null;
+        $datos['mensaje']      = "";
         $datos['resultOper']   = 0;
 
         $allowed = array('png', 'jpg', 'gif');
@@ -13,26 +13,27 @@ class ClassControllerFiles
             $extension = pathinfo($archivo['name'], PATHINFO_EXTENSION);
             if (!in_array(strtolower($extension), $allowed)) {
                 $datos['resultOper'] = -1;
-                $datos['mensaje'] = "ocurrio un problema al subir la imagen";
-                //CLog::escribirLog("[CGenerales::CASE 10][".__LINE__."]:: No se Guardo La Imagen");
+                $datos['mensaje'] .= "ocurrio un problema al subir la imagen";
             }
 
-            $renameImagen = $id . "_" . $archivo['name'];
-
-            $carpeta = "../resources/imagenes/imagenes-upload/$id/";
+            $carpeta = "../resources/imagenes/imagenes-upload/$carpeta/";
             //si la carpeta temporal no existe, se crea en la ruta $carpeta
             if (!file_exists($carpeta)) {
                 mkdir($carpeta, 0777, true);
             }
-            ClassControllerFiles::eliminarImagen("resources/imagenes/imagenes-upload/" . $id . "/" . $renameImagen); //elimino la imagen si ya existe
+            //elimina la imagen vieja para que solo quede la nueva, solo en caso de actualizar imagen
+            if ($imagen_anterior != null) {
+                $rutaIMG_toDelet = $carpeta . "/" . $imagen_anterior;
+                ClassControllerFiles::eliminarImagen($rutaIMG_toDelet); //elimino la imagen si ya existe
+            }
 
             if (move_uploaded_file($_FILES['upl']['tmp_name'], $carpeta . $renameImagen)) {
                 $datos['resultOper'] = 1;
-                $datos['mensaje'] = "archivo Subido con exito ";
+                $datos['mensaje'] .= "archivo Subido con exito ";
             }
         } else {
             $datos['resultOper']   = 0;
-            $datos['mensaje'] = "bad request";
+            $datos['mensaje'] .= "bad request";
         }
         return $datos;
     }
@@ -47,11 +48,11 @@ class ClassControllerFiles
             {
                 try {
 
-                    if (unlink("../" . $ruta)) {
+                    if (unlink($ruta)) {
                         $datos['mensaje'] = "Imagen Eliminada!";
                         $datos['resultOper'] = 1;
                     } else {
-                        $datos['mensaje'] = "No es posible eliminar la imagen!";
+                        $datos['mensaje'] = "No es posible eliminar la imagen";
                         $datos['resultOper'] = 2;
                     }
                 } catch (Exception $e) {
@@ -77,15 +78,10 @@ class ClassControllerFiles
         $nombreArchivo = $arrayRuta[$tamañoArray - 1];
 
         if ($nombreArchivo != "" && $nombreArchivo != null) { // valida que en la ruta se especifique el nombre del archivo
-            if (file_exists("../" . $rutaImagen)) {
+            if (file_exists($rutaImagen)) {
                 $result = true;
-            } else {
-                //CLog::escribirLog("::CGenerales.".__METHOD__."[".__LINE__."]:: imagen no encontrada en el servidor");
             }
-        } else {
-            //CLog::escribirLog("::CGenerales.".__METHOD__."[".__LINE__."]:: Ruta Archivo no valida");
         }
-
         return $result;
     }
 }

@@ -12,6 +12,7 @@ $(document).ready(function () {
 
     initEvents();
 
+    disableNotifyAlerta();//oculta el modal de loading
 });
 function initEvents() {
     // Reload Card
@@ -46,15 +47,15 @@ function initEvents() {
         if (imagen.length > 0) {//valida que no se envie ese campo si no se carga una imagen
             cargoImagen = true;
         }
-
         //valida los datos obligatorios a guardar
         if (nombre.length > 0 && condicion_uso.length > 0 && num_economico.length > 0 && num_serie.length > 0 && id_laboratorio.length > 0) {
             if (formOpcion == "new") {
                 console.log("insert");
-                insert($(this)[0], cargoImagen);//se le envian los campos del formulario, cada name del formulario hace referencia a un campo de base de datos
+                insert_or_update($(this)[0], cargoImagen, "new");//se le envian los campos del formulario, cada name del formulario hace referencia a un campo de base de datos
                 this.querySelector("#btnModalCancel").click();//oculta modal al insertar
             } else if (formOpcion == "edit") {
                 console.log("update");
+                insert_or_update($(this)[0], cargoImagen, "edit");//se le envian los campos del formulario, cada name del formulario hace referencia a un campo de base de datos
                 this.querySelector("#btnModalCancel").click();//oculta modal al actualizar
             } else {
                 console.log("opcion invalida");
@@ -77,6 +78,10 @@ function modalLogicLoad() {
         var opcion = button.getAttribute('data-bs-opcion');// se obtiene la opcion que levanta el modal
 
         btnModalSubmit.setAttribute("data-opcion", opcion);
+        //muestra la seccion de arrastrar un archivo al iniciar el modal
+        $('#recipient-imagen').addClass("d-block");
+        $('#recipient-imagen').removeClass("d-none");
+
         switch (opcion) {//dependiendo la accion se aplica logica
             case 'new':
                 modalTitle.textContent = 'Ingresar datos del equipo';
@@ -106,6 +111,10 @@ function modalLogicLoad() {
                 $('#section-detalle_mant').addClass("d-block");
                 $('#section-detalle_mant').removeClass("d-none");
 
+                //oculta la seccion de arrastras un archivo cuando esta en la opcion de ver
+                $('#recipient-imagen').removeClass("d-block");
+                $('#recipient-imagen').addClass("d-none");
+
                 $('#btnClearModal').hide();
                 break;
             case 'edit':
@@ -119,8 +128,8 @@ function modalLogicLoad() {
                 $('#btnModalSubmit').addClass("d-block");
                 $('#btnModalSubmit').removeClass("d-none");
 
-                $('#section-detalle_mant').addClass("d-block");
-                $('#section-detalle_mant').removeClass("d-none");
+                $('#section-detalle_mant').removeClass("d-block");
+                $('#section-detalle_mant').addClass("d-none");
 
                 $('#btnClearModal').hide();
 
@@ -136,14 +145,21 @@ function modalLogicLoad() {
     });
 }
 //recibe como parametro el formulario, NOTA: en el formulario cada input debe tener el atributo name, correspondiente al campo de base de datos
-function insert(form, cargoImagen) {
+function insert_or_update(form, cargoImagen, opcion) {
     //se genera form data para poder mandar el archivo file
     var objParam = new FormData(form);
 
     if (cargoImagen == false) {//valida que no se envie ese campo si no se carga una imagen
         objParam.delete("upl");
     }
-    objParam.append("opcion", 18);
+
+    if (opcion == "new") {
+        objParam.append("opcion", 18);//opcion del router a ejecutar: insert
+    } else {
+
+        objParam.append("imagen_anterior", $('#preview').attr("title"));//para que elimine esta imagen y agregue al servidor la nueva
+        objParam.append("opcion", 23);//opcion del router a ejecutar: update
+    }
 
     $.ajax({
         cache: false,
@@ -154,13 +170,17 @@ function insert(form, cargoImagen) {
         contentType: false,
         processData: false,
         success: function (response) {
-
+            console.log(response);
+            llenarTabla(getDatosTabla());
             if (response.resultOper == 1) {
-
-                console.log(response);
-
+                enableNotifyAlerta("Exito!", response.mensaje, 3);
             } else {
-                console.log(response);
+                if (response.mensaje.errorInfo) {
+                    enableNotifyAlerta("ADVERTENCIA!", response.mensaje.errorInfo[2], 5);
+                    console.log(response.mensaje.errorInfo[2]);
+                } else {
+                    enableNotifyAlerta("ADVERTENCIA!", response.mensaje, 5);
+                }
             }
         },
         beforeSend: function () {
@@ -172,7 +192,49 @@ function insert(form, cargoImagen) {
         }
     });
 }
+function deleted(id) {
+    //se genera form data para poder mandar el request
+    var objParam = new FormData();
+    objParam.append("id_equipo", id);//opcion del router a ejecutar: update
+    objParam.append("opcion", 24);//opcion del router a ejecutar: update
+
+    $.ajax({
+        cache: false,
+        url: '../../../php/router_controller.php',
+        type: 'POST',
+        dataType: 'JSON',
+        data: objParam,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            console.log(response);
+            llenarTabla(getDatosTabla());
+            if (response.resultOper == 1) {
+                enableNotifyAlerta("Exito!", response.mensaje, 3);
+            } else {
+                if (response.mensaje.errorInfo) {
+                    enableNotifyAlerta("ADVERTENCIA!", response.mensaje.errorInfo[2], 5);
+                    console.log(response.mensaje.errorInfo[2]);
+                } else {
+                    enableNotifyAlerta("ADVERTENCIA!", response.mensaje, 5);
+                }
+            }
+        },
+        beforeSend: function () {
+            console.log("cargando peticion");
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
+        }
+    });
+}
+
 function initFormModal(modal) {
+    $('#preview').addClass("d-none");//oculta el contenedor de la imagen cada que se levanta el modal
+    modal.querySelector('#preview').src = "";
+    modal.querySelector('#preview').title = "";
+
     $("#formModal").removeClass("was-validated");//elimina las validaciones activas
     $("#formModal")[0].reset();
     $("#closePrev").click();//cierra previsualizador
@@ -180,11 +242,17 @@ function initFormModal(modal) {
 }
 
 function setFormModal(modal, datos) {
+    modal.querySelector('#recipient-id_equipo').value = datos.id;
     modal.querySelector('#recipient-nombre').value = datos.nombre;
     modal.querySelector('#recipient-condicion_uso').value = datos.condicion_uso;
     modal.querySelector('#recipient-num_economico').value = datos.num_economico;
     modal.querySelector('#recipient-num_serie').value = datos.num_serie;
     modal.querySelector('#recipient-id_laboratorio').value = datos.id_laboratorio;
+    if (datos.imagen) {
+        $('#preview').removeClass("d-none");
+        modal.querySelector('#preview').src = "../../../resources/imagenes/imagenes-upload/equipos/" + datos.imagen;
+        modal.querySelector('#preview').title = datos.imagen;
+    }
 
     $("#btnDetalleMant").attr("href", "mantenimientos.php?ideq=" + datos.id);//se agrega esta linea para mandar el id por parametros a la vista de mantenimientos
 }
@@ -196,11 +264,11 @@ function deshabilitarFormModal(modal, isDisabled) {
     modal.querySelector('#recipient-id_laboratorio').disabled = isDisabled;
 
     if (isDisabled) { //si es true, se deshabilitan inputs
-        $('#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').addClass("form-control-plaintext");
-        $('#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').removeClass("form-control");
+        $('#recipient-id_equipo,#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').addClass("form-control-plaintext");
+        $('#recipient-id_equipo,#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').removeClass("form-control");
     } else {//si es false, se habilitan inputs
-        $('#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').removeClass("form-control-plaintext");
-        $('#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').addClass("form-control");
+        $('#recipient-id_equipo,#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').removeClass("form-control-plaintext");
+        $('#recipient-id_equipo,#recipient-nombre,#recipient-fecha_mantenimiento,#recipient-observaciones,#recipient-nombre,#recipient-condicion_uso,#recipient-num_economico,#recipient-num_serie,#recipient-id_laboratorio').addClass("form-control");
     }
 }
 
@@ -238,7 +306,7 @@ function llenarTabla(datos) {
         $("#btnModalYesOrCancel").click(function () {
             $.when(disableNotifyYesOrCancel())// funcion para cerrar el modal a continuacion ira las acciones a seguir
                 .then(function (data, textStatus, jqXHR) {
-                    enableNotifyAlerta("Exito!", "¡Equipo eliminado con exito!", 3);
+                    deleted(id);
                 });
         });
 
@@ -265,7 +333,6 @@ function getDatosTabla() {
 
             if (response.resultOper == 1) {
                 datos = response.respuesta;//datos a retornar
-                disableNotifyAlerta();//oculta el modal de loading
             } else {
                 setTimeout(() => {
                     if (response.mensaje.errorInfo) {
@@ -274,16 +341,17 @@ function getDatosTabla() {
                     } else {
                         enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                     }
-                }, 1000);
+                }, 1500);
             }
         },
         beforeSend: function () {
             console.log("cargando peticion");
         },
         error: function (xhr, status, error) {
-
-            console.log("Error En Ajax " + xhr.responseText + " " + status + " " + error + ".");
-            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
+            setTimeout(() => {
+                console.log("Error En Ajax " + xhr.responseText + " " + status + " " + error + ".");
+                enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
+            }, 1500);
         }
     });
 
@@ -332,18 +400,18 @@ function getLaboratorios() {
                     } else {
                         enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                     }
-                }, 1000);
+                }, 1500);
             }
         },
         beforeSend: function () {
             console.log("cargando peticion");
         },
         error: function (xhr, status, error) {
-
             console.log("Error En Ajax " + xhr.responseText + " " + status + " " + error + ".");
-            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
+            setTimeout(() => {
+                enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
+            }, 1500);
         }
     });
-
     return datos;
 }

@@ -7,7 +7,11 @@
             </div>
             <form id="formModal" class="needs-validation" novalidate>
                 <div class="modal-body">
+                    <input type="text" class="form-control d-none" id="recipient-id_equipo" name="id_equipo" placeholder="">
                     <div class="row">
+                        <div class="col-12 text-center">
+                            <img src="" class="img-thumbnail" title="" id="preview" alt="preview" width="100" height="100">
+                        </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
                                 <label for="recipient-nombre" class="col-form-label fw-bold">Nombre:</label>
@@ -49,7 +53,7 @@
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="mb-1">
                                 <label for="recipient-id_laboratorio" class="col-form-label fw-bold">Laboratorio:</label>
-                                <select class="form-select" aria-label="Default select example" id="recipient-id_laboratorio" name="id_id_laboratorio_equipo" required>
+                                <select class="form-select" aria-label="Default select example" id="recipient-id_laboratorio" name="id_laboratorio_equipo" required>
                                     <option selected disabled value="">Selección</option>
                                 </select>
                                 <div class="invalid-feedback">
@@ -57,7 +61,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12" id="recipient-imagen">
                             <label for="recipient-file" class="col-form-label fw-bold">Foto Equipo:</label>
                             <?php include("../components/drag-and-drop.php"); //el dato se envia por form data 
                             ?>

@@ -1,8 +1,105 @@
 <?php
 require_once("../php/objetos/Equipos.object.php");
+include_once("../php/clases/ClassControllerFiles.php");
 
 class ClassEquipos
 {
+    public static function insert($conexMySql, $equipoReq)
+    {
+        $datos               = array();
+        $datos['mensaje']    = "";
+        $datos['respuesta']  = array();
+        $datos['resultOper'] = 0;
+        $sql = "";
+        try {
+            $nombre_imagen = null;
+            if ($equipoReq->getImagen()) { //si viene una imagen se renombra la imagen
+                $nombre_original = $equipoReq->getImagen()['name'];
+                $estructura = explode(".", $nombre_original);
+                $extencion = $estructura[count($estructura) - 1];
+                $nombre_imagen = getdate()['0'] . "." . $extencion;
+                $sql = "INSERT INTO equipo(nombre, condicion_uso, num_economico, num_serie, id_laboratorio,imagen)
+                    VALUES ('" . $equipoReq->getNombre() . "','" . $equipoReq->getCondicion_uso() . "'," .
+                    $equipoReq->getNum_economico() . ",'" . $equipoReq->getNum_serie() . "'," . $equipoReq->getId_laboratorio() .
+                    ",'$nombre_imagen');";
+            } else {
+                $sql = "INSERT INTO equipo(nombre, condicion_uso, num_economico, num_serie, id_laboratorio)
+                VALUES ('" . $equipoReq->getNombre() . "','" . $equipoReq->getCondicion_uso() . "'," .
+                    $equipoReq->getNum_economico() . ",'" . $equipoReq->getNum_serie() . "'," . $equipoReq->getId_laboratorio() .
+                    ");";
+            }
+
+            $consulta = $conexMySql->prepare($sql);
+
+            $isSave = $consulta->execute();
+            if ($isSave) {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Equipo registrado con exito!!! ";
+                $datos['resultOper'] = 1;
+                if ($equipoReq->getImagen()) { //si viene una imagen se renombra la imagen
+                    $resultSave = ClassControllerFiles::subirArchivoAlServidor(null, $_FILES['upl'], $nombre_imagen, $equipoReq->getId(), "equipos");
+                    $datos['mensaje'] .=  $resultSave['mensaje'];
+                }
+            } else {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Ups... No fue posible guardar la informacion.";
+                $datos['resultOper'] = 2;
+            }
+        } catch (Exception $e) {
+            $datos['mensaje'] = $e;
+            $datos['resultOper'] = -1;
+        }
+        return $datos;
+    }
+    public static function update($conexMySql, $equipoReq, $imagen_anterior)
+    {
+        $datos               = array();
+        $datos['mensaje']    = "";
+        $datos['respuesta']  = array();
+        $datos['resultOper'] = 0;
+        $sql = "";
+        try {
+            $nombre_imagen = null;
+            if ($equipoReq->getImagen()) { //si viene una imagen se renombra la imagen
+                $nombre_original = $equipoReq->getImagen()['name'];
+                $estructura = explode(".", $nombre_original);
+                $extencion = $estructura[count($estructura) - 1];
+                $nombre_imagen = getdate()['0'] . "." . $extencion;
+                $sql = "UPDATE equipo SET nombre= '" . $equipoReq->getNombre() . "', condicion_uso= '" . $equipoReq->getCondicion_uso() .
+                    "', num_economico= " . $equipoReq->getNum_economico() . ", num_serie= '" . $equipoReq->getNum_serie() .
+                    "', id_laboratorio= " . $equipoReq->getId_laboratorio() . ", imagen= '" . $nombre_imagen .
+                    "' WHERE id = " . $equipoReq->getId() . ";";
+            } else {
+                $sql = "UPDATE equipo SET nombre= '" . $equipoReq->getNombre() . "', condicion_uso= '" . $equipoReq->getCondicion_uso() .
+                    "', num_economico= " . $equipoReq->getNum_economico() . ", num_serie= '" . $equipoReq->getNum_serie() .
+                    "', id_laboratorio= " . $equipoReq->getId_laboratorio() .
+                    " WHERE id = " . $equipoReq->getId() . ";";
+            }
+            $consulta = $conexMySql->prepare($sql);
+
+            $isSave = $consulta->execute();
+            if ($isSave) {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Equipo actualizado con exito!!!";
+                $datos['resultOper'] = 1;
+
+                if ($equipoReq->getImagen()) { //si viene una imagen se renombra la imagen
+                    $resultSave = ClassControllerFiles::subirArchivoAlServidor($imagen_anterior, $_FILES['upl'], $nombre_imagen, $equipoReq->getId(), "equipos");
+                    // $datos['mensaje'] .=  $resultSave['mensaje']; //descomentar en caso de que no se suban las imagenes
+                }
+            } else {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Ups... No fue posible actualizar la informacion.";
+                $datos['resultOper'] = 2;
+            }
+        } catch (Exception $e) {
+            $datos['mensaje'] = $e;
+            $datos['resultOper'] = -1;
+        }
+
+
+        return $datos;
+    }
     public static function getEquipos($conexMySql)
     {
         $datos               = array();
@@ -12,7 +109,7 @@ class ClassEquipos
 
         try {
 
-            $sql = "SELECT id, nombre, condicion_uso, num_economico, num_serie, id_laboratorio, eliminado
+            $sql = "SELECT id, nombre, condicion_uso, num_economico, num_serie, id_laboratorio, imagen,eliminado,fecha_baja
              FROM equipo WHERE eliminado = 0;";
             $consulta = $conexMySql->prepare($sql);
             $consulta->execute();
@@ -26,7 +123,9 @@ class ClassEquipos
                 $Equipo->setNum_economico($row->num_economico);
                 $Equipo->setNum_serie($row->num_serie);
                 $Equipo->setId_laboratorio($row->id_laboratorio);
+                $Equipo->setImagen($row->imagen);
                 $Equipo->setEliminado($row->eliminado);
+                $Equipo->setFecha_baja($row->fecha_baja);
 
                 array_push($datos['respuesta'], $Equipo); //se agrega cada registro a la variable de respuesta
                 $Equipo = null;
@@ -156,6 +255,36 @@ class ClassEquipos
             $datos['mensaje'] = $e;
             $datos['resultOper'] = -1;
         }
+        return $datos;
+    }
+    public static function delete($conexMySql, $id_equipo)
+    {
+        $datos               = array();
+        $datos['mensaje']    = "";
+        $datos['respuesta']  = array();
+        $datos['resultOper'] = 0;
+        $sql = "";
+        try {
+            $sql = "UPDATE equipo SET eliminado= 1, fecha_baja = NOW() WHERE id = " . $id_equipo . ";";
+
+            $consulta = $conexMySql->prepare($sql);
+
+            $isSave = $consulta->execute();
+            if ($isSave) {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Equipo eliminado con exito!!!";
+                $datos['resultOper'] = 1;
+            } else {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Ups... No fue posible Eliminar la informacion.";
+                $datos['resultOper'] = 2;
+            }
+        } catch (Exception $e) {
+            $datos['mensaje'] = $e;
+            $datos['resultOper'] = -1;
+        }
+
+
         return $datos;
     }
 }

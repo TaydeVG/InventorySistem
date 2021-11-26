@@ -8,7 +8,6 @@ include_once("../php/clases/ClassReactivos.php");
 include_once("../php/clases/ClassEquipos.php");
 include_once("../php/clases/ClassLogin.php");
 include_once("../php/clases/ClassRecipientes.php");
-include_once("../php/clases/ClassControllerFiles.php");
 include_once("../php/clases/ClassAdministradores.php");
 
 session_start(); // se agrega luego de las importaciones para no tener problemas con los arrays en variables de sesion
@@ -24,6 +23,12 @@ $MantenimientoRequest = new Mantenimiento();
 //obtencion opcion de peticion
 $opcion         = isset($_POST['opcion']) ? $_POST['opcion'] : 0;
 $opcion         = $opcion != 0 ? $opcion : (isset($_GET['opcion']) ? $_GET['opcion'] : 0);
+
+//obtencion de imagen anterior para el caso de actualizar imagen
+$imagen_anterior = isset($_POST['imagen_anterior']) ? $_POST['imagen_anterior'] : null;
+$imagen_anterior = $imagen_anterior != null ? $imagen_anterior : (isset($_GET['imagen_anterior']) ? $_GET['imagen_anterior'] : null);
+
+
 
 //obtencion de usuario de peticion
 $idUsuario         = isset($_POST['idUsuario']) ? $_POST['idUsuario'] : 0;
@@ -287,10 +292,11 @@ switch ($opcion) {
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
-	case 18: //subir imagen
-		/* $datosRespuesta = ClassControllerFiles::subirArchivoAlServidor($_FILES['upl'], $UsuarioRequest->getId());
-			echo json_encode($datosRespuesta); */
-		echo json_encode($EquipoRequest);
+	case 18: //agregar equipo
+		$conexMySql->conectar();
+		$datosRespuesta = ClassEquipos::insert($conexMySql->cnx, $EquipoRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
 		break;
 	case 19: //obtiene todos los reactivos
 		$conexMySql->conectar();
@@ -315,6 +321,19 @@ switch ($opcion) {
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
+	case 23: //actualizar equipo
+		$conexMySql->conectar();
+		$datosRespuesta = ClassEquipos::update($conexMySql->cnx, $EquipoRequest, $imagen_anterior);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 24: //eliminar equipo
+		$conexMySql->conectar();
+		$datosRespuesta = ClassEquipos::delete($conexMySql->cnx, $EquipoRequest->getId());
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+
 	case 0:
 		$datosRespuesta = ClassLogin::cerrarSesion();
 		$conexMySql = null;
