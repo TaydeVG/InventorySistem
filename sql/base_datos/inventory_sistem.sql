@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-11-2021 a las 01:44:00
+-- Tiempo de generación: 26-11-2021 a las 01:51:23
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -155,7 +155,50 @@ INSERT INTO `bitacora` (`id`, `usuario`, `fecha_movimiento`, `tabla`, `accion`, 
 (147, 'root@localhost', '2021-11-23 20:16:19', 'tipo_material', 'UPDATE', '1|Vidrio', '1|corcho'),
 (148, 'root@localhost', '2021-11-23 20:16:27', 'tipo_material', 'UPDATE', '2|Plástico', '2|carton'),
 (149, 'root@localhost', '2021-11-23 20:16:55', 'tipo_material', 'UPDATE', '4|Plástico', '4|plastico'),
-(150, 'root@localhost', '2021-11-23 20:16:59', 'tipo_material', 'DELETE', '', '2|Plástico');
+(150, 'root@localhost', '2021-11-23 20:16:59', 'tipo_material', 'DELETE', '', '2|Plástico'),
+(151, 'root@localhost', '2021-11-25 23:01:09', 'reactivo', 'INSERT', '7|reactivo 1|0|00|Frasco Plástico|PocoMililitro|Inflamable|2021-12-10213|2|3|0', ''),
+(152, 'root@localhost', '2021-11-25 23:03:25', 'reactivo', 'INSERT', '8|reactivo 2|1|23|Frasco Plástico|MedioGramo|Oxidante|2022-03-03123|21|3|0', ''),
+(153, 'root@localhost', '2021-11-25 23:04:48', 'reactivo', 'INSERT', '9|reactivo 3|0|00|Bidón Plástico|LlenoGramo|Inflamable|2021-12-09123|12|3|0', ''),
+(154, 'root@localhost', '2021-11-25 23:09:27', 'reactivo', 'INSERT', '10|reactivo 4|1|23|Frasco Plástico|LlenoGramo|Inflamable|2022-01-21123|12|3|0', ''),
+(155, 'root@localhost', '2021-11-25 23:35:45', 'reactivo', 'INSERT', '11|butamol|1|11|Bidón Vidrio|MedioGramo|Tóxico|2022-09-281|1|3|0', ''),
+(156, 'root@localhost', '2021-11-25 23:42:45', 'reactivo', 'INSERT', '12|butamol 2|1|11|Bidón Vidrio|MedioGramo|Tóxico|2022-09-281|1|3|0', ''),
+(157, 'root@localhost', '2021-11-25 23:49:35', 'reactivo', 'UPDATE', '11|butamol 3|1|11|Bidón Vidrio|MedioGramo|Tóxico|2022-09-281|1|3|0', '11|butamol|1|11|Bidón Vidrio|MedioGramo|Tóxico|2022-09-281|1|3|0'),
+(158, 'root@localhost', '2021-11-25 23:51:11', 'reactivo', 'UPDATE', '11|butamol 3|1|21|Bidón Vidrio|MedioGramo|Tóxico|2022-09-281|1|3|0', '11|butamol 3|1|11|Bidón Vidrio|MedioGramo|Tóxico|2022-09-281|1|3|0'),
+(159, 'root@localhost', '2021-11-25 23:53:19', 'reactivo', 'UPDATE', '3|butamol|1|11|Frasco Plástico|MedioLitro|Oxidante|2022-09-281|1|3|0', '3|butamol|1|11|Frasco vidrio|50lts|334JFEWD2|2022-09-281|1|3|0'),
+(160, 'root@localhost', '2021-11-26 00:00:50', 'reactivo', 'INSERT', '13|asfa|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-12-10324234|234|3|0', ''),
+(161, 'root@localhost', '2021-11-26 00:01:25', 'reactivo', 'UPDATE', '13|udpate|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-12-10324234|234|3|0', '13|asfa|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-12-10324234|234|3|0'),
+(162, 'root@localhost', '2021-11-26 00:10:27', 'reactivo', 'UPDATE', '13|udpate3|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-12-10324234|234|3|0', '13|udpate|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-12-10324234|234|3|0'),
+(163, 'root@localhost', '2021-11-26 00:10:53', 'reactivo', 'UPDATE', '13|udpate33|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-12-10324234|234|3|0', '13|udpate3|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-12-10324234|234|3|0'),
+(164, 'root@localhost', '2021-11-26 00:12:20', 'reactivo', 'UPDATE', '13|udpate33|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-12-1032|234|3|0', '13|udpate33|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-12-10324234|234|3|0'),
+(165, 'root@localhost', '2021-11-26 00:12:59', 'reactivo', 'INSERT', '14|asd|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0', ''),
+(166, 'root@localhost', '2021-11-26 00:13:59', 'reactivo', 'UPDATE', '14|otro|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0', '14|asd|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0'),
+(167, 'root@localhost', '2021-11-26 00:14:27', 'reactivo', 'UPDATE', '14|otro 2|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0', '14|otro|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0'),
+(168, 'root@localhost', '2021-11-26 00:14:52', 'reactivo', 'UPDATE', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0', '14|otro 2|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0'),
+(169, 'root@localhost', '2021-11-26 00:17:12', 'reactivo', 'UPDATE', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0'),
+(170, 'root@localhost', '2021-11-26 00:17:25', 'reactivo', 'UPDATE', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0'),
+(171, 'root@localhost', '2021-11-26 00:17:46', 'reactivo', 'UPDATE', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0'),
+(172, 'root@localhost', '2021-11-26 00:29:17', 'reactivo', 'UPDATE', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0'),
+(173, 'root@localhost', '2021-11-26 00:29:43', 'reactivo', 'UPDATE', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0'),
+(174, 'root@localhost', '2021-11-26 00:30:10', 'reactivo', 'INSERT', '15|asd|0|00|Bidón Plástico|MedioMililitro|Oxidante|2021-12-0932|32|3|0', ''),
+(175, 'root@localhost', '2021-11-26 00:30:43', 'reactivo', 'UPDATE', '15|asd|0|00|Bidón Plástico|MedioMililitro|Oxidante|2021-12-0932|32|3|0', '15|asd|0|00|Bidón Plástico|MedioMililitro|Oxidante|2021-12-0932|32|3|0'),
+(176, 'root@localhost', '2021-11-26 00:30:59', 'reactivo', 'UPDATE', '15|elminar|0|00|Bidón Plástico|MedioMililitro|Oxidante|2021-12-0932|32|3|0', '15|asd|0|00|Bidón Plástico|MedioMililitro|Oxidante|2021-12-0932|32|3|0'),
+(177, 'root@localhost', '2021-11-26 00:31:37', 'reactivo', 'UPDATE', '15|elminar 4|0|00|Bidón Plástico|MedioMililitro|Oxidante|2021-12-0932|32|3|0', '15|elminar|0|00|Bidón Plástico|MedioMililitro|Oxidante|2021-12-0932|32|3|0'),
+(178, 'root@localhost', '2021-11-26 00:44:04', 'reactivo', 'UPDATE', '15|elminar 4|0|00|Bidón Plástico|MedioMililitro|Oxidante|2021-12-0932|32|3|1', '15|elminar 4|0|00|Bidón Plástico|MedioMililitro|Oxidante|2021-12-0932|32|3|0'),
+(179, 'root@localhost', '2021-11-26 00:44:48', 'reactivo', 'DELETE', '', '15|elminar 4|0|00|Bidón Plástico|MedioMililitro|Oxidante|2021-12-0932|32|3|1'),
+(180, 'root@localhost', '2021-11-26 00:44:51', 'reactivo', 'DELETE', '', '14|otro 1|0|00|Frasco Vidrio|LlenoGramo|Oxidante|2021-12-112341|12|3|0'),
+(181, 'root@localhost', '2021-11-26 00:44:54', 'reactivo', 'DELETE', '', '13|udpate33|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-12-1032|234|3|0'),
+(182, 'root@localhost', '2021-11-26 00:44:57', 'reactivo', 'DELETE', '', '12|butamol 2|1|11|Bidón Vidrio|MedioGramo|Tóxico|2022-09-281|1|3|0'),
+(183, 'root@localhost', '2021-11-26 00:45:00', 'reactivo', 'DELETE', '', '11|butamol 3|1|21|Bidón Vidrio|MedioGramo|Tóxico|2022-09-281|1|3|0'),
+(184, 'root@localhost', '2021-11-26 00:45:03', 'reactivo', 'DELETE', '', '10|reactivo 4|1|23|Frasco Plástico|LlenoGramo|Inflamable|2022-01-21123|12|3|0'),
+(185, 'root@localhost', '2021-11-26 00:45:05', 'reactivo', 'DELETE', '', '9|reactivo 3|0|00|Bidón Plástico|LlenoGramo|Inflamable|2021-12-09123|12|3|0'),
+(186, 'root@localhost', '2021-11-26 00:45:09', 'reactivo', 'DELETE', '', '8|reactivo 2|1|23|Frasco Plástico|MedioGramo|Oxidante|2022-03-03123|21|3|0'),
+(187, 'root@localhost', '2021-11-26 00:45:12', 'reactivo', 'DELETE', '', '7|reactivo 1|0|00|Frasco Plástico|PocoMililitro|Inflamable|2021-12-10213|2|3|0'),
+(188, 'root@localhost', '2021-11-26 00:45:50', 'reactivo', 'INSERT', '16|nuevo reactivo|0|00|Frasco Plástico|MedioGramo|Oxidante|2021-12-03213|23|3|0', ''),
+(189, 'root@localhost', '2021-11-26 00:46:01', 'reactivo', 'UPDATE', '16|nuevo reactivo|0|00|Frasco Plástico|MedioGramo|Oxidante|2021-12-03213|23|3|0', '16|nuevo reactivo|0|00|Frasco Plástico|MedioGramo|Oxidante|2021-12-03213|23|3|0'),
+(190, 'root@localhost', '2021-11-26 00:46:17', 'reactivo', 'UPDATE', '16|nuevo reactivo|1|32|Frasco Plástico|MedioGramo|Oxidante|2021-12-03213|23|3|0', '16|nuevo reactivo|0|00|Frasco Plástico|MedioGramo|Oxidante|2021-12-03213|23|3|0'),
+(191, 'root@localhost', '2021-11-26 00:46:27', 'reactivo', 'UPDATE', '16|nuevo reactivo|1|32|Frasco Plástico|MedioGramo|Oxidante|2021-12-03213|23|3|1', '16|nuevo reactivo|1|32|Frasco Plástico|MedioGramo|Oxidante|2021-12-03213|23|3|0'),
+(192, 'root@localhost', '2021-11-26 00:49:33', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Bidón Vidrio|MedioGramo|Oxidante|2021-11-242|3|3|0', '5|sulfónico|1|23|Frasco vidrio|45gr|JJD344300D|2021-11-242|3|3|0'),
+(193, 'root@localhost', '2021-11-26 00:50:13', 'reactivo', 'UPDATE', '3|butamol|1|11|Frasco Plástico|PocoLitro|Oxidante|2022-09-281|1|3|0', '3|butamol|1|11|Frasco Plástico|MedioLitro|Oxidante|2022-09-281|1|3|0');
 
 -- --------------------------------------------------------
 
@@ -374,9 +417,10 @@ CREATE TABLE `reactivo` (
 --
 
 INSERT INTO `reactivo` (`id`, `nombre`, `reactividad`, `inflamabilidad`, `riesgo_salud`, `presentacion`, `cantidad_reactivo`, `unidad_medida`, `codigo_almacenamiento`, `caducidad`, `num_mueble`, `num_estante`, `id_laboratorio`, `eliminado`, `fecha_baja`) VALUES
-(3, 'butamol', 1, 1, 1, 'Frasco vidrio', '50', 'lts', '334JFEWD2', '2022-09-28', 1, 1, 3, 0, NULL),
+(3, 'butamol', 1, 1, 1, 'Frasco Plástico', 'Poco', 'Litro', 'Oxidante', '2022-09-28', 1, 1, 3, 0, NULL),
 (4, 'octanol', 2, 1, 2, 'Frasco vidrio', '23', 'ml', 'HHSJ332K', '2021-11-02', 3, 6, 3, 1, NULL),
-(5, 'sulfónico', 1, 2, 3, 'Frasco vidrio', '45', 'gr', 'JJD344300D', '2021-11-24', 2, 3, 3, 0, NULL);
+(5, 'sulfónico', 1, 2, 3, 'Bidón Vidrio', 'Medio', 'Gramo', 'Oxidante', '2021-11-24', 2, 3, 3, 0, NULL),
+(16, 'nuevo reactivo', 1, 3, 2, 'Frasco Plástico', 'Medio', 'Gramo', 'Oxidante', '2021-12-03', 213, 23, 3, 1, '2021-11-25 17:46:27');
 
 --
 -- Disparadores `reactivo`
@@ -621,7 +665,7 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
@@ -645,7 +689,7 @@ ALTER TABLE `mantenimiento`
 -- AUTO_INCREMENT de la tabla `reactivo`
 --
 ALTER TABLE `reactivo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `recipiente`
