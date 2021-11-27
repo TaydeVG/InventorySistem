@@ -37,7 +37,7 @@ class ClassEquipos
                 $datos['mensaje'] = "Equipo registrado con exito!!! ";
                 $datos['resultOper'] = 1;
                 if ($equipoReq->getImagen()) { //si viene una imagen se renombra la imagen
-                    $resultSave = ClassControllerFiles::subirArchivoAlServidor(null, $_FILES['upl'], $nombre_imagen, $equipoReq->getId(), "equipos");
+                    $resultSave = ClassControllerFiles::subirArchivoAlServidor(null, $_FILES['upl'], $nombre_imagen, "equipos");
                     $datos['mensaje'] .=  $resultSave['mensaje'];
                 }
             } else {
@@ -84,7 +84,7 @@ class ClassEquipos
                 $datos['resultOper'] = 1;
 
                 if ($equipoReq->getImagen()) { //si viene una imagen se renombra la imagen
-                    $resultSave = ClassControllerFiles::subirArchivoAlServidor($imagen_anterior, $_FILES['upl'], $nombre_imagen, $equipoReq->getId(), "equipos");
+                    $resultSave = ClassControllerFiles::subirArchivoAlServidor($imagen_anterior, $_FILES['upl'], $nombre_imagen, "equipos");
                     // $datos['mensaje'] .=  $resultSave['mensaje']; //descomentar en caso de que no se suban las imagenes
                 }
             } else {
@@ -283,8 +283,6 @@ class ClassEquipos
             $datos['mensaje'] = $e;
             $datos['resultOper'] = -1;
         }
-
-
         return $datos;
     }
 }

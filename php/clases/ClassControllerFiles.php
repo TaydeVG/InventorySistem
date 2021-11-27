@@ -2,7 +2,7 @@
 
 class ClassControllerFiles
 {
-    public static function subirArchivoAlServidor($imagen_anterior, $archivo, $renameImagen, $id, $carpeta)
+    public static function subirArchivoAlServidor($imagen_anterior, $archivo, $renameImagen, $carpeta)
     {
         $datos                 = array();
         $datos['mensaje']      = "";
@@ -29,7 +29,7 @@ class ClassControllerFiles
 
             if (move_uploaded_file($_FILES['upl']['tmp_name'], $carpeta . $renameImagen)) {
                 $datos['resultOper'] = 1;
-                $datos['mensaje'] .= "archivo Subido con exito ";
+                $datos['mensaje'] .= "imagen Subida con exito ";
             }
         } else {
             $datos['resultOper']   = 0;

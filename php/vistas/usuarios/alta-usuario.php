@@ -74,14 +74,28 @@ session_start();
                 <div class="col-12 pb-1">
                     <div class="d-flex justify-content-end">
                         <div class="form-floating pb-0 w-100">
-                            <input type="password" class="rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="txtPass" name="txtPass" style="height: 40px !important;" minlength="8" maxlength="8" placeholder="Password" required>
+                            <input type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$" class="rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="txtPass" name="txtPass" style="height: 40px !important;" minlength="8" maxlength="12" placeholder="Password" required>
                             <label for="floatingPassword" class="form-text pt-1">Contraseña</label>
                         </div>
                         <button class="btn btn-sm btn-outline-light text-dark h-75 mt-2 border-0" type="button" id="btnPassword">
                             <i id="iconShowHide" class="fas fa-eye-slash"></i>
                         </button>
                     </div>
-                    <label class="text-muted ps-2">Minimo 8 caracteres</label>
+                    <label class=" text-muted ps-2">
+                        <li>Al menos 1 mayúscula</li>
+                    </label><br>
+                    <label class=" text-muted ps-2">
+                        <li>Al menos 1 minúscula</li>
+                    </label><br>
+                    <label class=" text-muted ps-2">
+                        <li>Al menos 1 número</li>
+                    </label><br>
+                    <label class=" text-muted ps-2">
+                        <li>Al menos 1 símbolo, símbolo permitido ->! @ # $% ^ & * _ = + -</li>
+                    </label><br>
+                    <label class=" text-muted ps-2">
+                        <li>Mínimo 8 caracteres y máximo 12 caracteres</li>
+                    </label>
                 </div>
             </div>
 

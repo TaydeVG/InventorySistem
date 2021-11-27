@@ -27,23 +27,11 @@ function modalLogicLoad() {
         var button = event.relatedTarget;//obtiene la info del boton que detono el modal
     });
 
-    $("#btnModalPassSubmit").click(function (e) {
-        e.preventDefault();
+    $("#frmCambiarPassword").submit(function (event) {
+        event.preventDefault();
+        modalPassword.toggle();
         var pass = modal.querySelector('#recipient-pass-cambio').value;
-
-        if (pass.length == 8) {
-            cambiar_password(pass);
-        } else if (pass.length > 0) {
-            enableNotifyAlerta("ADVERTENCIA!", "Asegurate de cumplir con la longitud especificada", 5);
-            $("#btnModal").click(function () {
-                modalPassword.toggle();//vuelve a levantar el modal para capturar la contraseña
-            });
-        } else {
-            enableNotifyAlerta("ADVERTENCIA!", "Todos los campos son obligatorios.", 5);
-            $("#btnModal").click(function () {
-                modalPassword.toggle();//vuelve a levantar el modal para capturar la contraseña
-            });
-        }
+        cambiar_password(pass);
     });
 
     var showPass = false;

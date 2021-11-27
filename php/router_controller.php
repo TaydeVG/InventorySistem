@@ -220,10 +220,11 @@ switch ($opcion) {
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
-	case 6: //subir imagen
-		/* $datosRespuesta = ClassControllerFiles::subirArchivoAlServidor($_FILES['upl'], $UsuarioRequest->getId());
-		echo json_encode($datosRespuesta); */
-		echo json_encode($RecipienteRequest);
+	case 6: //insert recipiente
+		$conexMySql->conectar();
+		$datosRespuesta = ClassRecipientes::insert($conexMySql->cnx, $RecipienteRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
 		break;
 	case 7:
 		$conexMySql->conectar();
@@ -255,7 +256,7 @@ switch ($opcion) {
 	case 12: //obtiene todos los reactivos por caducar en un intervalo de tiempo, 1 semana,1 mes, 3 meses, 6 meses, 1 año
 
 		//si no viene un valor por defecto mostrara los que faltan por caducar en 1 semana
-		$tiempo_para_caducar         = isset($_POST['tiempo_para_caducar']) ? $_POST['tiempo_para_caducar'] : '7 DAY';
+		$tiempo_para_caducar = isset($_POST['tiempo_para_caducar']) ? $_POST['tiempo_para_caducar'] : '7 DAY';
 
 		$conexMySql->conectar();
 		$datosRespuesta = ClassReactivos::getReactivosPorCaducar($conexMySql->cnx, $tiempo_para_caducar);
@@ -298,7 +299,7 @@ switch ($opcion) {
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
-	case 19: //obtiene todos los reactivos
+	case 19: //obtiene todos los laboratorios
 		$conexMySql->conectar();
 		$datosRespuesta = ClassEquipos::getLaboratorios($conexMySql->cnx);
 		$conexMySql->desconectar();
@@ -333,7 +334,18 @@ switch ($opcion) {
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
-
+	case 25: //actualizar recipiente
+		$conexMySql->conectar();
+		$datosRespuesta = ClassRecipientes::update($conexMySql->cnx, $RecipienteRequest, $imagen_anterior);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 26: //eliminar equipo
+		$conexMySql->conectar();
+		$datosRespuesta = ClassRecipientes::delete($conexMySql->cnx, $RecipienteRequest->getId());
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
 	case 0:
 		$datosRespuesta = ClassLogin::cerrarSesion();
 		$conexMySql = null;
