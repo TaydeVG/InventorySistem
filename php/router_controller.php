@@ -306,9 +306,10 @@ switch ($opcion) {
 		echo json_encode($datosRespuesta);
 		break;
 	case 20: //guardar mantenimiento
-		/* $datosRespuesta = ClassControllerFiles::subirArchivoAlServidor($_FILES['upl'], $UsuarioRequest->getId());
-				echo json_encode($datosRespuesta); */
-		echo json_encode($MantenimientoRequest);
+		$conexMySql->conectar();
+		$datosRespuesta = ClassEquipos::insert_mantenimiento($conexMySql->cnx, $MantenimientoRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
 		break;
 	case 21: //actualiza un reactivo
 		$conexMySql->conectar();
@@ -343,6 +344,18 @@ switch ($opcion) {
 	case 26: //eliminar equipo
 		$conexMySql->conectar();
 		$datosRespuesta = ClassRecipientes::delete($conexMySql->cnx, $RecipienteRequest->getId());
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 27: //actualizar mantenimiento
+		$conexMySql->conectar();
+		$datosRespuesta = ClassEquipos::update_mantenimiento($conexMySql->cnx, $MantenimientoRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 28: //eliminar mantenimiento
+		$conexMySql->conectar();
+		$datosRespuesta = ClassEquipos::delete_mantenimiento($conexMySql->cnx, $MantenimientoRequest->getId());
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;

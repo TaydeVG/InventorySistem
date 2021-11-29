@@ -186,6 +186,70 @@ class ClassEquipos
         }
         return $datos;
     }
+    public static function insert_mantenimiento($conexMySql, $mantenimientoReq)
+    {
+        $datos               = array();
+        $datos['mensaje']    = "";
+        $datos['respuesta']  = array();
+        $datos['resultOper'] = 0;
+        $sql = "";
+        try {
+
+            $sql = "INSERT INTO mantenimiento(fecha_mantenimiento, observaciones, id_equipo)
+                VALUES ('" . $mantenimientoReq->getFecha_mantenimiento() . "','" . $mantenimientoReq->getObservaciones() . "'," .
+                $mantenimientoReq->getId_equipo() . ");";
+
+            $consulta = $conexMySql->prepare($sql);
+
+            $isSave = $consulta->execute();
+            if ($isSave) {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Mantenimiento registrado con exito!!! ";
+                $datos['resultOper'] = 1;
+            } else {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Ups... No fue posible guardar la informacion.";
+                $datos['resultOper'] = 2;
+            }
+        } catch (Exception $e) {
+            $datos['mensaje'] = $e;
+            $datos['resultOper'] = -1;
+        }
+        return $datos;
+    }
+    public static function update_mantenimiento($conexMySql, $mantenimientoReq)
+    {
+        $datos               = array();
+        $datos['mensaje']    = "";
+        $datos['respuesta']  = array();
+        $datos['resultOper'] = 0;
+        $sql = "";
+        try {
+
+            $sql = "UPDATE mantenimiento SET fecha_mantenimiento= '" . $mantenimientoReq->getFecha_mantenimiento() .
+                "', observaciones= '" . $mantenimientoReq->getObservaciones() .
+                "' WHERE id = " . $mantenimientoReq->getId() . ";";
+
+            $consulta = $conexMySql->prepare($sql);
+
+            $isSave = $consulta->execute();
+            if ($isSave) {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Mantenimiento actualizado con exito!!!";
+                $datos['resultOper'] = 1;
+            } else {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Ups... No fue posible actualizar la informacion.";
+                $datos['resultOper'] = 2;
+            }
+        } catch (Exception $e) {
+            $datos['mensaje'] = $e;
+            $datos['resultOper'] = -1;
+        }
+
+
+        return $datos;
+    }
     //obtiene los mantenimientos del id del equipo que se le pase por parametro
     public static function getMantenimientos($conexMySql, $id_equipo)
     {
@@ -211,7 +275,6 @@ class ClassEquipos
 
                 array_push($datos['respuesta'], $Mantenimiento); //se agrega cada registro a la variable de respuesta
                 $Mantenimiento = null; //se libera de memoria
-
             }
 
             if (count($datos['respuesta']) > 0) { //se valida que aya registros en la tabla
@@ -273,6 +336,34 @@ class ClassEquipos
             if ($isSave) {
                 $datos['respuesta'] = $isSave;
                 $datos['mensaje'] = "Equipo eliminado con exito!!!";
+                $datos['resultOper'] = 1;
+            } else {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Ups... No fue posible Eliminar la informacion.";
+                $datos['resultOper'] = 2;
+            }
+        } catch (Exception $e) {
+            $datos['mensaje'] = $e;
+            $datos['resultOper'] = -1;
+        }
+        return $datos;
+    }
+    public static function delete_mantenimiento($conexMySql, $id_mantenimiento)
+    {
+        $datos               = array();
+        $datos['mensaje']    = "";
+        $datos['respuesta']  = array();
+        $datos['resultOper'] = 0;
+        $sql = "";
+        try {
+            $sql = "UPDATE mantenimiento SET eliminado= 1 WHERE id = " . $id_mantenimiento . ";";
+
+            $consulta = $conexMySql->prepare($sql);
+
+            $isSave = $consulta->execute();
+            if ($isSave) {
+                $datos['respuesta'] = $isSave;
+                $datos['mensaje'] = "Mantenimiento eliminado con exito!!!";
                 $datos['resultOper'] = 1;
             } else {
                 $datos['respuesta'] = $isSave;

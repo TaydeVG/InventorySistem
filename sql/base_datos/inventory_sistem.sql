@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-11-2021 a las 00:33:37
+-- Tiempo de generación: 29-11-2021 a las 21:00:55
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -250,7 +250,25 @@ INSERT INTO `bitacora` (`id`, `usuario`, `fecha_movimiento`, `tabla`, `accion`, 
 (240, 'root@localhost', '2021-11-27 23:01:12', 'recipiente', 'UPDATE', '4|recipiente 2|1|Volúmen|3|0', '4|recipiente 2|1|40 lt|3|0'),
 (241, 'root@localhost', '2021-11-27 23:04:00', 'recipiente', 'INSERT', '6|kjh|1|Volúmen|3|0', ''),
 (242, 'root@localhost', '2021-11-27 23:04:17', 'recipiente', 'UPDATE', '6|kjh|1|Volúmen|3|1', '6|kjh|1|Volúmen|3|0'),
-(243, 'root@localhost', '2021-11-27 23:04:33', 'recipiente', 'DELETE', '', '6|kjh|1|Volúmen|3|1');
+(243, 'root@localhost', '2021-11-27 23:04:33', 'recipiente', 'DELETE', '', '6|kjh|1|Volúmen|3|1'),
+(244, 'root@localhost', '2021-11-29 17:53:09', 'mantenimiento', 'INSERT', '6|2021-11-29 00:00:00|todo bien|8|0', ''),
+(245, 'root@localhost', '2021-11-29 18:00:08', 'mantenimiento', 'INSERT', '7|2021-12-01 11:59:00|todo fain|8|0', ''),
+(246, 'root@localhost', '2021-11-29 18:03:28', 'mantenimiento', 'INSERT', '8|2021-12-02 13:00:00|todo deli|8|0', ''),
+(247, 'root@localhost', '2021-11-29 18:15:41', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Bidón Vidrio|MedioGramo|Oxidante|2021-11-242|3|3|0|vacio', '5|sulfónico|1|23|Bidón Vidrio|MedioGramo|Oxidante|2021-11-242|3|3|0|vacio'),
+(248, 'root@localhost', '2021-11-29 18:50:22', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Bidón Vidrio|MedioGramo|Oxidante|2021-11-242|3|3|0|is null', '5|sulfónico|1|23|Bidón Vidrio|MedioGramo|Oxidante|2021-11-242|3|3|0|is null'),
+(249, 'root@localhost', '2021-11-29 19:44:38', 'mantenimiento', 'INSERT', '9|2021-11-29 12:44:00|ahi va|8|0', ''),
+(250, 'root@localhost', '2021-11-29 19:48:34', 'mantenimiento', 'UPDATE', '9|2021-11-29 12:44:00|ahi va|8|0', '9|2021-11-29 12:44:00|ahi va|8|0'),
+(251, 'root@localhost', '2021-11-29 19:50:11', 'mantenimiento', 'UPDATE', '9|2021-11-29 12:44:00|ahi va|8|0', '9|2021-11-29 12:44:00|ahi va|8|0'),
+(252, 'root@localhost', '2021-11-29 19:50:19', 'mantenimiento', 'UPDATE', '9|2021-11-29 12:44:00|ahi va|8|0', '9|2021-11-29 12:44:00|ahi va|8|0'),
+(253, 'root@localhost', '2021-11-29 19:51:06', 'mantenimiento', 'UPDATE', '9|2021-11-29 12:45:00|ahi va|8|0', '9|2021-11-29 12:44:00|ahi va|8|0'),
+(254, 'root@localhost', '2021-11-29 19:55:25', 'mantenimiento', 'UPDATE', '9|2021-11-29 12:55:25|ahi va|8|1', '9|2021-11-29 12:45:00|ahi va|8|0'),
+(255, 'root@localhost', '2021-11-29 19:58:12', 'mantenimiento', 'UPDATE', '8|2021-11-29 12:58:12|todo deli|8|1', '8|2021-12-02 13:00:00|todo deli|8|0'),
+(256, 'root@localhost', '2021-11-29 19:58:25', 'mantenimiento', 'UPDATE', '8|2021-11-29 12:58:25|todo deli|8|0', '8|2021-11-29 12:58:12|todo deli|8|1'),
+(257, 'root@localhost', '2021-11-29 19:58:28', 'mantenimiento', 'UPDATE', '9|2021-11-29 12:58:28|ahi va|8|0', '9|2021-11-29 12:55:25|ahi va|8|1'),
+(258, 'root@localhost', '2021-11-29 19:58:51', 'mantenimiento', 'UPDATE', '8|2021-11-29 12:58:25|todo bien|8|0', '8|2021-11-29 12:58:25|todo deli|8|0'),
+(259, 'root@localhost', '2021-11-29 19:59:01', 'mantenimiento', 'UPDATE', '9|2021-11-29 12:58:28|todo bien|8|0', '9|2021-11-29 12:58:28|ahi va|8|0'),
+(260, 'root@localhost', '2021-11-29 19:59:46', 'mantenimiento', 'INSERT', '10|2021-11-29 12:59:00|sin problemas.|12|0', ''),
+(261, 'root@localhost', '2021-11-29 20:00:22', 'equipo', 'UPDATE', '12|prueba 3|todo bien|234|234|3|1637965800.png|0|is null', '12|prueba 3|23|234|234|3|1637965800.png|0|is null');
 
 -- --------------------------------------------------------
 
@@ -278,7 +296,7 @@ INSERT INTO `equipo` (`id`, `nombre`, `condicion_uso`, `num_economico`, `num_ser
 (5, 'Vaso de precipitados', 'en buenas condiciones', 1, '1', 3, NULL, 1, NULL),
 (6, 'equipo 2', 'muy bueno', 124234, '11009934', 3, NULL, 0, '2021-11-21 19:45:20'),
 (8, 'nombre', 'condicion', 1, 'serie', 3, '1637965706.jpg', 0, NULL),
-(12, 'prueba 3', '23', 234, '234', 3, '1637965800.png', 0, NULL);
+(12, 'prueba 3', 'todo bien', 234, '234', 3, '1637965800.png', 0, NULL);
 
 --
 -- Disparadores `equipo`
@@ -286,12 +304,18 @@ INSERT INTO `equipo` (`id`, `nombre`, `condicion_uso`, `num_economico`, `num_ser
 DELIMITER $$
 CREATE TRIGGER `TRIGGER_EQUIPO_BITACORA_DELETE` AFTER DELETE ON `equipo` FOR EACH ROW BEGIN
 
+SET @fecha_baja_old =OLD.fecha_baja;
+
+IF ISNULL(OLD.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_old = 'is null';
+END; END IF;
+
 INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
 VALUES(CURRENT_USER,'equipo','DELETE',CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.condicion_uso,'|',              OLD.num_economico,'|',
 OLD.num_serie,'|',OLD.id_laboratorio,'|',
 OLD.imagen,'|',OLD.eliminado,'|',
-OLD.fecha_baja));
+@fecha_baja_old));
 
 END
 $$
@@ -299,18 +323,34 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `TRIGGER_EQUIPO_BITACORA_INSERT` AFTER INSERT ON `equipo` FOR EACH ROW BEGIN
 
+SET @fecha_baja_new =NEW.fecha_baja;
+
+IF ISNULL(NEW.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_new = 'is null';
+END; END IF;
+
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
 VALUES(CURRENT_USER,'equipo','INSERT',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.condicion_uso,'|',                          NEW.num_economico,'|',
 NEW.num_serie,'|',NEW.id_laboratorio,'|',
 NEW.imagen,'|',NEW.eliminado,'|',
-NEW.fecha_baja));
+@fecha_baja_new));
 
 END
 $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `TRIGGER_EQUIPO_BITACORA_UPDATE` AFTER UPDATE ON `equipo` FOR EACH ROW BEGIN
+
+SET @fecha_baja_new =NEW.fecha_baja;
+SET @fecha_baja_old =OLD.fecha_baja;
+
+IF ISNULL(NEW.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_new = 'is null';
+END; END IF;
+IF ISNULL(OLD.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_old = 'is null';
+END; END IF;
 
 INSERT INTO bitacora 
 (usuario,tabla,accion,informacion_actual,
@@ -319,13 +359,13 @@ VALUES(CURRENT_USER,'equipo','UPDATE',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.condicion_uso,'|',                    NEW.num_economico,'|',
 NEW.num_serie,'|',NEW.id_laboratorio,'|',
 NEW.imagen,'|',NEW.eliminado,'|',
-NEW.fecha_baja),
+@fecha_baja_new),
 CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.condicion_uso,'|',
 OLD.num_economico,'|',
 OLD.num_serie,'|',OLD.id_laboratorio,'|',
 OLD.imagen,'|',OLD.eliminado,'|',
-OLD.fecha_baja));
+@fecha_baja_old));
 
 END
 $$
@@ -408,7 +448,12 @@ CREATE TABLE `mantenimiento` (
 
 INSERT INTO `mantenimiento` (`id`, `fecha_mantenimiento`, `observaciones`, `id_equipo`, `eliminado`) VALUES
 (4, '2021-11-19 18:58:12', 'se aplico mantenimiento', 5, 0),
-(5, '2021-11-19 18:58:26', 'se aplico mantenimiento otra vez', 5, 0);
+(5, '2021-11-19 18:58:26', 'se aplico mantenimiento otra vez', 5, 0),
+(6, '2021-11-29 07:00:00', 'todo bien', 8, 0),
+(7, '2021-12-01 18:59:00', 'todo fain', 8, 0),
+(8, '2021-11-29 19:58:25', 'todo bien', 8, 0),
+(9, '2021-11-29 19:58:28', 'todo bien', 8, 0),
+(10, '2021-11-29 19:59:00', 'sin problemas.', 12, 0);
 
 --
 -- Disparadores `mantenimiento`
@@ -493,27 +538,38 @@ INSERT INTO `reactivo` (`id`, `nombre`, `reactividad`, `inflamabilidad`, `riesgo
 DELIMITER $$
 CREATE TRIGGER `TRIGGER_REACTIVO_BITACORA_DELETE` AFTER DELETE ON `reactivo` FOR EACH ROW BEGIN
 
+SET @fecha_baja_old =OLD.fecha_baja;
+
+IF ISNULL(OLD.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_old = 'is null';
+END; END IF;
+
 INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
 VALUES(CURRENT_USER,'reactivo','DELETE',CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.reactividad,'|',OLD.inflamabilidad,
 OLD.riesgo_salud,'|',OLD.presentacion,'|',OLD.cantidad_reactivo,
 OLD.unidad_medida,'|',OLD.codigo_almacenamiento,'|',OLD.caducidad,
 OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio
-,'|',OLD.eliminado,'|',OLD.fecha_baja));
+,'|',OLD.eliminado,'|',@fecha_baja_old));
 
 END
 $$
 DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `TRIGGER_REACTIVO_BITACORA_INSERT` AFTER INSERT ON `reactivo` FOR EACH ROW BEGIN
+SET @fecha_baja_new =NEW.fecha_baja;
 
+IF ISNULL(NEW.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_new = 'is null';
+END; END IF;
+ 
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
 VALUES(CURRENT_USER,'reactivo','INSERT',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.reactividad,'|',NEW.inflamabilidad,
 NEW.riesgo_salud,'|',NEW.presentacion,'|',NEW.cantidad_reactivo,
 NEW.unidad_medida,'|',NEW.codigo_almacenamiento,'|',NEW.caducidad,
 NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio,'|',
-NEW.eliminado,'|',NEW.fecha_baja));
+NEW.eliminado,'|',@fecha_baja_new));
 
 END
 $$
@@ -521,19 +577,29 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `TRIGGER_REACTIVO_BITACORA_UPDATE` AFTER UPDATE ON `reactivo` FOR EACH ROW BEGIN
 
+SET @fecha_baja_new =NEW.fecha_baja;
+SET @fecha_baja_old =OLD.fecha_baja;
+
+IF ISNULL(NEW.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_new = 'is null';
+END; END IF;
+IF ISNULL(OLD.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_old = 'is null';
+END; END IF;
+ 
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual,informacion_anterior)
 VALUES(CURRENT_USER,'reactivo','UPDATE',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.reactividad,'|',NEW.inflamabilidad,
 NEW.riesgo_salud,'|',NEW.presentacion,'|',NEW.cantidad_reactivo,
 NEW.unidad_medida,'|',NEW.codigo_almacenamiento,'|',NEW.caducidad,
 NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio
-,'|',NEW.eliminado,'|',NEW.fecha_baja),
+,'|',NEW.eliminado,'|',@fecha_baja_new),
 CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.reactividad,'|',OLD.inflamabilidad,
 OLD.riesgo_salud,'|',OLD.presentacion,'|',OLD.cantidad_reactivo,
 OLD.unidad_medida,'|',OLD.codigo_almacenamiento,'|',OLD.caducidad,
 OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio
-,'|',OLD.eliminado,'|',OLD.fecha_baja));
+,'|',OLD.eliminado,'|',@fecha_baja_old));
 
 END
 $$
@@ -571,11 +637,17 @@ INSERT INTO `recipiente` (`id`, `nombre`, `id_tipo_material`, `capacidad`, `id_l
 DELIMITER $$
 CREATE TRIGGER `TRIGGER_RECIPIENTE_BITACORA_DELETE` AFTER DELETE ON `recipiente` FOR EACH ROW BEGIN
 
+SET @fecha_baja_old =OLD.fecha_baja;
+
+IF ISNULL(OLD.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_old = 'is null';
+END; END IF;
+
 INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
 VALUES(CURRENT_USER,'recipiente','DELETE',CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.id_tipo_material,'|',OLD.capacidad,
 '|',OLD.id_laboratorio,'|',OLD.imagen,
-'|',OLD.eliminado,'|',OLD.fecha_baja));
+'|',OLD.eliminado,'|',@fecha_baja_old));
 
 END
 $$
@@ -583,11 +655,17 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `TRIGGER_RECIPIENTE_BITACORA_INSERT` AFTER INSERT ON `recipiente` FOR EACH ROW BEGIN
 
+SET @fecha_baja_new =NEW.fecha_baja;
+
+IF ISNULL(NEW.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_new = 'is null';
+END; END IF;
+
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
 VALUES(CURRENT_USER,'recipiente','INSERT',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.id_tipo_material,'|',NEW.capacidad,
 '|',NEW.id_laboratorio,'|',NEW.imagen,
-'|',NEW.eliminado,'|',NEW.fecha_baja));
+'|',NEW.eliminado,'|',@fecha_baja_new));
 
 END
 $$
@@ -595,15 +673,25 @@ DELIMITER ;
 DELIMITER $$
 CREATE TRIGGER `TRIGGER_RECIPIENTE_BITACORA_UPDATE` AFTER UPDATE ON `recipiente` FOR EACH ROW BEGIN
 
+SET @fecha_baja_new =NEW.fecha_baja;
+SET @fecha_baja_old =OLD.fecha_baja;
+
+IF ISNULL(NEW.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_new = 'is null';
+END; END IF;
+IF ISNULL(OLD.fecha_baja) = 1 THEN BEGIN
+	SET @fecha_baja_old = 'is null';
+END; END IF;
+
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual,informacion_anterior)
 VALUES(CURRENT_USER,'recipiente','UPDATE',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.id_tipo_material,'|',NEW.capacidad,
 '|',NEW.id_laboratorio,'|',NEW.imagen,
-'|',NEW.eliminado,'|',NEW.fecha_baja),
+'|',NEW.eliminado,'|', @fecha_baja_new),
 CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.id_tipo_material,'|',OLD.capacidad,
 '|',OLD.id_laboratorio,'|',OLD.imagen,
-'|',OLD.eliminado,'|',OLD.fecha_baja));
+'|',OLD.eliminado,'|',@fecha_baja_old));
 
 END
 $$
@@ -737,7 +825,7 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=244;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=262;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
@@ -755,13 +843,13 @@ ALTER TABLE `laboratorio`
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `reactivo`
 --
 ALTER TABLE `reactivo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `recipiente`

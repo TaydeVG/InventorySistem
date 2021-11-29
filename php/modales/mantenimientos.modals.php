@@ -6,13 +6,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form id="formModal" class="needs-validation" novalidate>
+                <input type="text" class="form-control d-none" id="recipient-id_mantenimiento" name="id_mantenimiento" placeholder="">
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-12 col-sm-12">
                             <div class="mb-1">
                                 <label for="recipient-fecha_mantenimiento" class="col-form-label fw-bold">Fecha de
                                     mantenimiento:</label>
-                                <input type="date" class="form-control" id="recipient-fecha_mantenimiento" name="fecha_mantenimiento_mantenimiento" required>
+                                <input type="datetime-local" class="form-control" id="recipient-fecha_mantenimiento" name="fecha_mantenimiento_mantenimiento" required>
                                 <div class="invalid-feedback">
                                     Campo invalido.
                                 </div>

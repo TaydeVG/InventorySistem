@@ -11,10 +11,12 @@ $(document).ready(function () {
     modalLogicLoad();
 
 
-    llenarTabla(getDatosTabla(_GET_Param('ideq')));
+    llenarTabla(getDatosTabla(_GET_Param('ideq')),_GET_Param('ideq'));
     agregarFiltradoTabla("#tabla_id", "#body-table", "#filtrado", "#paginationTable");//agrega paginacion a tabla
 
     initEvents();
+    disableNotifyAlerta();//oculta el modal de loading
+
 });
 
 function initEvents() {
@@ -22,7 +24,7 @@ function initEvents() {
     $('.reload').on('click', function () {
 
         efectoLoadInSection($('.reload'));
-        $.when(llenarTabla(getDatosTabla(_GET_Param('ideq')))).then(function (data, textStatus, jqXHR) {
+        $.when(llenarTabla(getDatosTabla(_GET_Param('ideq')),_GET_Param('ideq'))).then(function (data, textStatus, jqXHR) {
             setTimeout(() => {
                 disableEfectoLoadInSection($('.reload'));
             }, 500);
@@ -45,10 +47,11 @@ function initEvents() {
         if (fecha_mantenimiento.length > 0 && observaciones.length > 0) {
             if (formOpcion == "new") {
                 console.log("insert");
-                insert($(this)[0], _GET_Param('ideq'));//se le envian los campos del formulario, cada name del formulario hace referencia a un campo de base de datos
+                insert_or_update($(this)[0], _GET_Param('ideq'), "new");//se le envian los campos del formulario, cada name del formulario hace referencia a un campo de base de datos
                 this.querySelector("#btnModalCancel").click();//oculta modal al insertar
             } else if (formOpcion == "edit") {
                 console.log("update");
+                insert_or_update($(this)[0], _GET_Param('ideq'), "edit");//se le envian los campos del formulario, cada name del formulario hace referencia a un campo de base de datos
                 this.querySelector("#btnModalCancel").click();//oculta modal al actualizar
             } else {
                 console.log("opcion invalida");
@@ -114,40 +117,7 @@ function modalLogicLoad() {
         }
     });
 }
-//recibe como parametro el formulario, NOTA: en el formulario cada input debe tener el atributo name, correspondiente al campo de base de datos
-function insert(form, id_equipo) {
-    //se genera form data para poder mandar el archivo file
-    var objParam = new FormData(form);
-    objParam.append("id_equipo_mantenimiento", id_equipo);
-    objParam.append("opcion", 20);
 
-    $.ajax({
-        cache: false,
-        url: '../../../php/router_controller.php',
-        type: 'POST',
-        dataType: 'JSON',
-        data: objParam,
-        contentType: false,
-        processData: false,
-        success: function (response) {
-
-            if (response.resultOper == 1) {
-
-                console.log(response);
-
-            } else {
-                console.log(response);
-            }
-        },
-        beforeSend: function () {
-            console.log("cargando peticion");
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr.responseText);
-            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
-        }
-    });
-}
 function initFormModal(modal) {
     $("#formModal").removeClass("was-validated");//elimina las validaciones activas
     $("#formModal")[0].reset();
@@ -155,25 +125,28 @@ function initFormModal(modal) {
 }
 
 function setFormModal(modal, datos) {
-    modal.querySelector('#recipient-fecha_mantenimiento').value = datos.fecha_mantenimiento;
+    modal.querySelector('#recipient-id_mantenimiento').value = datos.id;
+    modal.querySelector('#recipient-fecha_mantenimiento').value = datos.fecha_mantenimiento.replace(" ", "T");
     modal.querySelector('#recipient-observaciones').value = datos.observaciones;
+
 }
 
 function deshabilitarFormModal(modal, isDisabled) {
+    modal.querySelector('#recipient-id_mantenimiento').disabled = isDisabled;
 
     modal.querySelector('#recipient-fecha_mantenimiento').disabled = isDisabled;
     modal.querySelector('#recipient-observaciones').disabled = isDisabled;
 
     if (isDisabled) { //si es true, se deshabilitan inputs
-        $('#recipient-fecha_mantenimiento,#recipient-observaciones').addClass("form-control-plaintext");
-        $('#recipient-fecha_mantenimiento,#recipient-observaciones').removeClass("form-control");
+        $('#recipient-id_mantenimiento,#recipient-fecha_mantenimiento,#recipient-observaciones').addClass("form-control-plaintext");
+        $('#recipient-id_mantenimiento,#recipient-fecha_mantenimiento,#recipient-observaciones').removeClass("form-control");
     } else {//si es false, se habilitan inputs
-        $('#recipient-fecha_mantenimiento,#recipient-observaciones').removeClass("form-control-plaintext");
-        $('#recipient-fecha_mantenimiento,#recipient-observaciones').addClass("form-control");
+        $('#recipient-id_mantenimiento,#recipient-fecha_mantenimiento,#recipient-observaciones').removeClass("form-control-plaintext");
+        $('#recipient-id_mantenimiento,#recipient-fecha_mantenimiento,#recipient-observaciones').addClass("form-control");
     }
 }
 
-function llenarTabla(datos) {
+function llenarTabla(datos, id_equipo) {
     var cantdatos = datos.length;
 
     $('#body-table').html('');
@@ -196,16 +169,16 @@ function llenarTabla(datos) {
     }
 
     $('#slctRowsTable').change(function (event) {
-        llenarTabla(datos);
+        llenarTabla(datos, id_equipo);
     });
 
     $('.btnEliminar').click(function (event) {
-        var idUsuario = $(this).data('id');
+        var id = $(this).data('id');
         enableNotifyYesOrCancel("Eliminar manteniminto", "¿Está usted seguro de eliminar el mantenimiento de manera permanente?", 3);
         $("#btnModalYesOrCancel").click(function () {
             $.when(disableNotifyYesOrCancel())// funcion para cerrar el modal a continuacion ira las acciones a seguir
                 .then(function (data, textStatus, jqXHR) {
-                    alert("Eliminado = " + idUsuario);
+                    deleted(id, id_equipo);
                 });
         });
 
@@ -233,7 +206,6 @@ function getDatosTabla(id_equipo) {
 
             if (response.resultOper == 1) {
                 datos = response.respuesta;//datos a retornar
-                disableNotifyAlerta();//oculta el modal de loading
             } else {
                 setTimeout(() => {
                     if (response.mensaje.errorInfo) {
@@ -242,18 +214,102 @@ function getDatosTabla(id_equipo) {
                     } else {
                         enableNotifyAlerta("ATENCION!", response.mensaje, 5);
                     }
-                }, 1000);
+                }, 1500);
             }
         },
         beforeSend: function () {
             console.log("cargando peticion");
         },
         error: function (xhr, status, error) {
-
-            console.log("Error En Ajax " + xhr.responseText + " " + status + " " + error + ".");
-            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
+            //disableNotifyAlerta();//oculta el modal de loading
+            setTimeout(() => {
+                console.log("Error En Ajax " + xhr.responseText + " " + status + " " + error + ".");
+                enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
+            }, 1500);
         }
     });
 
     return datos;
+}
+
+//recibe como parametro el formulario, NOTA: en el formulario cada input debe tener el atributo name, correspondiente al campo de base de datos
+function insert_or_update(form, id_equipo, opcion) {
+    //se genera form data para poder mandar el archivo file
+    var objParam = new FormData(form);
+    if (opcion == "new") {
+        objParam.append("id_equipo_mantenimiento", id_equipo);
+
+        objParam.append("opcion", 20);//opcion del router a ejecutar: insert
+    } else {
+        objParam.append("opcion", 27);//opcion del router a ejecutar: update
+    }
+
+    $.ajax({
+        cache: false,
+        url: '../../../php/router_controller.php',
+        type: 'POST',
+        dataType: 'JSON',
+        data: objParam,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            console.log(response);
+            llenarTabla(getDatosTabla(id_equipo), id_equipo);
+            if (response.resultOper == 1) {
+                enableNotifyAlerta("Exito!", response.mensaje, 3);
+            } else {
+                if (response.mensaje.errorInfo) {
+                    enableNotifyAlerta("ADVERTENCIA!", response.mensaje.errorInfo[2], 5);
+                    console.log(response.mensaje.errorInfo[2]);
+                } else {
+                    enableNotifyAlerta("ADVERTENCIA!", response.mensaje, 5);
+                }
+            }
+
+        },
+        beforeSend: function () {
+            console.log("cargando peticion");
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
+        }
+    });
+}
+function deleted(id, id_equipo) {
+    //se genera form data para poder mandar el archivo file
+    var objParam = new FormData();
+    objParam.append("id_mantenimiento", id);//opcion del router a ejecutar: update
+    objParam.append("opcion", 28);//opcion del router a ejecutar: update
+
+    $.ajax({
+        cache: false,
+        url: '../../../php/router_controller.php',
+        type: 'POST',
+        dataType: 'JSON',
+        data: objParam,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            console.log(response);
+            llenarTabla(getDatosTabla(id_equipo),id_equipo);
+            if (response.resultOper == 1) {
+                enableNotifyAlerta("Exito!", response.mensaje, 3);
+            } else {
+                if (response.mensaje.errorInfo) {
+                    enableNotifyAlerta("ADVERTENCIA!", response.mensaje.errorInfo[2], 5);
+                    console.log(response.mensaje.errorInfo[2]);
+                } else {
+                    enableNotifyAlerta("ADVERTENCIA!", response.mensaje, 5);
+                }
+            }
+        },
+        beforeSend: function () {
+            console.log("cargando peticion");
+        },
+        error: function (xhr, status, error) {
+            console.log(xhr.responseText);
+            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
+        }
+    });
 }
