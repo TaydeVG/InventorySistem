@@ -153,7 +153,7 @@ class ClassEquipos
 
         try {
 
-            $sql = "SELECT id, nombre, condicion_uso, num_economico, num_serie, id_laboratorio, eliminado
+            $sql = "SELECT id, nombre, condicion_uso, num_economico, num_serie, id_laboratorio, eliminado,fecha_baja
              FROM equipo WHERE eliminado = 1;";
             $consulta = $conexMySql->prepare($sql);
             $consulta->execute();
@@ -167,6 +167,7 @@ class ClassEquipos
                 $Equipo->setNum_economico($row->num_economico);
                 $Equipo->setNum_serie($row->num_serie);
                 $Equipo->setId_laboratorio($row->id_laboratorio);
+                $Equipo->setFecha_baja($row->fecha_baja);
                 $Equipo->setEliminado($row->eliminado);
 
                 array_push($datos['respuesta'], $Equipo); //se agrega cada registro a la variable de respuesta

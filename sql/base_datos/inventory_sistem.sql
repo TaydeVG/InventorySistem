@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2021 a las 21:00:55
+-- Tiempo de generación: 29-11-2021 a las 21:26:00
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -268,7 +268,24 @@ INSERT INTO `bitacora` (`id`, `usuario`, `fecha_movimiento`, `tabla`, `accion`, 
 (258, 'root@localhost', '2021-11-29 19:58:51', 'mantenimiento', 'UPDATE', '8|2021-11-29 12:58:25|todo bien|8|0', '8|2021-11-29 12:58:25|todo deli|8|0'),
 (259, 'root@localhost', '2021-11-29 19:59:01', 'mantenimiento', 'UPDATE', '9|2021-11-29 12:58:28|todo bien|8|0', '9|2021-11-29 12:58:28|ahi va|8|0'),
 (260, 'root@localhost', '2021-11-29 19:59:46', 'mantenimiento', 'INSERT', '10|2021-11-29 12:59:00|sin problemas.|12|0', ''),
-(261, 'root@localhost', '2021-11-29 20:00:22', 'equipo', 'UPDATE', '12|prueba 3|todo bien|234|234|3|1637965800.png|0|is null', '12|prueba 3|23|234|234|3|1637965800.png|0|is null');
+(261, 'root@localhost', '2021-11-29 20:00:22', 'equipo', 'UPDATE', '12|prueba 3|todo bien|234|234|3|1637965800.png|0|is null', '12|prueba 3|23|234|234|3|1637965800.png|0|is null'),
+(262, 'root@localhost', '2021-11-29 20:07:21', 'reactivo', 'UPDATE', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|0|is null', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|1|is null'),
+(263, 'root@localhost', '2021-11-29 20:07:52', 'reactivo', 'UPDATE', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|1|2021-11-29 13:07:52', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|0|is null'),
+(264, 'root@localhost', '2021-11-29 20:08:15', 'reactivo', 'UPDATE', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|0|2021-11-29 13:07:52', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|1|2021-11-29 13:07:52'),
+(265, 'root@localhost', '2021-11-29 20:08:37', 'reactivo', 'UPDATE', '4|octanol|2|12|Bidón Vidrio|MedioLitro|Oxidante|2021-11-023|6|3|0|2021-11-29 13:07:52', '4|octanol|2|12|Frasco vidrio|23ml|HHSJ332K|2021-11-023|6|3|0|2021-11-29 13:07:52'),
+(266, 'root@localhost', '2021-11-29 20:08:47', 'reactivo', 'UPDATE', '4|octanol|2|12|Bidón Vidrio|MedioLitro|Oxidante|2021-11-023|6|3|1|2021-11-29 13:08:47', '4|octanol|2|12|Bidón Vidrio|MedioLitro|Oxidante|2021-11-023|6|3|0|2021-11-29 13:07:52'),
+(267, 'root@localhost', '2021-11-29 20:09:11', 'reactivo', 'DELETE', '', '18|sasf|0|00|Frasco Plástico|LlenoMililitro|Oxidante|2021-12-0224|23|3|1|2021-11-25 22:01:44'),
+(268, 'root@localhost', '2021-11-29 20:17:52', 'equipo', 'UPDATE', '5|Vaso de precipitados|en buenas condiciones|1|1|3|1|is null', '5|Vaso de precipitados|en buenas condiciones|1|1|3|1|is null'),
+(269, 'root@localhost', '2021-11-29 20:18:04', 'equipo', 'UPDATE', '6|equipo 2|muy bueno|124234|11009934|3|0|2021-11-21 19:45:20', '6|equipo 2|muy bueno|124234|11009934|3|0|2021-11-21 19:45:20'),
+(270, 'root@localhost', '2021-11-29 20:19:53', 'recipiente', 'UPDATE', '3|recipiente 1|4|10 lt|3|1|is null', '3|recipiente 1|4|10 lt|3|1|is null'),
+(271, 'root@localhost', '2021-11-29 20:20:42', 'recipiente', 'UPDATE', '3|recipiente 1|4|10 lt|3||0|is null', '3|recipiente 1|4|10 lt|3||1|is null'),
+(272, 'root@localhost', '2021-11-29 20:20:46', 'recipiente', 'UPDATE', '3|recipiente 1|4|10 lt|3||0|is null', '3|recipiente 1|4|10 lt|3||0|is null'),
+(273, 'root@localhost', '2021-11-29 20:21:02', 'recipiente', 'UPDATE', '4|recipiente 2|1|Volúmen|3|1638054072.jpg|0|is null', '4|recipiente 2|1|Volúmen|3|1638054072.jpg|0|2021-11-21 19:45:57'),
+(274, 'root@localhost', '2021-11-29 20:21:23', 'equipo', 'UPDATE', '5|Vaso de precipitados|en buenas condiciones|1|1|3| |0|is null', '5|Vaso de precipitados|en buenas condiciones|1|1|3| |1|is null'),
+(275, 'root@localhost', '2021-11-29 20:21:32', 'equipo', 'UPDATE', '5|Vaso de precipitados|en buenas condiciones|1|1|3| |0|is null', '5|Vaso de precipitados|en buenas condiciones|1|1|3| |0|is null'),
+(276, 'root@localhost', '2021-11-29 20:22:36', 'equipo', 'UPDATE', '5|Vaso de precipitados|en buenas condiciones|1|1|3| |1|2021-11-29 13:22:36', '5|Vaso de precipitados|en buenas condiciones|1|1|3| |0|is null'),
+(277, 'root@localhost', '2021-11-29 20:22:50', 'recipiente', 'UPDATE', '3|recipiente 1|4|Volúmen|3||0|is null', '3|recipiente 1|4|10 lt|3||0|is null'),
+(278, 'root@localhost', '2021-11-29 20:22:56', 'recipiente', 'UPDATE', '3|recipiente 1|4|Volúmen|3||1|2021-11-29 13:22:56', '3|recipiente 1|4|Volúmen|3||0|is null');
 
 -- --------------------------------------------------------
 
@@ -283,7 +300,7 @@ CREATE TABLE `equipo` (
   `num_economico` int(11) NOT NULL,
   `num_serie` varchar(20) NOT NULL,
   `id_laboratorio` int(11) NOT NULL,
-  `imagen` text DEFAULT NULL,
+  `imagen` text DEFAULT '',
   `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   `fecha_baja` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -293,8 +310,8 @@ CREATE TABLE `equipo` (
 --
 
 INSERT INTO `equipo` (`id`, `nombre`, `condicion_uso`, `num_economico`, `num_serie`, `id_laboratorio`, `imagen`, `eliminado`, `fecha_baja`) VALUES
-(5, 'Vaso de precipitados', 'en buenas condiciones', 1, '1', 3, NULL, 1, NULL),
-(6, 'equipo 2', 'muy bueno', 124234, '11009934', 3, NULL, 0, '2021-11-21 19:45:20'),
+(5, 'Vaso de precipitados', 'en buenas condiciones', 1, '1', 3, ' ', 1, '2021-11-29 13:22:36'),
+(6, 'equipo 2', 'muy bueno', 124234, '11009934', 3, '', 0, '2021-11-21 19:45:20'),
 (8, 'nombre', 'condicion', 1, 'serie', 3, '1637965706.jpg', 0, NULL),
 (12, 'prueba 3', 'todo bien', 234, '234', 3, '1637965800.png', 0, NULL);
 
@@ -526,11 +543,10 @@ CREATE TABLE `reactivo` (
 
 INSERT INTO `reactivo` (`id`, `nombre`, `reactividad`, `inflamabilidad`, `riesgo_salud`, `presentacion`, `cantidad_reactivo`, `unidad_medida`, `codigo_almacenamiento`, `caducidad`, `num_mueble`, `num_estante`, `id_laboratorio`, `eliminado`, `fecha_baja`) VALUES
 (3, 'butamol', 1, 1, 1, 'Frasco Plástico', 'Poco', 'Litro', 'Oxidante', '2022-09-28', 1, 1, 3, 0, NULL),
-(4, 'octanol', 2, 1, 2, 'Frasco vidrio', '23', 'ml', 'HHSJ332K', '2021-11-02', 3, 6, 3, 1, NULL),
+(4, 'octanol', 2, 1, 2, 'Bidón Vidrio', 'Medio', 'Litro', 'Oxidante', '2021-11-02', 3, 6, 3, 1, '2021-11-29 13:08:47'),
 (5, 'sulfónico', 1, 2, 3, 'Bidón Vidrio', 'Medio', 'Gramo', 'Oxidante', '2021-11-24', 2, 3, 3, 0, NULL),
 (16, 'nuevo reactivo', 1, 3, 2, 'Frasco Plástico', 'Medio', 'Gramo', 'Oxidante', '2021-12-03', 213, 23, 3, 1, '2021-11-25 17:46:27'),
-(17, 'reactivo 2', 1, 2, 2, 'Frasco Plástico', 'Medio', 'Gramo', 'Inflamable', '2021-11-30', 342, 234, 3, 1, '2021-11-25 21:40:08'),
-(18, 'sasf', 0, 0, 0, 'Frasco Plástico', 'Lleno', 'Mililitro', 'Oxidante', '2021-12-02', 24, 23, 3, 1, '2021-11-25 22:01:44');
+(17, 'reactivo 2', 1, 2, 2, 'Frasco Plástico', 'Medio', 'Gramo', 'Inflamable', '2021-11-30', 342, 234, 3, 1, '2021-11-25 21:40:08');
 
 --
 -- Disparadores `reactivo`
@@ -617,7 +633,7 @@ CREATE TABLE `recipiente` (
   `id_tipo_material` int(11) NOT NULL,
   `capacidad` varchar(50) NOT NULL,
   `id_laboratorio` int(11) NOT NULL,
-  `imagen` text DEFAULT NULL,
+  `imagen` text DEFAULT '',
   `eliminado` tinyint(1) NOT NULL DEFAULT 0,
   `fecha_baja` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -627,8 +643,8 @@ CREATE TABLE `recipiente` (
 --
 
 INSERT INTO `recipiente` (`id`, `nombre`, `id_tipo_material`, `capacidad`, `id_laboratorio`, `imagen`, `eliminado`, `fecha_baja`) VALUES
-(3, 'recipiente 1', 4, '10 lt', 3, NULL, 1, NULL),
-(4, 'recipiente 2', 1, 'Volúmen', 3, '1638054072.jpg', 0, '2021-11-21 19:45:57'),
+(3, 'recipiente 1', 4, 'Volúmen', 3, '', 1, '2021-11-29 13:22:56'),
+(4, 'recipiente 2', 1, 'Volúmen', 3, '1638054072.jpg', 0, NULL),
 (5, 'recipiente 3', 1, 'Kilogramo', 3, '1638054013.png', 0, NULL);
 
 --
@@ -825,7 +841,7 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=262;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`

@@ -177,7 +177,7 @@ class ClassRecipientes
         $datos['resultOper'] = 0;
 
         try {
-            $sql = "SELECT rec.id, rec.nombre, rec.id_tipo_material, rec.capacidad, rec.id_laboratorio, rec.eliminado,tm.tipo_material
+            $sql = "SELECT rec.id, rec.nombre, rec.id_tipo_material, rec.capacidad, rec.id_laboratorio, rec.eliminado,tm.tipo_material,rec.fecha_baja
             FROM recipiente rec, tipo_material tm
             WHERE rec.id_tipo_material = tm.id AND rec.eliminado = 1;";
             $consulta = $conexMySql->prepare($sql);
@@ -193,6 +193,7 @@ class ClassRecipientes
                 $Recipiente->setCapacidad($row->capacidad);
                 $Recipiente->setId_laboratorio($row->id_laboratorio);
                 $Recipiente->setEliminado($row->eliminado);
+                $Recipiente->setFecha_baja($row->fecha_baja);
 
                 array_push($datos['respuesta'], $Recipiente); //se agrega cada registro a la variable de respuesta
                 $Recipiente = null; //se libera de memoria
