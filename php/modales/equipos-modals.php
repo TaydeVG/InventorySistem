@@ -25,7 +25,7 @@
                             <div class="mb-1">
                                 <label for="recipient-condicion_uso" class="col-form-label fw-bold">Condicion de
                                     uso:</label>
-                                <input type="text" class="form-control" id="recipient-condicion_uso" name="condicion_uso_equipo" placeholder="Escribe Aquí" required>
+                                <input type="text" class="form-control solo-letras" id="recipient-condicion_uso" name="condicion_uso_equipo" placeholder="Escribe Aquí" required>
                                 <div class="invalid-feedback">
                                     Campo invalido.
                                 </div>

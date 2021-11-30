@@ -1,8 +1,6 @@
 $(document).ready(function () {
     initEvents();
 
-    console.log(localStorage.getItem("user"));
-    console.log(localStorage.getItem("pass"));
     if (localStorage.getItem("user") && localStorage.getItem("pass")) {
         $('#txtMail').val(localStorage.getItem("user"));
         $('#txtPass').val(localStorage.getItem("pass"));
