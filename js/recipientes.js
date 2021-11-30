@@ -89,6 +89,9 @@ function initEvents() {
 function modalLogicLoad() {
    var modal = document.getElementById('modalId');
    modal.addEventListener('show.bs.modal', function (event) {
+
+      $('#btnCambiarMat').click();//esto para que no quede pegado el input de escribir un tipo material
+
       initFormModal(modal);//reinicia el modal cada que se detona
       var button = event.relatedTarget;//obtiene la info del boton que detono el modal
       var modalTitle = modal.querySelector('.modal-title');
@@ -151,6 +154,11 @@ function modalLogicLoad() {
             break;
       }
    });
+   modal.addEventListener('hidden.bs.modal', function (event) {
+      //recarga los selects al ocultar el modal
+      LoadTiposMaterial();
+      LoadLaboratorios();
+   })
 }
 //recibe como parametro el formulario, NOTA: en el formulario cada input debe tener el atributo name, correspondiente al campo de base de datos
 function insert_or_update(form, cargoImagen, opcion) {
@@ -181,6 +189,9 @@ function insert_or_update(form, cargoImagen, opcion) {
          llenarTabla(getDatosTabla());
          if (response.resultOper == 1) {
             enableNotifyAlerta("Exito!", response.mensaje, 3);
+         } else if (response.resultOper == -2) {//problemas en la validacion del tipo material
+            alert(response.mensaje);
+            console.log(response);
          } else {
             if (response.mensaje.errorInfo) {
                enableNotifyAlerta("ADVERTENCIA!", response.mensaje.errorInfo[2], 5);
@@ -460,7 +471,6 @@ function getLaboratorios() {
 
          if (response.resultOper == 1) {
             datos = response.respuesta;//datos a retornar
-            disableNotifyAlerta();//oculta el modal de loading
          } else {
             setTimeout(() => {
                if (response.mensaje.errorInfo) {

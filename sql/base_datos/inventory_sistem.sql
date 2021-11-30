@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2021 a las 21:26:00
+-- Tiempo de generación: 30-11-2021 a las 03:36:25
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -285,7 +285,46 @@ INSERT INTO `bitacora` (`id`, `usuario`, `fecha_movimiento`, `tabla`, `accion`, 
 (275, 'root@localhost', '2021-11-29 20:21:32', 'equipo', 'UPDATE', '5|Vaso de precipitados|en buenas condiciones|1|1|3| |0|is null', '5|Vaso de precipitados|en buenas condiciones|1|1|3| |0|is null'),
 (276, 'root@localhost', '2021-11-29 20:22:36', 'equipo', 'UPDATE', '5|Vaso de precipitados|en buenas condiciones|1|1|3| |1|2021-11-29 13:22:36', '5|Vaso de precipitados|en buenas condiciones|1|1|3| |0|is null'),
 (277, 'root@localhost', '2021-11-29 20:22:50', 'recipiente', 'UPDATE', '3|recipiente 1|4|Volúmen|3||0|is null', '3|recipiente 1|4|10 lt|3||0|is null'),
-(278, 'root@localhost', '2021-11-29 20:22:56', 'recipiente', 'UPDATE', '3|recipiente 1|4|Volúmen|3||1|2021-11-29 13:22:56', '3|recipiente 1|4|Volúmen|3||0|is null');
+(278, 'root@localhost', '2021-11-29 20:22:56', 'recipiente', 'UPDATE', '3|recipiente 1|4|Volúmen|3||1|2021-11-29 13:22:56', '3|recipiente 1|4|Volúmen|3||0|is null'),
+(279, 'root@localhost', '2021-11-29 20:30:18', 'reactivo', 'UPDATE', '5|sulfónico|1|23|Bidón Vidrio|MedioGramo|Oxidante|2021-12-012|3|3|0|is null', '5|sulfónico|1|23|Bidón Vidrio|MedioGramo|Oxidante|2021-11-242|3|3|0|is null'),
+(280, 'root@localhost', '2021-11-29 20:39:53', 'reactivo', 'INSERT', '20|ulti|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-11-3012|123|3|0|is null', ''),
+(281, 'root@localhost', '2021-11-29 20:40:31', 'reactivo', 'UPDATE', '20|ulti 2|0|10|Bidón Plástico|MedioGramo|Corrosivo|2021-11-3012|123|3|0|is null', '20|ulti|0|00|Bidón Plástico|MedioGramo|Corrosivo|2021-11-3012|123|3|0|is null'),
+(282, 'root@localhost', '2021-11-29 20:41:28', 'reactivo', 'UPDATE', '20|ulti 2|0|10|Bidón Plástico|MedioGramo|Corrosivo|2021-11-3012|123|3|1|2021-11-29 13:41:28', '20|ulti 2|0|10|Bidón Plástico|MedioGramo|Corrosivo|2021-11-3012|123|3|0|is null'),
+(283, 'root@localhost', '2021-11-29 20:46:43', 'equipo', 'INSERT', '13|ulti|todo bien|2|23|3|1638218803.jpg|0|is null', ''),
+(284, 'root@localhost', '2021-11-29 20:47:05', 'equipo', 'UPDATE', '13|ulti 2|todo bien|2|23|3|1638218825.png|0|is null', '13|ulti|todo bien|2|23|3|1638218803.jpg|0|is null'),
+(285, 'root@localhost', '2021-11-29 20:47:34', 'mantenimiento', 'INSERT', '11|2021-11-29 13:47:00|todo bien|13|0', ''),
+(286, 'root@localhost', '2021-11-29 20:47:54', 'equipo', 'UPDATE', '13|ulti 2|todo bien|2|23|3|1638218825.png|1|2021-11-29 13:47:54', '13|ulti 2|todo bien|2|23|3|1638218825.png|0|is null'),
+(287, 'root@localhost', '2021-11-29 20:48:14', 'recipiente', 'INSERT', '8|ulti|1|Volúmen|3|1638218894.jpg|0|is null', ''),
+(288, 'root@localhost', '2021-11-29 20:48:31', 'recipiente', 'UPDATE', '8|ulti 2|1|Volúmen|3|1638218911.png|0|is null', '8|ulti|1|Volúmen|3|1638218894.jpg|0|is null'),
+(289, 'root@localhost', '2021-11-29 20:49:02', 'recipiente', 'UPDATE', '8|ulti 2|1|Volúmen|3|1638218911.png|0|is null', '8|ulti 2|1|Volúmen|3|1638218911.png|0|is null'),
+(290, 'root@localhost', '2021-11-29 20:49:41', 'recipiente', 'UPDATE', '8|ulti 2|1|Volúmen|3|1638218911.png|1|2021-11-29 13:49:41', '8|ulti 2|1|Volúmen|3|1638218911.png|0|is null'),
+(291, 'root@localhost', '2021-11-30 02:03:12', 'recipiente', 'INSERT', '9|prueba 1234|1|Volúmen|3||0|is null', ''),
+(292, 'root@localhost', '2021-11-30 02:05:49', 'recipiente', 'DELETE', '', '9|prueba 1234|1|Volúmen|3||0|is null'),
+(293, 'root@localhost', '2021-11-30 02:07:28', 'tipo_material', 'INSERT', '5|es otro we', ''),
+(294, 'root@localhost', '2021-11-30 02:08:35', 'tipo_material', 'DELETE', '', '5|es otro we'),
+(295, 'root@localhost', '2021-11-30 02:11:27', 'tipo_material', 'INSERT', '6|es otro man', ''),
+(296, 'root@localhost', '2021-11-30 02:13:30', 'tipo_material', 'INSERT', '7|qqweq', ''),
+(297, 'root@localhost', '2021-11-30 02:13:30', 'recipiente', 'INSERT', '10|asf|1|Kilogramo|3||0|is null', ''),
+(298, 'root@localhost', '2021-11-30 02:14:28', 'tipo_material', 'INSERT', '8|qweasdfas asf', ''),
+(299, 'root@localhost', '2021-11-30 02:15:53', 'tipo_material', 'INSERT', '9|asf 234', ''),
+(300, 'root@localhost', '2021-11-30 02:15:53', 'recipiente', 'INSERT', '11|fin|9|Volúmen|3||0|is null', ''),
+(301, 'root@localhost', '2021-11-30 02:16:18', 'tipo_material', 'DELETE', '', '6|es otro man'),
+(302, 'root@localhost', '2021-11-30 02:16:21', 'tipo_material', 'DELETE', '', '7|qqweq'),
+(303, 'root@localhost', '2021-11-30 02:16:26', 'tipo_material', 'DELETE', '', '8|qweasdfas asf'),
+(304, 'root@localhost', '2021-11-30 02:17:03', 'recipiente', 'DELETE', '', '10|asf|1|Kilogramo|3||0|is null'),
+(305, 'root@localhost', '2021-11-30 02:17:03', 'recipiente', 'DELETE', '', '11|fin|9|Volúmen|3||0|is null'),
+(306, 'root@localhost', '2021-11-30 02:17:44', 'tipo_material', 'DELETE', '', '9|asf 234'),
+(307, 'root@localhost', '2021-11-30 02:18:25', 'tipo_material', 'INSERT', '10|Corcho', ''),
+(308, 'root@localhost', '2021-11-30 02:18:25', 'recipiente', 'INSERT', '12|recipiente 4|10|Kilogramo|3||0|is null', ''),
+(309, 'root@localhost', '2021-11-30 02:25:01', 'tipo_material', 'INSERT', '11|Carton', ''),
+(310, 'root@localhost', '2021-11-30 02:25:01', 'recipiente', 'UPDATE', '12|recipiente 4|11|Kilogramo|3||0|is null', '12|recipiente 4|10|Kilogramo|3||0|is null'),
+(311, 'root@localhost', '2021-11-30 02:33:27', 'tipo_material', 'INSERT', '12|Metal', ''),
+(312, 'root@localhost', '2021-11-30 02:33:27', 'recipiente', 'UPDATE', '12|recipiente 4|12|Kilogramo|3||0|is null', '12|recipiente 4|11|Kilogramo|3||0|is null'),
+(313, 'root@localhost', '2021-11-30 02:34:24', 'tipo_material', 'INSERT', '13|Metal 2', ''),
+(314, 'root@localhost', '2021-11-30 02:34:24', 'recipiente', 'UPDATE', '12|recipiente 4|13|Kilogramo|3||0|is null', '12|recipiente 4|12|Kilogramo|3||0|is null'),
+(315, 'root@localhost', '2021-11-30 02:34:35', 'recipiente', 'UPDATE', '12|recipiente 4|10|Kilogramo|3||0|is null', '12|recipiente 4|13|Kilogramo|3||0|is null'),
+(316, 'root@localhost', '2021-11-30 02:34:48', 'recipiente', 'UPDATE', '5|recipiente 3|11|Kilogramo|3|1638054013.png|0|is null', '5|recipiente 3|1|Kilogramo|3|1638054013.png|0|is null'),
+(317, 'root@localhost', '2021-11-30 02:35:01', 'tipo_material', 'DELETE', '', '13|Metal 2');
 
 -- --------------------------------------------------------
 
@@ -313,7 +352,8 @@ INSERT INTO `equipo` (`id`, `nombre`, `condicion_uso`, `num_economico`, `num_ser
 (5, 'Vaso de precipitados', 'en buenas condiciones', 1, '1', 3, ' ', 1, '2021-11-29 13:22:36'),
 (6, 'equipo 2', 'muy bueno', 124234, '11009934', 3, '', 0, '2021-11-21 19:45:20'),
 (8, 'nombre', 'condicion', 1, 'serie', 3, '1637965706.jpg', 0, NULL),
-(12, 'prueba 3', 'todo bien', 234, '234', 3, '1637965800.png', 0, NULL);
+(12, 'prueba 3', 'todo bien', 234, '234', 3, '1637965800.png', 0, NULL),
+(13, 'ulti 2', 'todo bien', 2, '23', 3, '1638218825.png', 1, '2021-11-29 13:47:54');
 
 --
 -- Disparadores `equipo`
@@ -470,7 +510,8 @@ INSERT INTO `mantenimiento` (`id`, `fecha_mantenimiento`, `observaciones`, `id_e
 (7, '2021-12-01 18:59:00', 'todo fain', 8, 0),
 (8, '2021-11-29 19:58:25', 'todo bien', 8, 0),
 (9, '2021-11-29 19:58:28', 'todo bien', 8, 0),
-(10, '2021-11-29 19:59:00', 'sin problemas.', 12, 0);
+(10, '2021-11-29 19:59:00', 'sin problemas.', 12, 0),
+(11, '2021-11-29 20:47:00', 'todo bien', 13, 0);
 
 --
 -- Disparadores `mantenimiento`
@@ -544,9 +585,10 @@ CREATE TABLE `reactivo` (
 INSERT INTO `reactivo` (`id`, `nombre`, `reactividad`, `inflamabilidad`, `riesgo_salud`, `presentacion`, `cantidad_reactivo`, `unidad_medida`, `codigo_almacenamiento`, `caducidad`, `num_mueble`, `num_estante`, `id_laboratorio`, `eliminado`, `fecha_baja`) VALUES
 (3, 'butamol', 1, 1, 1, 'Frasco Plástico', 'Poco', 'Litro', 'Oxidante', '2022-09-28', 1, 1, 3, 0, NULL),
 (4, 'octanol', 2, 1, 2, 'Bidón Vidrio', 'Medio', 'Litro', 'Oxidante', '2021-11-02', 3, 6, 3, 1, '2021-11-29 13:08:47'),
-(5, 'sulfónico', 1, 2, 3, 'Bidón Vidrio', 'Medio', 'Gramo', 'Oxidante', '2021-11-24', 2, 3, 3, 0, NULL),
+(5, 'sulfónico', 1, 2, 3, 'Bidón Vidrio', 'Medio', 'Gramo', 'Oxidante', '2021-12-01', 2, 3, 3, 0, NULL),
 (16, 'nuevo reactivo', 1, 3, 2, 'Frasco Plástico', 'Medio', 'Gramo', 'Oxidante', '2021-12-03', 213, 23, 3, 1, '2021-11-25 17:46:27'),
-(17, 'reactivo 2', 1, 2, 2, 'Frasco Plástico', 'Medio', 'Gramo', 'Inflamable', '2021-11-30', 342, 234, 3, 1, '2021-11-25 21:40:08');
+(17, 'reactivo 2', 1, 2, 2, 'Frasco Plástico', 'Medio', 'Gramo', 'Inflamable', '2021-11-30', 342, 234, 3, 1, '2021-11-25 21:40:08'),
+(20, 'ulti 2', 0, 1, 0, 'Bidón Plástico', 'Medio', 'Gramo', 'Corrosivo', '2021-11-30', 12, 123, 3, 1, '2021-11-29 13:41:28');
 
 --
 -- Disparadores `reactivo`
@@ -563,9 +605,9 @@ END; END IF;
 INSERT INTO bitacora (usuario,tabla,accion,informacion_anterior)
 VALUES(CURRENT_USER,'reactivo','DELETE',CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.reactividad,'|',OLD.inflamabilidad,
-OLD.riesgo_salud,'|',OLD.presentacion,'|',OLD.cantidad_reactivo,
-OLD.unidad_medida,'|',OLD.codigo_almacenamiento,'|',OLD.caducidad,
-OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio
+'|',OLD.riesgo_salud,'|',OLD.presentacion,'|',OLD.cantidad_reactivo,
+'|',OLD.unidad_medida,'|',OLD.codigo_almacenamiento,'|',OLD.caducidad,
+'|',OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio
 ,'|',OLD.eliminado,'|',@fecha_baja_old));
 
 END
@@ -582,9 +624,9 @@ END; END IF;
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual)
 VALUES(CURRENT_USER,'reactivo','INSERT',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.reactividad,'|',NEW.inflamabilidad,
-NEW.riesgo_salud,'|',NEW.presentacion,'|',NEW.cantidad_reactivo,
-NEW.unidad_medida,'|',NEW.codigo_almacenamiento,'|',NEW.caducidad,
-NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio,'|',
+'|',NEW.riesgo_salud,'|',NEW.presentacion,'|',NEW.cantidad_reactivo,
+'|',NEW.unidad_medida,'|',NEW.codigo_almacenamiento,'|',NEW.caducidad,
+'|',NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio,'|',
 NEW.eliminado,'|',@fecha_baja_new));
 
 END
@@ -606,15 +648,15 @@ END; END IF;
 INSERT INTO bitacora (usuario,tabla,accion,informacion_actual,informacion_anterior)
 VALUES(CURRENT_USER,'reactivo','UPDATE',CONCAT(NEW.id,'|',
 NEW.nombre,'|',NEW.reactividad,'|',NEW.inflamabilidad,
-NEW.riesgo_salud,'|',NEW.presentacion,'|',NEW.cantidad_reactivo,
-NEW.unidad_medida,'|',NEW.codigo_almacenamiento,'|',NEW.caducidad,
-NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio
+'|',NEW.riesgo_salud,'|',NEW.presentacion,'|',NEW.cantidad_reactivo,
+'|',NEW.unidad_medida,'|',NEW.codigo_almacenamiento,'|',NEW.caducidad,
+'|',NEW.num_mueble,'|',NEW.num_estante,'|',NEW.id_laboratorio
 ,'|',NEW.eliminado,'|',@fecha_baja_new),
 CONCAT(OLD.id,'|',
 OLD.nombre,'|',OLD.reactividad,'|',OLD.inflamabilidad,
-OLD.riesgo_salud,'|',OLD.presentacion,'|',OLD.cantidad_reactivo,
-OLD.unidad_medida,'|',OLD.codigo_almacenamiento,'|',OLD.caducidad,
-OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio
+'|',OLD.riesgo_salud,'|',OLD.presentacion,'|',OLD.cantidad_reactivo,
+'|',OLD.unidad_medida,'|',OLD.codigo_almacenamiento,'|',OLD.caducidad,
+'|',OLD.num_mueble,'|',OLD.num_estante,'|',OLD.id_laboratorio
 ,'|',OLD.eliminado,'|',@fecha_baja_old));
 
 END
@@ -645,7 +687,9 @@ CREATE TABLE `recipiente` (
 INSERT INTO `recipiente` (`id`, `nombre`, `id_tipo_material`, `capacidad`, `id_laboratorio`, `imagen`, `eliminado`, `fecha_baja`) VALUES
 (3, 'recipiente 1', 4, 'Volúmen', 3, '', 1, '2021-11-29 13:22:56'),
 (4, 'recipiente 2', 1, 'Volúmen', 3, '1638054072.jpg', 0, NULL),
-(5, 'recipiente 3', 1, 'Kilogramo', 3, '1638054013.png', 0, NULL);
+(5, 'recipiente 3', 11, 'Kilogramo', 3, '1638054013.png', 0, NULL),
+(8, 'ulti 2', 1, 'Volúmen', 3, '1638218911.png', 1, '2021-11-29 13:49:41'),
+(12, 'recipiente 4', 10, 'Kilogramo', 3, '', 0, NULL);
 
 --
 -- Disparadores `recipiente`
@@ -729,6 +773,9 @@ CREATE TABLE `tipo_material` (
 --
 
 INSERT INTO `tipo_material` (`id`, `tipo_material`) VALUES
+(11, 'Carton'),
+(10, 'Corcho'),
+(12, 'Metal'),
 (4, 'Plástico'),
 (1, 'Vidrio');
 
@@ -841,13 +888,13 @@ ALTER TABLE `administrador`
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=318;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorio`
@@ -859,25 +906,25 @@ ALTER TABLE `laboratorio`
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `reactivo`
 --
 ALTER TABLE `reactivo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `recipiente`
 --
 ALTER TABLE `recipiente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_material`
 --
 ALTER TABLE `tipo_material`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas
