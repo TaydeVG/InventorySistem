@@ -244,7 +244,7 @@ switch ($opcion) {
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
-	case 10:
+	case 10://retorna el usuario de la sesion
 		echo json_encode($_SESSION["usuario"]);
 		break;
 	case 11: //obtiene todos los reactivos
