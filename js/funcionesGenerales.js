@@ -2,7 +2,7 @@ $('.solo-numeros').on('input', function () { //solo numeros, asignar esta clase 
    this.value = this.value.replace(/[^0-9]/g, '');
 });
 $('.solo-letras').on('input', function () { //solo numeros, asignar esta clase al inputa para aplicar validacion
-   this.value = this.value.replace(/[^a-zA-Z .,]/g, '');
+   this.value = this.value.replace(/[^a-zA-Z ]/g, '');
 });
 //obtiene y retorna el valor del parametros GET de la URL
 function _GET_Param(parametro_get_url) {

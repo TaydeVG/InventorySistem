@@ -55,13 +55,13 @@ session_start();
             <div class="row">
                 <div class="col-6 pb-1">
                     <div class="form-floating">
-                        <input type="text" class="rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="txtNombre" name="txtNombre" style="height: 40px !important;" placeholder="Nombre(s)" required>
+                        <input type="text" class="solo-letras rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="txtNombre" name="txtNombre" style="height: 40px !important;" placeholder="Nombre(s)" required>
                         <label for="floatingInput" class="form-text pt-1">Nombre(s)</label>
                     </div>
                 </div>
                 <div class="col-6 pb-1">
                     <div class="form-floating">
-                        <input type="text" class="rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="txtApellido" name="txtApellido" style="height: 40px !important;" placeholder="Apellido(s)" required>
+                        <input type="text" class="solo-letras rounded-0 rounded-top form-control border-0 border-bottom border-primary" id="txtApellido" name="txtApellido" style="height: 40px !important;" placeholder="Apellido(s)" required>
                         <label for="floatingInput" class="form-text pt-1">Apellido(s)</label>
                     </div>
                 </div>
