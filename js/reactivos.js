@@ -26,6 +26,12 @@ function initEvents() {
       });
    });
 
+   var btnexport = document.querySelector('#btn_export_excel');
+   btnexport.addEventListener("click", async () => {
+      exportarExcel();
+   });
+
+
    var formModal = $("#frmModalReactivos");
    // controla los mensajes de error o exito en campos formulario
    aplicarValidacionFormulario(formModal);
@@ -226,7 +232,7 @@ function getDatosTabla() {
    var objParam = {
       'opcion': 2
    };
-
+   $("#formExporterExcel").hide();
    $.ajax({
       async: false,
       cache: false,
@@ -237,6 +243,7 @@ function getDatosTabla() {
       success: function (response) {
 
          if (response.resultOper == 1) {
+            $("#formExporterExcel").show();
             datos = response.respuesta;//datos a retornar
          } else {
             setTimeout(() => {
@@ -401,4 +408,31 @@ function getLaboratorios() {
    });
 
    return datos;
+}
+
+function exportarExcel() {
+   try {
+      // Send our FormData object; HTTP headers are set automatically
+      var formExporterExcel = document.querySelector('#formExporterExcel');
+      formExporterExcel.method = "POST";
+      formExporterExcel.action = "../../../php/router_controller.php";
+
+      //agrega la opcion del controlador a ejecutar
+      var opcion = document.createElement("input");
+      opcion.name = "opcion";
+      opcion.id = opcion.name;
+      opcion.value = 29;
+      opcion.classList.add("d-none");
+      formExporterExcel.appendChild(opcion);
+
+      formExporterExcel.submit();
+
+      setTimeout(() => {
+         formExporterExcel.removeChild(opcion);
+      }, 2000);
+
+   } catch (error) {
+      console.log(error);
+      enableNotifyAlerta("ERROR!", error + ".", 4);
+   }
 }

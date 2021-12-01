@@ -14,6 +14,22 @@ $(document).ready(function () {
 });
 
 function initEvents() {
+
+    var btnexport = document.querySelector('#btn_export_excel_reactivos');
+    btnexport.addEventListener("click", async () => {
+        exportarExcel("reactivos", 32);
+    });
+
+    var btnexport = document.querySelector('#btn_export_excel_equipos');
+    btnexport.addEventListener("click", async () => {
+        exportarExcel("equipos", 33);
+    });
+
+    var btnexport = document.querySelector('#btn_export_excel_recipientes');
+    btnexport.addEventListener("click", async () => {
+        exportarExcel("recipientes", 34);
+    });
+
     // Reload Card
     $('.reload-equipos').on('click', function () {
 
@@ -121,6 +137,7 @@ function getDatosTabla_equipos() {
         'opcion': 14
     };
 
+    $("#formExporterExcel_equipos").hide();
     $.ajax({
         async: false,
         cache: false,
@@ -131,6 +148,7 @@ function getDatosTabla_equipos() {
         success: function (response) {
 
             if (response.resultOper == 1) {
+                $("#formExporterExcel_equipos").show();
                 datos = response.respuesta;//datos a retornar
                 disableNotifyAlerta();//oculta el modal de loading
             } else {
@@ -162,7 +180,7 @@ function getDatosTabla_recipientes() {
     var objParam = {
         'opcion': 15
     };
-
+    $("#formExporterExcel_recipientes").hide();
     $.ajax({
         async: false,
         cache: false,
@@ -173,6 +191,7 @@ function getDatosTabla_recipientes() {
         success: function (response) {
 
             if (response.resultOper == 1) {
+                $("#formExporterExcel_recipientes").show();
                 datos = response.respuesta;//datos a retornar
                 disableNotifyAlerta();//oculta el modal de loading
             } else {
@@ -228,7 +247,7 @@ function getDatosTabla_reactivos() {
     var objParam = {
         'opcion': 13
     };
-
+    $("#formExporterExcel_reactivos").hide();
     $.ajax({
         async: false,
         cache: false,
@@ -239,6 +258,7 @@ function getDatosTabla_reactivos() {
         success: function (response) {
 
             if (response.resultOper == 1) {
+                $("#formExporterExcel_reactivos").show();
                 datos = response.respuesta;//datos a retornar
                 disableNotifyAlerta();//oculta el modal de loading
             }
@@ -264,4 +284,31 @@ function getDatosTabla_reactivos() {
     });
 
     return datos;
+}
+
+function exportarExcel(nameForm, opc) {
+    try {
+        // Send our FormData object; HTTP headers are set automatically
+        var formExporterExcel = document.querySelector('#formExporterExcel_' + nameForm);
+        formExporterExcel.method = "POST";
+        formExporterExcel.action = "../../../php/router_controller.php";
+
+        //agrega la opcion del controlador a ejecutar
+        var opcion = document.createElement("input");
+        opcion.name = "opcion";
+        opcion.id = opcion.name;
+        opcion.value = opc;
+        opcion.classList.add("d-none");
+        formExporterExcel.appendChild(opcion);
+
+        formExporterExcel.submit();
+
+        setTimeout(() => {
+            formExporterExcel.removeChild(opcion);
+        }, 2000);
+
+    } catch (error) {
+        console.log(error);
+        enableNotifyAlerta("ERROR!", error + ".", 4);
+    }
 }

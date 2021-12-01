@@ -84,7 +84,9 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                     <div class="card-footer text-muted ">
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-4">
-                                <button class="btn btn-outline-primary  mx-auto">Descargar <i class="fas fa-download"></i></button>
+                                <form id="formExporterExcel_caducados">
+                                    <button type="submit" class="btn btn-outline-primary float-start" id="btn_export_excel_caducados">Descargar <i class="fas fa-download"></i></button>
+                                </form>
                             </div>
                             <div class="col-12 col-sm-12 col-md-4">
                                 <button id="btn_react_por_caducar" class="btn btn btn-link mx-auto">Ir a reactivos por
@@ -180,7 +182,9 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                     <div class="card-footer text-muted ">
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-4">
-                                <button class="btn btn-outline-primary  mx-auto">Descargar <i class="fas fa-download"></i></button>
+                                <form id="formExporterExcel_porcaducar">
+                                    <button type="submit" class="btn btn-outline-primary float-start" id="btn_export_excel_porcaducar">Descargar <i class="fas fa-download"></i></button>
+                                </form>
                             </div>
                             <div class="col-12 col-sm-12 col-md-4">
                                 <button id="btn_react_caducados" class="btn btn btn-link mx-auto"><i class="fas fa-arrow-left"></i> Ir a reactivos Caducados</button>

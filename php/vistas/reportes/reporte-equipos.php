@@ -48,7 +48,9 @@
     <div class="card-footer text-muted ">
         <div class="row">
             <div class="col-6">
-                <button class="btn btn-outline-primary float-start">Descargar <i class="fas fa-download"></i></button>
+                <form id="formExporterExcel_equipos">
+                    <button type="submit" class="btn btn-outline-primary float-start" id="btn_export_excel_equipos">Descargar <i class="fas fa-download"></i></button>
+                </form>
             </div>
             <div class="col-6 padding-right-5por padding-left-5por">
                 <nav aria-label="Page navigation example" id="paginationTable-equipos">

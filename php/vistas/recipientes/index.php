@@ -30,8 +30,7 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                     <div class="card-header">
                         <div class="d-flex justify-content-between ">
                             <h3> Recipientes </h3>
-                            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalId"
-                                data-bs-opcion="new">Nuevo <i class="fas fa-plus"></i></button>
+                            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalId" data-bs-opcion="new">Nuevo <i class="fas fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
@@ -44,9 +43,7 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                             <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 mt-0">
                                 <div class="row">
                                     <div class="form-floating ">
-                                        <select class="form-select font-size-12px pt-3" name="slctRowsTable"
-                                            id="slctRowsTable" aria-label="Floating label select"
-                                            style="height: 47px !important;">
+                                        <select class="form-select font-size-12px pt-3" name="slctRowsTable" id="slctRowsTable" aria-label="Floating label select" style="height: 47px !important;">
                                             <option value="5">5 registros.</option>
                                             <option value="10">10 registros.</option>
                                             <option value="20">20 registros.</option>
@@ -65,8 +62,7 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                                             <i class="fas fa-search"></i>
                                         </span>
                                         <div class=" form-floating ">
-                                            <input type="text" class="form-control border-start-0" id="filtrado"
-                                                placeholder="Escribe aquí..." style="height: 40px !important;">
+                                            <input type="text" class="form-control border-start-0" id="filtrado" placeholder="Escribe aquí..." style="height: 40px !important;">
                                             <label for="filtrado" class="form-text pt-1">Buscar </label>
                                         </div>
                                     </div>
@@ -90,8 +86,10 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                     </div>
                     <div class="card-footer text-muted ">
                         <div class="row">
-                        <div class="col-6">
-                                <button class="btn btn-outline-primary float-start">Descargar <i class="fas fa-download"></i></button>
+                            <div class="col-6">
+                                <form id="formExporterExcel">
+                                    <button type="submit" class="btn btn-outline-primary float-start" id="btn_export_excel">Descargar <i class="fas fa-download"></i></button>
+                                </form>
                             </div>
                             <div class="col-6 padding-right-5por padding-left-5por">
                                 <nav aria-label="Page navigation example" id="paginationTable">

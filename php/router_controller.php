@@ -4,11 +4,15 @@ include_once("../php/objetos/Usuario.php");
 include_once("../php/objetos/Equipos.object.php");
 include_once("../php/objetos/Recipiente.object.php");
 include_once("../php/objetos/Reactivos.object.php");
+include_once("../php/objetos/DataArchivoExcel.obect.php");
 include_once("../php/clases/ClassReactivos.php");
 include_once("../php/clases/ClassEquipos.php");
 include_once("../php/clases/ClassLogin.php");
 include_once("../php/clases/ClassRecipientes.php");
 include_once("../php/clases/ClassAdministradores.php");
+include_once("../php/clases/ClassExportarToExcel.php");
+
+
 
 session_start(); // se agrega luego de las importaciones para no tener problemas con los arrays en variables de sesion
 
@@ -19,6 +23,7 @@ $EquipoRequest = new Equipo();
 $RecipienteRequest = new Recipiente();
 $ReactivoRequest = new Reactivo();
 $MantenimientoRequest = new Mantenimiento();
+$DataArchivoExcelRequest = new DataArchivoExcel();
 
 //obtencion opcion de peticion
 $opcion         = isset($_POST['opcion']) ? $_POST['opcion'] : 0;
@@ -28,11 +33,9 @@ $opcion         = $opcion != 0 ? $opcion : (isset($_GET['opcion']) ? $_GET['opci
 $imagen_anterior = isset($_POST['imagen_anterior']) ? $_POST['imagen_anterior'] : null;
 $imagen_anterior = $imagen_anterior != null ? $imagen_anterior : (isset($_GET['imagen_anterior']) ? $_GET['imagen_anterior'] : null);
 
-
-
 //obtencion de usuario de peticion
-$idUsuario         = isset($_POST['idUsuario']) ? $_POST['idUsuario'] : 0;
-$UsuarioRequest->setId($idUsuario != 0 ? $idUsuario : (isset($_GET['idUsuario']) ? $_GET['idUsuario'] : 0));
+$idUsuario         = isset($_POST['idUsuario']) ? $_POST['idUsuario'] : null;
+$UsuarioRequest->setId($idUsuario != null ? $idUsuario : (isset($_GET['idUsuario']) ? $_GET['idUsuario'] : null));
 
 $email         = isset($_POST['email']) ? $_POST['email'] : 0;
 $UsuarioRequest->setCorreo($email != 0 ? $email : (isset($_GET['email']) ? $_GET['email'] : ""));
@@ -172,6 +175,8 @@ set_time_limit(0);
 //ESTAS DOS LINEAS ES PARA RESOLVER EL PROBLEMA DE LAS Ñ
 setlocale(LC_ALL, 'es_ES');
 define("CHARSET", "iso-8859-1");
+date_default_timezone_set('America/Mazatlan'); //se define zona horaria
+
 
 $conexMySql = new Conexion(); //se instancia la clase Conexion para acceder a sus funciones
 /* 
@@ -244,7 +249,7 @@ switch ($opcion) {
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;
-	case 10://retorna el usuario de la sesion
+	case 10: //retorna el usuario de la sesion
 		echo json_encode($_SESSION["usuario"]);
 		break;
 	case 11: //obtiene todos los reactivos
@@ -254,7 +259,6 @@ switch ($opcion) {
 		echo json_encode($datosRespuesta);
 		break;
 	case 12: //obtiene todos los reactivos por caducar en un intervalo de tiempo, 1 semana,1 mes, 3 meses, 6 meses, 1 año
-
 		//si no viene un valor por defecto mostrara los que faltan por caducar en 1 semana
 		$tiempo_para_caducar = isset($_POST['tiempo_para_caducar']) ? $_POST['tiempo_para_caducar'] : '7 DAY';
 
@@ -356,6 +360,231 @@ switch ($opcion) {
 	case 28: //eliminar mantenimiento
 		$conexMySql->conectar();
 		$datosRespuesta = ClassEquipos::delete_mantenimiento($conexMySql->cnx, $MantenimientoRequest->getId());
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 29: //exportar Excel Reactivos
+		$name_excel = 'Reactivos_' . date('d-m-Y H:i:s') . '.xlsx';
+		$DataArchivoExcelRequest->setNombre_archivo_excel($name_excel);
+		$DataArchivoExcelRequest->setTitulo_hoja('Reactivos');
+		$DataArchivoExcelRequest->setEncabezado('Reporte de reactivos');
+
+		$DataArchivoExcelRequest->setColumnas_base_datos(array(
+			'nombre',
+			'cantidad_reactivo',
+			'reactividad',
+			'inflamabilidad',
+			'riesgo_salud',
+			'unidad_medida',
+			'caducidad',
+			'num_mueble'
+		));
+		$DataArchivoExcelRequest->setTitulosColumnas(array(
+			' # ',
+			' NOMBRE ',
+			' CANTIDAD ',
+			' REACTIVIDAD ',
+			' INFLAMABILIDAD ',
+			' RIESGO A LA SALUD ',
+			' U. DE MEDIDA ',
+			' CADUCIDAD ',
+			' NUMERO DE MUEBLE '
+		));
+		$DataArchivoExcelRequest->setTabla_base_datos('reactivo');
+		$DataArchivoExcelRequest->setCondicionExtraerDatos('WHERE eliminado = 0');
+
+		$conexMySql->conectar();
+		$datosRespuesta = ClassExportarToExcel::exportarExcel($conexMySql->cnx, $DataArchivoExcelRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 30: //exportar Excel Equipos
+		$name_excel = 'Equipos_' . date('d-m-Y H:i:s') . '.xlsx';
+		$DataArchivoExcelRequest->setNombre_archivo_excel($name_excel);
+		$DataArchivoExcelRequest->setTitulo_hoja('Equipos');
+		$DataArchivoExcelRequest->setEncabezado('Reporte de Equipos');
+
+		$DataArchivoExcelRequest->setColumnas_base_datos(array(
+			'nombre',
+			'condicion_uso',
+			'num_economico',
+			'num_serie'
+		));
+		$DataArchivoExcelRequest->setTitulosColumnas(array(
+			' # ',
+			' NOMBRE ',
+			' CONDICION DE USO ',
+			' NÚMERO ECONOMICO ',
+			' NÚMERO DE SERIE '
+		));
+		$DataArchivoExcelRequest->setTabla_base_datos('equipo');
+		$DataArchivoExcelRequest->setCondicionExtraerDatos('WHERE eliminado = 0');
+
+		$conexMySql->conectar();
+		$datosRespuesta = ClassExportarToExcel::exportarExcel($conexMySql->cnx, $DataArchivoExcelRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 31: //exportar Excel Recipientes
+		$name_excel = 'Recipientes_' . date('d-m-Y H:i:s') . '.xlsx';
+		$DataArchivoExcelRequest->setNombre_archivo_excel($name_excel);
+		$DataArchivoExcelRequest->setTitulo_hoja('Recipientes');
+		$DataArchivoExcelRequest->setEncabezado('Reporte de Recipientes');
+
+		//nombres de los campos de base de datos a obtener
+		$DataArchivoExcelRequest->setColumnas_base_datos(array(
+			'nombre',
+			'tipo_material',
+			'capacidad'
+		));
+		$DataArchivoExcelRequest->setTitulosColumnas(array(
+			' # ',
+			' NOMBRE ',
+			' TIPO MATERIAL ',
+			' CAPACIDAD '
+		));
+		//tablas de base de datos de donde obtendra la informacion
+		$DataArchivoExcelRequest->setTabla_base_datos(' recipiente rec, tipo_material tm ');
+		//condiciones de la consulta
+		$DataArchivoExcelRequest->setCondicionExtraerDatos(' WHERE rec.id_tipo_material = tm.id AND rec.eliminado = 0');
+
+		$conexMySql->conectar();
+		$datosRespuesta = ClassExportarToExcel::exportarExcel($conexMySql->cnx, $DataArchivoExcelRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 32: //exportar Excel Reactivos bajas
+		$name_excel = 'Bajas_Reactivos_' . date('d-m-Y H:i:s') . '.xlsx';
+		$DataArchivoExcelRequest->setNombre_archivo_excel($name_excel);
+		$DataArchivoExcelRequest->setTitulo_hoja('Reactivos');
+		$DataArchivoExcelRequest->setEncabezado('Reporte de reactivos');
+
+		$DataArchivoExcelRequest->setColumnas_base_datos(array(
+			'nombre',
+			'cantidad_reactivo',
+			'fecha_baja',
+		));
+		$DataArchivoExcelRequest->setTitulosColumnas(array(
+			' # ',
+			' NOMBRE ',
+			' CANTIDAD ',
+			' FECHA DE BAJA '
+		));
+		$DataArchivoExcelRequest->setTabla_base_datos('reactivo');
+		$DataArchivoExcelRequest->setCondicionExtraerDatos('WHERE eliminado = 1');
+
+		$conexMySql->conectar();
+		$datosRespuesta = ClassExportarToExcel::exportarExcel($conexMySql->cnx, $DataArchivoExcelRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 33: //exportar Excel Equipos bajas
+		$name_excel = 'Bajas_Equipos_' . date('d-m-Y H:i:s') . '.xlsx';
+		$DataArchivoExcelRequest->setNombre_archivo_excel($name_excel);
+		$DataArchivoExcelRequest->setTitulo_hoja('Equipos');
+		$DataArchivoExcelRequest->setEncabezado('Reporte de Equipos');
+
+		$DataArchivoExcelRequest->setColumnas_base_datos(array(
+			'nombre',
+			'num_economico',
+			'fecha_baja'
+		));
+		$DataArchivoExcelRequest->setTitulosColumnas(array(
+			' # ',
+			' NOMBRE ',
+			' NÚMERO ECONOMICO ',
+			' FECHA DE BAJA '
+		));
+		$DataArchivoExcelRequest->setTabla_base_datos('equipo');
+		$DataArchivoExcelRequest->setCondicionExtraerDatos('WHERE eliminado = 1');
+
+		$conexMySql->conectar();
+		$datosRespuesta = ClassExportarToExcel::exportarExcel($conexMySql->cnx, $DataArchivoExcelRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 34: //exportar Excel Recipientes Bajas
+		$name_excel = 'Bajas_Recipientes_' . date('d-m-Y H:i:s') . '.xlsx';
+		$DataArchivoExcelRequest->setNombre_archivo_excel($name_excel);
+		$DataArchivoExcelRequest->setTitulo_hoja('Recipientes');
+		$DataArchivoExcelRequest->setEncabezado('Reporte de Recipientes');
+
+		//nombres de los campos de base de datos a obtener
+		$DataArchivoExcelRequest->setColumnas_base_datos(array(
+			'nombre',
+			'capacidad',
+			'fecha_baja'
+		));
+		$DataArchivoExcelRequest->setTitulosColumnas(array(
+			' # ',
+			' NOMBRE ',
+			' CAPACIDAD ',
+			' FECHA DE BAJA '
+		));
+		//tablas de base de datos de donde obtendra la informacion
+		$DataArchivoExcelRequest->setTabla_base_datos(' recipiente ');
+		//condiciones de la consulta
+		$DataArchivoExcelRequest->setCondicionExtraerDatos(' WHERE eliminado = 1');
+
+		$conexMySql->conectar();
+		$datosRespuesta = ClassExportarToExcel::exportarExcel($conexMySql->cnx, $DataArchivoExcelRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 35: //exportar Excel Reactivos caducados
+		$name_excel = 'Reactivos_Caducados_' . date('d-m-Y H:i:s') . '.xlsx';
+		$DataArchivoExcelRequest->setNombre_archivo_excel($name_excel);
+		$DataArchivoExcelRequest->setTitulo_hoja('Reactivos Caducados');
+		$DataArchivoExcelRequest->setEncabezado('Reporte de Reactivos Caducados');
+
+		$DataArchivoExcelRequest->setColumnas_base_datos(array(
+			'nombre',
+			'caducidad',
+			'num_mueble',
+			'num_estante',
+		));
+		$DataArchivoExcelRequest->setTitulosColumnas(array(
+			' # ',
+			' NOMBRE ',
+			' CADUCIDAD ',
+			' NO. MUEBLE ',
+			' NO. ESTANTE ',
+		));
+		$DataArchivoExcelRequest->setTabla_base_datos('reactivo');
+		$DataArchivoExcelRequest->setCondicionExtraerDatos('WHERE caducidad < NOW() AND eliminado = 0;');
+
+		$conexMySql->conectar();
+		$datosRespuesta = ClassExportarToExcel::exportarExcel($conexMySql->cnx, $DataArchivoExcelRequest);
+		$conexMySql->desconectar();
+		echo json_encode($datosRespuesta);
+		break;
+	case 36: //exportar Excel Reactivos por caducar
+
+		$tiempo_para_caducar = isset($_POST['tiempo_para_caducar']) ? $_POST['tiempo_para_caducar'] : '7 DAY';
+
+		$name_excel = 'Reactivos_Por_Vencer_' . date('d-m-Y H:i:s') . '.xlsx';
+		$DataArchivoExcelRequest->setNombre_archivo_excel($name_excel);
+		$DataArchivoExcelRequest->setTitulo_hoja('Reactivos por vencer');
+		$DataArchivoExcelRequest->setEncabezado('Reporte de Reactivos por vencer');
+
+		$DataArchivoExcelRequest->setColumnas_base_datos(array(
+			'nombre',
+			'caducidad',
+			'num_mueble',
+			'num_estante',
+		));
+		$DataArchivoExcelRequest->setTitulosColumnas(array(
+			' # ',
+			' NOMBRE ',
+			' CADUCIDAD ',
+			' NO. MUEBLE ',
+			' NO. ESTANTE ',
+		));
+		$DataArchivoExcelRequest->setTabla_base_datos('reactivo');
+		$DataArchivoExcelRequest->setCondicionExtraerDatos("WHERE caducidad BETWEEN NOW() AND DATE_ADD(NOW(), INTERVAL $tiempo_para_caducar) AND eliminado = 0;");
+
+		$conexMySql->conectar();
+		$datosRespuesta = ClassExportarToExcel::exportarExcel($conexMySql->cnx, $DataArchivoExcelRequest);
 		$conexMySql->desconectar();
 		echo json_encode($datosRespuesta);
 		break;

@@ -27,6 +27,17 @@ function initEvents() {
             }, 500);
         });
     });
+
+    var btnexport = document.querySelector('#btn_export_excel_porcaducar');
+    btnexport.addEventListener("click", async () => {
+        exportarExcel_porcaducar($('#slctPlazo').val());
+    });
+
+    var btnexport = document.querySelector('#btn_export_excel_caducados');
+    btnexport.addEventListener("click", async () => {
+        exportarExcelCaducados();
+    });
+
     // Reload Card
     $('.reload-2').on('click', function () {
 
@@ -91,12 +102,12 @@ function llenarTabla(datos) {
     paginacionTabla('#paginationTable', '#body-table', 1, '#slctRowsTable');
 
 }
-
 function getDatosTabla() {
     var datos = [];
     var objParam = {
         'opcion': 11
     };
+    $("#formExporterExcel_caducados").hide();
 
     $.ajax({
         async: false,
@@ -108,6 +119,7 @@ function getDatosTabla() {
         success: function (response) {
 
             if (response.resultOper == 1) {
+                $("#formExporterExcel_caducados").show();
                 datos = response.respuesta;//datos a retornar
                 disableNotifyAlerta();//oculta el modal de loading
             } else {
@@ -164,6 +176,8 @@ function getDatosTabla_porvencer(tiempo_faltante_para_caducar) {
         'tiempo_para_caducar': tiempo_faltante_para_caducar
     };
 
+
+    $("#formExporterExcel_porcaducar").hide();
     console.log(objParam);
     $.ajax({
         async: false,
@@ -176,6 +190,7 @@ function getDatosTabla_porvencer(tiempo_faltante_para_caducar) {
 
             if (response.resultOper == 1) {
                 datos = response.respuesta;//datos a retornar
+                $("#formExporterExcel_porcaducar").show();
                 disableNotifyAlerta();//oculta el modal de loading
             } else {
                 setTimeout(() => {
@@ -199,4 +214,66 @@ function getDatosTabla_porvencer(tiempo_faltante_para_caducar) {
     });
 
     return datos;
+}
+
+function exportarExcelCaducados() {
+    try {
+        // Send our FormData object; HTTP headers are set automatically
+        var formExporterExcel = document.querySelector('#formExporterExcel_caducados');
+        formExporterExcel.method = "POST";
+        formExporterExcel.action = "../../../php/router_controller.php";
+
+        //agrega la opcion del controlador a ejecutar
+        var opcion = document.createElement("input");
+        opcion.name = "opcion";
+        opcion.id = opcion.name;
+        opcion.value = 35;
+        opcion.classList.add("d-none");
+        formExporterExcel.appendChild(opcion);
+
+        formExporterExcel.submit();
+
+        setTimeout(() => {
+            formExporterExcel.removeChild(opcion);
+        }, 2000);
+
+    } catch (error) {
+        console.log(error);
+        enableNotifyAlerta("ERROR!", error + ".", 4);
+    }
+}
+
+function exportarExcel_porcaducar(tiempo_faltante) {
+    try {
+        // Send our FormData object; HTTP headers are set automatically
+        var formExporterExcel = document.querySelector('#formExporterExcel_porcaducar');
+        formExporterExcel.method = "POST";
+        formExporterExcel.action = "../../../php/router_controller.php";
+
+        //agrega la opcion del controlador a ejecutar
+        var opcion = document.createElement("input");
+        opcion.name = "opcion";
+        opcion.id = opcion.name;
+        opcion.value = 36;
+        opcion.classList.add("d-none");
+        formExporterExcel.appendChild(opcion);
+
+        var intervalo_tiempo = document.createElement("input");
+        intervalo_tiempo.name = "tiempo_para_caducar";
+        intervalo_tiempo.id = intervalo_tiempo.name;
+        intervalo_tiempo.value = tiempo_faltante;
+        intervalo_tiempo.classList.add("d-none");
+        formExporterExcel.appendChild(intervalo_tiempo);
+
+        formExporterExcel.submit();
+
+        setTimeout(() => {
+            formExporterExcel.removeChild(opcion);
+            formExporterExcel.removeChild(intervalo_tiempo);
+        }, 2000);
+
+    } catch (error) {
+        console.log(error);
+        enableNotifyAlerta("ERROR!", error + ".", 4);
+    }
 }
