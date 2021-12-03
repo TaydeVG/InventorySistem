@@ -9,7 +9,6 @@ class DataArchivoExcel
     public $titulo_hoja = "";
     public $nombre_archivo_excel = "";
     public $tabla_base_datos = "";
-    public $tablas_base_datos = array();
     public $columnas_base_datos = array();
     public $titulosColumnas_excel = array();
     public $condicionExtraerDatos = "";
@@ -73,14 +72,5 @@ class DataArchivoExcel
     public function setCondicionExtraerDatos($condicionExtraerDatos)
     {
         $this->condicionExtraerDatos = $condicionExtraerDatos;
-    }
-
-    public function getTablas_base_datos()
-    {
-        return $this->tablas_base_datos;
-    }
-    public function setTablas_base_datos($tablas_base_datos)
-    {
-        $this->tablas_base_datos = $tablas_base_datos;
     }
 }

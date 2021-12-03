@@ -5,15 +5,16 @@ $(document).ready(function () {
     if (sessionStorage.getItem("opcion-reactivos") == "acaducar") {
         $('#container-caducados').hide();
         $('#btn_react_por_caducar').click();
-        agregarFiltradoTabla("#tabla_id_avencer", "#body-table-avencer", "#filtrado-avencer", "#paginationTable-avencer");
     } else {
         loadingNotify("Espere un momento...", "Cargando");//efecto loading al inicar pagina
         $('#container-por-caducados').hide();
 
 
         llenarTabla(getDatosTabla());
-        agregarFiltradoTabla("#tabla_id", "#body-table", "#filtrado", "#paginationTable");
     }
+
+    agregarFiltradoTabla("#tabla_id", "#body-table", "#filtrado", "#paginationTable");
+    agregarFiltradoTabla("#tabla_id_avencer", "#body-table-avencer", "#filtrado-avencer", "#paginationTable-avencer");
 });
 
 function initEvents() {
