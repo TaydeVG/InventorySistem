@@ -3,8 +3,9 @@ var modalPassword = new bootstrap.Modal(document.getElementById('modalIdPassword
 $(document).ready(function () {
     initEventsPrin();
     modalLogicLoad();// carga la logica para cuando se muestre el modal
-    getUserSesion();//obtiene el usuario de sesion para ferificarlo
     sessionStorage.setItem("opcion-reactivos", "");
+    getUserSesion();//obtiene el usuario de sesion para verificarlo
+    
 });
 
 function initEventsPrin() {
@@ -23,10 +24,7 @@ function initEventsPrin() {
 }
 function modalLogicLoad() {
     var modal = document.getElementById('modalIdPassword');
-    modal.addEventListener('show.bs.modal', function (event) {
-        var button = event.relatedTarget;//obtiene la info del boton que detono el modal
-    });
-
+   
     $("#frmCambiarPassword").submit(function (event) {
         event.preventDefault();
         modalPassword.toggle();
@@ -52,41 +50,6 @@ function modalLogicLoad() {
         showPass = !showPass;
     });
 }
-//valida que si el usuario se le acaba de generar una contraseña aleatoria por olvido de contraseña, le pida ingresar una nueva
-function getUserSesion() {
-
-    var objParam = {
-        'opcion': 10,
-        "email": localStorage.getItem("user"),
-        "password": localStorage.getItem("pass")
-    };
-
-    $.ajax({
-        cache: false,
-        url: '../../../php/router_controller.php',
-        type: 'POST',
-        dataType: 'JSON',
-        data: objParam,
-        success: function (response) {
-            console.log(response);
-            disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
-            if (response.id > 0 && response.is_password_random == 1) {
-                //is_password_random =1: significa que utilizo el olvide mi contraseña
-                //por lo que se pasa a recomendarle cambiar de contraseña
-                setTimeout(() => {
-                    modalPassword.toggle();
-                }, 1000);
-            }
-        },
-        beforeSend: function () {
-            loadingNotify("Cargando", "Espere un momento por favor...");//efecto loading al inicar pagina
-        },
-        error: function (xhr, status, error) {
-            console.log(xhr.responseText);
-            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
-        }
-    });
-}
 
 function cambiar_password(pass) {
     var objParam = {
@@ -108,9 +71,6 @@ function cambiar_password(pass) {
 
                     enableNotifyAlerta("Exito!", response.mensaje, 3);
                     localStorage.setItem("pass", pass);//se actualiza la contraseña guardada en navegador por la nueva
-                    $("#btnModal").click(function () {
-                        //  window.location = "principal.php";
-                    });
                 }
                 else {
                     if (response.mensaje.errorInfo) {

@@ -16,7 +16,7 @@ $(document).ready(function () {
 
     initEvents();
     disableNotifyAlerta();//oculta el modal de loading
-
+    getUserSesion();//valida el dom dependiendo el usuario
 });
 
 function initEvents() {
@@ -160,8 +160,8 @@ function llenarTabla(datos, id_equipo) {
             `<td class="text-center"> 
                 <div class="d-flex justify-content-evenly">
                    <button class="btn btn-outline-success" title="Ver" data-bs-toggle="modal" data-bs-target="#modalId" data-bs-id="`+ datos[i].id + `" data-bs-opcion="view"><i class="fas fa-eye"></i></button>
-                   <button class="btn btn-outline-info" title="Editar" data-bs-toggle="modal" data-bs-target="#modalId" data-bs-id="`+ datos[i].id + `" data-bs-opcion="edit"><i class="fas fa-edit"></i></button>
-                   <button class="btn btn-sm btn-outline-danger btnEliminar" title="Eliminar" data-id="`+ datos[i].id + `"><i class="fas fa-trash-alt"></i></button> 
+                   <button class="btn btn-outline-info solo-admin" title="Editar" data-bs-toggle="modal" data-bs-target="#modalId" data-bs-id="`+ datos[i].id + `" data-bs-opcion="edit"><i class="fas fa-edit"></i></button>
+                   <button class="btn btn-sm btn-outline-danger btnEliminar solo-admin" title="Eliminar" data-id="`+ datos[i].id + `"><i class="fas fa-trash-alt"></i></button> 
                 </div>
                  </td>`+
             `</tr>`)

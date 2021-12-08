@@ -65,7 +65,7 @@ class ClassAdministradores
 			$isSave = $consulta->execute();
 			if ($isSave) {
 				$datos['respuesta'] = $isSave;
-				$datos['mensaje'] = "Administrador registrado con exito!!!";
+				$datos['mensaje'] = "Usuario registrado con exito!!!";
 				$datos['resultOper'] = 1;
 			} else {
 				$datos['respuesta'] = $isSave;

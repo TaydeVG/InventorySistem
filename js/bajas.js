@@ -11,6 +11,7 @@ $(document).ready(function () {
     agregarFiltradoTabla("#tabla_id-equipos", "#body-table-equipos", "#filtrado-equipos", "#paginationTable-equipos");//agrega paginacion a tabla
 
     initEvents();
+    getUserSesion();//valida el dom dependiendo el usuario
 });
 
 function initEvents() {

@@ -1,5 +1,6 @@
 $(document).ready(function () {
     initEvents();
+    getUserSesion();//valida el dom dependiendo el usuario
 });
 
 function initEvents() {

@@ -30,7 +30,7 @@ if (isset($_SESSION["usuario"])) { //si hay sesion le permite acceder
                     <div class="card-header">
                         <div class="d-flex justify-content-between ">
                             <h3><a href="../equipos/">Equipos</a> / Mantenimientos </h3>
-                            <button class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#modalId"
+                            <button class="btn btn-outline-success solo-admin" data-bs-toggle="modal" data-bs-target="#modalId"
                                 data-bs-opcion="new">Nuevo <i class="fas fa-plus"></i></button>
                         </div>
                     </div>

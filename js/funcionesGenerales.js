@@ -187,11 +187,59 @@ function cerrarSesion() {
          console.log("cargando peticion");
       },
       error: function (xhr, status, error) {
-
          console.log("Error En Ajax " + xhr.responseText + " " + status + " " + error + ".");
-         enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
+         setTimeout(() => {
+            enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr + " " + status + " " + error + ".", 4);
+         }, 1500);
       }
    });
 
    return datos;
+}
+
+//valida que si el usuario se le acaba de generar una contraseña aleatoria por olvido de contraseña, le pida ingresar una nueva
+function getUserSesion() {
+
+   var objParam = {
+      'opcion': 10,
+      "email": localStorage.getItem("user"),
+      "password": localStorage.getItem("pass")
+   };
+   var userSession = null;
+   $.ajax({
+      async: false,
+      cache: false,
+      url: '../../../php/router_controller.php',
+      type: 'POST',
+      dataType: 'JSON',
+      data: objParam,
+      success: function (response) {
+         userSession = response;
+         if (response.id > 0 && response.is_password_random == 1) {//solo funciona esta validacion en la vista principal
+            //is_password_random =1: significa que utilizo el olvide mi contraseña
+            //por lo que se pasa a recomendarle cambiar de contraseña
+            setTimeout(() => {
+               modalPassword.toggle();
+            }, 1000);
+         }
+
+         if (response.tipo_usuario != 'admin') {//controla que solo el usuario pueda hacer modificaciones en la base de datos
+            //agregar la clase "solo-admin" a los elementos a eliminar del dom
+            $('.solo-admin').each(function (index, element) {
+               // element == this
+               var contenedor = this.parentNode;
+               contenedor.removeChild(this);
+            });
+
+         }
+      },
+      beforeSend: function () {
+         console.log("get user session");
+      },
+      error: function (xhr, status, error) {
+         console.log(xhr.responseText);
+         enableNotifyAlerta("ERROR!", "Error En Ajax " + xhr.responseText + " " + status + " " + error + ".", 4);
+      }
+   });
+   return userSession;
 }

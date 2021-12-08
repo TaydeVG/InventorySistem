@@ -15,7 +15,7 @@ class ClassLogin
 		if ($pEmail && $pPassword) {
 			try {
 
-				$sql = "SELECT id,nombre,apellido,correo,password,is_password_random FROM administrador WHERE correo = '$pEmail' and password = '" .
+				$sql = "SELECT id,nombre,apellido,correo,password,is_password_random,tipo_usuario AS user FROM administrador WHERE correo = '$pEmail' and password = '" .
 					Password::hash($pPassword) . "' LIMIT 1;";
 				$consulta = $conexMySql->prepare($sql);
 				$consulta->execute();
@@ -28,6 +28,7 @@ class ClassLogin
 					$Usuario->setCorreo($row->correo);
 					$Usuario->setPassword($row->password);
 					$Usuario->setIs_password_random($row->is_password_random);
+					$Usuario->setTipo_usuario($row->user);
 				}
 
 				if ($Usuario != null && $Usuario->getId() != null && $Usuario->getId() != 0) {

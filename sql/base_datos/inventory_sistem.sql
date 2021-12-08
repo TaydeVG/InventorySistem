@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2021 a las 23:15:56
+-- Tiempo de generación: 08-12-2021 a las 23:46:42
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -33,15 +33,16 @@ CREATE TABLE `administrador` (
   `apellido` varchar(50) NOT NULL,
   `correo` varchar(200) NOT NULL,
   `password` text NOT NULL,
-  `is_password_random` tinyint(1) NOT NULL DEFAULT 0
+  `is_password_random` tinyint(1) NOT NULL DEFAULT 0,
+  `tipo_usuario` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `administrador` (`id`, `nombre`, `apellido`, `correo`, `password`, `is_password_random`) VALUES
-(18, 'ADMINISTRADOR', '123Abc#+', 'admin@upve.edu.mx', '0cbee8715e5908fb780f0786ca212f8c9f36028e0ade32eaa65d04faddd10ae10b0f64d6ed5d7c1a4b5441340229ef3a858907100dcbb0f24a428504bc419c5d', 0);
+INSERT INTO `administrador` (`id`, `nombre`, `apellido`, `correo`, `password`, `is_password_random`, `tipo_usuario`) VALUES
+(18, 'ADMINISTRADOR', '123Abc#+', 'admin@upve.edu.mx', '0cbee8715e5908fb780f0786ca212f8c9f36028e0ade32eaa65d04faddd10ae10b0f64d6ed5d7c1a4b5441340229ef3a858907100dcbb0f24a428504bc419c5d', 0, 'admin');
 
 --
 -- Disparadores `administrador`
@@ -603,19 +604,19 @@ ALTER TABLE `tipo_material`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=373;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=404;
 
 --
 -- AUTO_INCREMENT de la tabla `equipo`
 --
 ALTER TABLE `equipo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `laboratorio`
@@ -627,19 +628,19 @@ ALTER TABLE `laboratorio`
 -- AUTO_INCREMENT de la tabla `mantenimiento`
 --
 ALTER TABLE `mantenimiento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `reactivo`
 --
 ALTER TABLE `reactivo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `recipiente`
 --
 ALTER TABLE `recipiente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `tipo_material`

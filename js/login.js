@@ -71,15 +71,11 @@ function restablecer_password(mail) {
         dataType: 'JSON',
         data: objParam,
         success: function (response) {
-            //disableNotifyAlerta();//una vez cargado todo se quita el efecto de loading
             console.log(response);
 
             if (response.resultOper == 1) {
 
                 enableNotifyAlerta("Exito!", response.mensaje, 3);
-                $("#btnModal").click(function () {
-                    //  window.location = "principal.php";
-                });
             }
             else {
                 setTimeout(() => {

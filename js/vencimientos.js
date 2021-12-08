@@ -15,6 +15,7 @@ $(document).ready(function () {
 
     agregarFiltradoTabla("#tabla_id", "#body-table", "#filtrado", "#paginationTable");
     agregarFiltradoTabla("#tabla_id_avencer", "#body-table-avencer", "#filtrado-avencer", "#paginationTable-avencer");
+    getUserSesion();//valida el dom dependiendo el usuario
 });
 
 function initEvents() {

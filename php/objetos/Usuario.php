@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 /**
  * 
  */
@@ -10,58 +11,66 @@ class Usuario
 	public  $correo = "";
 	public  $password = "";
 	public  $is_password_random = 0;
-	
-	public function getId() 
+	public  $tipo_usuario = "";
+
+	public function getId()
 	{
 		return $this->id;
 	}
-	public function setId($id) 
+	public function setId($id)
 	{
 		$this->id = $id;
 	}
-	public function getNombre() 
+	public function getNombre()
 	{
 		return $this->nombre;
 	}
-	public function setNombre($nombre) 
+	public function setNombre($nombre)
 	{
 		$this->nombre = $nombre;
 	}
-	public function getApellido() 
+	public function getApellido()
 	{
 		return $this->apellido;
 	}
-	public function setApellido($apellido) 
+	public function setApellido($apellido)
 	{
 		$this->apellido = $apellido;
 	}
-	public function getCorreo() 
+	public function getCorreo()
 	{
 		return $this->correo;
 	}
-	public function setCorreo($correo) 
+	public function setCorreo($correo)
 	{
 		$this->correo = $correo;
 	}
-	public function getPassword() 
+	public function getPassword()
 	{
 		return $this->password;
 	}
-	public function setPassword($password) 
+	public function setPassword($password)
 	{
 		$this->password = $password;
-	} 
-	public function getIs_password_random() 
+	}
+	public function getIs_password_random()
 	{
 		return $this->is_password_random;
 	}
-	public function setIs_password_random($is_password_random) 
+	public function setIs_password_random($is_password_random)
 	{
 		$this->is_password_random = $is_password_random;
 	}
-
-	public function toString() 
+	public function getTipo_usuario()
 	{
-		return "Usuario [id=" . $this->id . ", nombre=" . $this->nombre . ", apellido=" . $this->apellido. ", email=" . $this->email . ", password=" . $this->password .", is_password_random=" . $this->is_password_random . "]";
+		return $this->tipo_usuario;
+	}
+	public function setTipo_usuario($tipo_usuario)
+	{
+		$this->tipo_usuario = $tipo_usuario;
+	}
+	public function toString()
+	{
+		return "Usuario [id=" . $this->id . ", nombre=" . $this->nombre . ", apellido=" . $this->apellido . ", email=" . $this->email . ", password=" . $this->password . ", is_password_random=" . $this->is_password_random . "]";
 	}
 }
